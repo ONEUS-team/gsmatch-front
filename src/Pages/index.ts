@@ -5,3 +5,4 @@ export { default as ProfilePage } from "./ProfilePage";
 export { default as RequestPage } from "./RequestPage";
 export { default as SignupPage } from "./SignupPage";
 export { default as SurveyPage } from "./SurveyPage";
+export { default as MainPage } from "./MainPage";
