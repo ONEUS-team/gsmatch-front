@@ -32,7 +32,7 @@ export const SubTitleText = styled.h2`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 130px;
+  width: 140px;
   position: absolute;
   cursor: pointer;
 `;
