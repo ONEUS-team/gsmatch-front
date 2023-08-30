@@ -6,12 +6,13 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 150px;
+  height: 140px;
   justify-content: space-around;
   margin-left: 100px;
 `;
@@ -19,13 +20,13 @@ export const TitleContainer = styled.div`
 export const TitleText = styled.h1`
   color: white;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 40px;
 `;
 
 export const SubTitleText = styled.h2`
   color: #f0a0bd;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 45px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -43,4 +44,8 @@ export const LoginPageButton = styled.button`
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
+`;
+
+export const MainLogoBox = styled.div`
+  margin-right: 100px;
 `;

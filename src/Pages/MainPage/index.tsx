@@ -15,7 +15,9 @@ export default function MainPage() {
           </S.ButtonContainer>
         </Link>
       </S.TitleContainer>
-      <MainPageLogo />
+      <S.MainLogoBox>
+        <MainPageLogo />
+      </S.MainLogoBox>
     </S.Container>
   );
 }
