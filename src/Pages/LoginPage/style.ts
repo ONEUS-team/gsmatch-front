@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #111;
-  height: 1080px;
+  height: 100vh;
 `;
 
 export const LogoContainer = styled.div`
