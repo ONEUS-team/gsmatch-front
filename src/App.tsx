@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<P.SignupPage />} />
         <Route path="/login" element={<P.LoginPage />} />
+        <Route path="/main" element={<P.MainPage />} />
         <Route
           path="/"
           element={<PrivateRouter element={<P.ProfilePage />} />}
