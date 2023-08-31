@@ -4,17 +4,17 @@ import { useState } from "react";
 import * as I from "../../Assets/svg/index";
 
 export default function LoginPage() {
-  // const [emailValue, setEmailValue] = useState<string>("");
-  // const [passwordValue, setPasswordValue] = useState<string>("");
+  const [emailValue, setEmailValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
   const [isHide, setIsHide] = useState<boolean>(true);
 
-  // const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setEmailValue(e.target.value);
-  // };
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailValue(e.target.value);
+  };
 
-  // const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setPasswordValue(e.target.value);
-  // };
+  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordValue(e.target.value);
+  };
 
   const loginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,8 +34,8 @@ export default function LoginPage() {
           <S.InputText>이메일</S.InputText>
           <S.InputItem //
             type="email"
-            // value={emailValue}
-            // onChange={changeEmail}
+            value={emailValue}
+            onChange={changeEmail}
           />
         </S.InputContainer>
         <S.InputContainer>
@@ -43,8 +43,8 @@ export default function LoginPage() {
           <S.PasswrdContainer>
             <S.InputItem
               type={isHide ? "password" : "text"}
-              // value={passwordValue}
-              // onChange={changePassword}
+              value={passwordValue}
+              onChange={changePassword}
             />
             <S.PasswrdToggleButton onClick={toggleIsHide}>
               {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
