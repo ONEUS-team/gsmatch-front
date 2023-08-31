@@ -21,7 +21,7 @@ export default function LoginPage() {
     e.preventDefault();
   };
 
-  const clickHideButton = () => {
+  const toggleIsHide = () => {
     setIsHide(!isHide);
   };
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
               value={passwordValue}
               onChange={changePassword}
             />
-            <S.PasswrdToggleButton onClick={clickHideButton}>
+            <S.PasswrdToggleButton onClick={toggleIsHide}>
               {isHide ? <PasswordHideIcon /> : <PasswordShowIcon />}
             </S.PasswrdToggleButton>
           </S.PasswrdContainer>
