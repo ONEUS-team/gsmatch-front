@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { HeaderLogo } from "../../Assets/svg";
 import { Link } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { PasswordHideIcon, PasswordShowIcon } from "../../Assets/svg/index";
 
 export default function LoginPage() {
@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [isHide, setIsHide] = useState<boolean>(true);
 
-  const changeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
   };
 
