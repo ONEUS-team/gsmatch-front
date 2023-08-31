@@ -33,11 +33,7 @@ export default function LoginPage() {
       <S.FormContainer onSubmit={loginFormSubmit}>
         <S.InputContainer>
           <S.InputText>이메일</S.InputText>
-          <S.InputItem //
-            type="text"
-            value={emailValue}
-            onChange={changeEmail}
-          />
+          <S.InputItem type="text" value={emailValue} onChange={changeEmail} />
         </S.InputContainer>
         <S.InputContainer>
           <S.InputText>비밀번호</S.InputText>
