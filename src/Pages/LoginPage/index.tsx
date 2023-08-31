@@ -1,21 +1,20 @@
 import * as S from "./style";
-import { HeaderLogo } from "../../Assets/svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { PasswordHideIcon, PasswordShowIcon } from "../../Assets/svg/index";
+import * as I from "../../Assets/svg/index";
 
 export default function LoginPage() {
-  const [emailValue, setEmailValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
+  // const [emailValue, setEmailValue] = useState<string>("");
+  // const [passwordValue, setPasswordValue] = useState<string>("");
   const [isHide, setIsHide] = useState<boolean>(true);
 
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailValue(e.target.value);
-  };
+  // const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmailValue(e.target.value);
+  // };
 
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswordValue(e.target.value);
-  };
+  // const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPasswordValue(e.target.value);
+  // };
 
   const loginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,23 +27,27 @@ export default function LoginPage() {
   return (
     <S.Container>
       <S.LogoContainer>
-        <HeaderLogo />
+        <I.HeaderLogo />
       </S.LogoContainer>
       <S.FormContainer onSubmit={loginFormSubmit}>
         <S.InputContainer>
           <S.InputText>이메일</S.InputText>
-          <S.InputItem type="email" value={emailValue} onChange={changeEmail} />
+          <S.InputItem //
+            type="email"
+            // value={emailValue}
+            // onChange={changeEmail}
+          />
         </S.InputContainer>
         <S.InputContainer>
           <S.InputText>비밀번호</S.InputText>
           <S.PasswrdContainer>
             <S.InputItem
               type={isHide ? "password" : "text"}
-              value={passwordValue}
-              onChange={changePassword}
+              // value={passwordValue}
+              // onChange={changePassword}
             />
             <S.PasswrdToggleButton onClick={toggleIsHide}>
-              {isHide ? <PasswordHideIcon /> : <PasswordShowIcon />}
+              {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
             </S.PasswrdToggleButton>
           </S.PasswrdContainer>
         </S.InputContainer>
