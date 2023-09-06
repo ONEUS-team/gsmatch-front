@@ -5,17 +5,38 @@ import * as I from "../../Assets/svg/index";
 import { Link } from "react-router-dom";
 
 export default function SignupPage() {
-  const [nameValue, setnameValue] = useState<string>("");
+  const [nameValue, setNameValue] = useState<string>("");
   const [emailValue, setEmailValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
-  const [checkpasswordValue, setcheckPasswordValue] = useState<string>("");
-  const [isHide, setIsHide] = useState<boolean>(true);
+  const [checkpasswordValue, setCheckPasswordValue] = useState<string>("");
+  const [passwordHide, setPasswordHide] = useState<boolean>(true);
+  const [checkPasswordHide, setCheckPasswordHide] = useState<boolean>(true);
 
   const { enablePrevent } = usePreventLeave();
 
   useEffect(() => {
     enablePrevent();
   }, []);
+
+  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const ID = e.target.id;
+    switch (ID) {
+      case "name":
+        setNameValue(e.target.value);
+        break;
+
+      case "email":
+        setEmailValue(e.target.value);
+        break;
+
+      case "password":
+        setPasswordValue(e.target.value);
+        break;
+
+      case "checkPassword":
+        setCheckPasswordValue(e.target.value);
+    }
+  };
 
   return (
     <S.Container>
@@ -29,23 +50,35 @@ export default function SignupPage() {
       <S.FormContainer>
         <S.InputContainer>
           <S.InputText>이름</S.InputText>
-          <S.InputItem></S.InputItem>
+          <S.InputItem
+            type="text"
+            id="name"
+            value={nameValue}
+            onChange={changeValue}
+          />
         </S.InputContainer>
 
         <S.InputContainer>
           <S.InputText>학교 이메일</S.InputText>
-          <S.InputItem></S.InputItem>
+          <S.InputItem
+            type="email"
+            id="email"
+            value={emailValue}
+            onChange={changeValue}
+          />
         </S.InputContainer>
 
         <S.InputContainer>
           <S.InputText>비밀번호</S.InputText>
           <S.PasswrdContainer>
             <S.InputItem
-              type={isHide ? "password" : "text"}
+              type={passwordHide ? "password" : "text"}
+              id="password"
               value={passwordValue}
+              onChange={changeValue}
             />
             <S.PasswrdToggleButton>
-              {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
+              {passwordHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
             </S.PasswrdToggleButton>
           </S.PasswrdContainer>
         </S.InputContainer>
@@ -54,11 +87,17 @@ export default function SignupPage() {
           <S.InputText>비밀번호 재확인</S.InputText>
           <S.PasswrdContainer>
             <S.InputItem
-              type={isHide ? "password" : "text"}
-              value={passwordValue}
+              type={checkPasswordHide ? "password" : "text"}
+              id="checkPassword"
+              value={checkpasswordValue}
+              onChange={changeValue}
             />
             <S.PasswrdToggleButton>
-              {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
+              {checkPasswordHide ? (
+                <I.PasswordHideIcon />
+              ) : (
+                <I.PasswordShowIcon />
+              )}
             </S.PasswrdToggleButton>
           </S.PasswrdContainer>
         </S.InputContainer>
