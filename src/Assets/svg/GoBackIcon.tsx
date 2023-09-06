@@ -9,8 +9,8 @@ const GoBack = () => (
     <path
       d="M14 2L2.70711 13.2929C2.31658 13.6834 2.31658 14.3166 2.70711 14.7071L14 26"
       stroke="#EEEEEE"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </svg>
 );
