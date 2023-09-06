@@ -101,6 +101,9 @@ export default function SignupPage() {
             </S.PasswrdToggleButton>
           </S.PasswrdContainer>
         </S.InputContainer>
+        <Link to="/">
+          <S.NextButton>다음</S.NextButton>
+        </Link>
       </S.FormContainer>
     </S.Container>
   );
