@@ -1,5 +1,5 @@
 export const usePreventLeave = () => {
-  const listener = (event) => {
+  const listener = (event: BeforeUnloadEvent) => {
     event.preventDefault();
     event.returnValue = "";
 
