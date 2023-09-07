@@ -85,11 +85,11 @@ export const SignupText = styled.p`
   margin-right: 5px;
 `;
 
-export const PasswrdContainer = styled.div`
+export const PasswordContainer = styled.div`
   display: flex;
 `;
 
-export const PasswrdToggleButton = styled.div`
+export const PasswordToggleButton = styled.div`
   margin: 18px;
   cursor: pointer;
 `;
