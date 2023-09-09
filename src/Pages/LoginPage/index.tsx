@@ -40,16 +40,16 @@ export default function LoginPage() {
         </S.InputContainer>
         <S.InputContainer>
           <S.InputText>비밀번호</S.InputText>
-          <S.PasswrdContainer>
+          <S.PasswordContainer>
             <S.InputItem
               type={isHide ? "password" : "text"}
               value={passwordValue}
               onChange={changePassword}
             />
-            <S.PasswrdToggleButton onClick={toggleIsHide}>
+            <S.PasswordToggleButton onClick={toggleIsHide}>
               {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
-            </S.PasswrdToggleButton>
-          </S.PasswrdContainer>
+            </S.PasswordToggleButton>
+          </S.PasswordContainer>
         </S.InputContainer>
         <S.Button>로그인</S.Button>
       </S.FormContainer>
