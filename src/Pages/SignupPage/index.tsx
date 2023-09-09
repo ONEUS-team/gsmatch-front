@@ -5,20 +5,6 @@ import * as I from "../../Assets/svg/index";
 import * as T from "../../types/signup";
 import { Link, Route, Routes } from "react-router-dom";
 
-const grades = [1, 2, 3];
-const genders = ["남자", "여자"];
-const majors = [
-  "프론트엔드",
-  "백엔드",
-  "디자이너",
-  "IOS",
-  "안드로이드",
-  "DevOps",
-  "기능반",
-  "IOT",
-  "AI",
-];
-
 export default function SignupPage() {
   const [nameValue, setNameValue] = useState<string>("");
   const [emailValue, setEmailValue] = useState<string>("");
@@ -29,6 +15,28 @@ export default function SignupPage() {
   const [majorValue, setMajorValue] = useState<T.Major>(0);
   const [passwordHide, setPasswordHide] = useState<boolean>(true);
   const [checkPasswordHide, setCheckPasswordHide] = useState<boolean>(true);
+  const [grades, setGrades] = useState([
+    { grade: 1, isSelect: false },
+    { grade: 2, isSelect: false },
+    { grade: 3, isSelect: false },
+  ]);
+
+  const [genders, setGenders] = useState([
+    { gender: "남자", isSelect: false },
+    { gender: "여자", isSelect: false },
+  ]);
+
+  const [majors, setMajors] = useState([
+    { major: "프론트엔드", isSelect: false },
+    { major: "백엔드", isSelect: false },
+    { major: "디자이너", isSelect: false },
+    { major: "IOS", isSelect: false },
+    { major: "안드로이드", isSelect: false },
+    { major: "DevOps", isSelect: false },
+    { major: "기능반", isSelect: false },
+    { major: "IOT", isSelect: false },
+    { major: "AI", isSelect: false },
+  ]);
 
   const { enablePrevent } = usePreventLeave();
 
@@ -36,19 +44,33 @@ export default function SignupPage() {
     enablePrevent();
   }, []);
 
-  const chageGrade = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeGrade = (e: React.MouseEvent<HTMLDivElement>) => {
     const ID: T.Grade = e.currentTarget.id as unknown as T.Grade;
     setGradeValue(ID);
+    const newGrades = grades.map((g) =>
+      g.grade === Number(ID)
+        ? { ...g, isSelect: true }
+        : { ...g, isSelect: false }
+    );
+    setGrades(newGrades);
   };
 
-  const chageGender = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeGender = (e: React.MouseEvent<HTMLDivElement>) => {
     const ID: T.Gender = e.currentTarget.id as unknown as T.Gender;
     setGenderValue(ID);
+    const newGenders = genders.map((g) =>
+      g.gender === ID ? { ...g, isSelect: true } : { ...g, isSelect: false }
+    );
+    setGenders(newGenders);
   };
 
-  const chageMajor = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeMajor = (e: React.MouseEvent<HTMLDivElement>) => {
     const ID: T.Major = e.currentTarget.id as unknown as T.Major;
     setMajorValue(ID);
+    const newMajors = majors.map((m) =>
+      m.major === ID ? { ...m, isSelect: true } : { ...m, isSelect: false }
+    );
+    setMajors(newMajors);
   };
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,11 +187,12 @@ export default function SignupPage() {
                   {grades.map((g) => {
                     return (
                       <S.SelectButton
-                        key={g}
-                        id={g.toString()}
-                        onClick={chageGrade}
+                        key={g.grade}
+                        id={g.grade.toString()}
+                        isSelect={g.isSelect}
+                        onClick={changeGrade}
                       >
-                        {g}학년
+                        {g.grade}학년
                       </S.SelectButton>
                     );
                   })}
@@ -180,8 +203,13 @@ export default function SignupPage() {
                 <S.SelectContainer>
                   {genders.map((g) => {
                     return (
-                      <S.SelectButton key={g} id={g}>
-                        {g}
+                      <S.SelectButton
+                        key={g.gender}
+                        id={g.gender}
+                        onClick={changeGender}
+                        isSelect={g.isSelect}
+                      >
+                        {g.gender}
                       </S.SelectButton>
                     );
                   })}
@@ -192,8 +220,13 @@ export default function SignupPage() {
                 <S.SelectContainer>
                   {majors.map((m) => {
                     return (
-                      <S.SelectButton key={m} id={m}>
-                        {m}
+                      <S.SelectButton
+                        key={m.major}
+                        id={m.major}
+                        onClick={changeMajor}
+                        isSelect={m.isSelect}
+                      >
+                        {m.major}
                       </S.SelectButton>
                     );
                   })}
