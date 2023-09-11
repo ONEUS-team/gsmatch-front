@@ -38,7 +38,7 @@ export default function SignupPage() {
     { major: "AI", isSelect: false },
   ]);
 
-  const { enablePrevent } = usePreventLeave();
+  const { enablePrevent, disablePrevent } = usePreventLeave();
 
   useEffect(() => {
     enablePrevent();
@@ -96,7 +96,7 @@ export default function SignupPage() {
   return (
     <S.Container>
       <S.BackContainer>
-        <Link to="/login">
+        <Link to="/login" onClick={() => disablePrevent()}>
           <I.GoBackIcon />
         </Link>
         <S.TextContainer>회원가입</S.TextContainer>
