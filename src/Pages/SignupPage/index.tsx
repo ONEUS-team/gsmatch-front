@@ -12,7 +12,7 @@ export default function SignupPage() {
   const [checkpasswordValue, setCheckPasswordValue] = useState<string>("");
   const [gradeValue, setGradeValue] = useState<T.Grade>(0);
   const [genderValue, setGenderValue] = useState<T.Gender>(0);
-  const [majorValue, setMajorValue] = useState<T.Major>(0);
+  const [majorValue, setMajorValue] = useState<T.Major[]>([]);
   const [passwordHide, setPasswordHide] = useState<boolean>(true);
   const [checkPasswordHide, setCheckPasswordHide] = useState<boolean>(true);
   const [grades, setGrades] = useState([
@@ -66,11 +66,19 @@ export default function SignupPage() {
 
   const changeMajor = (e: React.MouseEvent<HTMLDivElement>) => {
     const ID: T.Major = e.currentTarget.id as unknown as T.Major;
-    setMajorValue(ID);
-    const newMajors = majors.map((m) =>
-      m.major === ID ? { ...m, isSelect: true } : { ...m, isSelect: false }
-    );
-    setMajors(newMajors);
+    if (majorValue.indexOf(ID) > -1) {
+      const newMajors = majors.map((major) =>
+        major.major === ID ? { major: ID, isSelect: false } : major
+      );
+      setMajors(newMajors);
+      setMajorValue(majorValue.filter((major) => major !== ID));
+    } else if (majorValue.indexOf(ID) === -1) {
+      const newMajors = majors.map((major) =>
+        major.major === ID ? { major: ID, isSelect: true } : major
+      );
+      setMajors(newMajors);
+      setMajorValue((currentVlaue) => [...currentVlaue, ID]);
+    }
   };
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
