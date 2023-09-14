@@ -130,4 +130,5 @@ export const SelectButton = styled.button<{ isSelect: boolean }>`
   font-weight: 700;
   border-radius: 30px;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
 `;
