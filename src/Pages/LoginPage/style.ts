@@ -89,7 +89,7 @@ export const PasswordContainer = styled.div`
   display: flex;
 `;
 
-export const PasswordToggleButton = styled.div`
+export const PasswordToggleButton = styled.button`
   margin: 18px;
   cursor: pointer;
 `;
