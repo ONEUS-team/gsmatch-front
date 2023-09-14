@@ -122,7 +122,7 @@ export const SelectText = styled.p`
   margin-bottom: 15px;
 `;
 
-export const SelectButton = styled.div<{ isSelect: boolean }>`
+export const SelectButton = styled.button<{ isSelect: boolean }>`
   border: 2px solid ${(props) => (props.isSelect ? "#F0A0BD" : "#777777")};
   color: ${(props) => (props.isSelect ? "#F0A0BD" : "#777777")};
   padding: 7px 13px;
