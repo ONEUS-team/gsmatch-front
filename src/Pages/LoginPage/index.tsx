@@ -1,7 +1,7 @@
-import * as S from "./style";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import * as S from "./style";
 import * as I from "../../Assets/svg/index";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState<string>("");
