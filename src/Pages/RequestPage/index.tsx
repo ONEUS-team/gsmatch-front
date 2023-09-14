@@ -1,13 +1,16 @@
 import { useState } from "react";
 import * as I from "../../Assets/svg/index";
 import * as S from "./style";
+import {} from "react-router-dom";
 
 export default function RequestPage() {
-  const [select, setSelect] = useState("genre");
+  const [select, setSelect] = useState("");
 
   const handleRequestClick = (e: React.MouseEvent) => {
     setSelect(e.currentTarget.id);
   };
+
+  const nextPage = () => {};
 
   console.log(select);
 
@@ -22,6 +25,7 @@ export default function RequestPage() {
             alt="유형사진"
             id="genre"
             onClick={handleRequestClick}
+            isSelect={select === "genre" ? true : false}
           />
           <S.SelectTitle>유형</S.SelectTitle>
           <S.SelectInfo>
@@ -38,6 +42,7 @@ export default function RequestPage() {
             alt="전공사진"
             id="major"
             onClick={handleRequestClick}
+            isSelect={select === "major" ? true : false}
           />
           <S.SelectTitle>전공</S.SelectTitle>
           <S.SelectInfo>
@@ -49,7 +54,7 @@ export default function RequestPage() {
           </S.SelectInfo>
         </S.SelectItem>
       </S.SelectForm>
-      <S.Button>
+      <S.Button onClick={nextPage}>
         다음
         <I.ArrowButtonIcon />
       </S.Button>

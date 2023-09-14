@@ -8,7 +8,7 @@ const ArrowButtonIcon = () => (
   >
     <path
       d="M1.5 2L6.79289 7.29289C7.18342 7.68342 7.18342 8.31658 6.79289 8.70711L1.5 14"
-      stroke="#292424"
+      stroke="black"
       strokeWidth="3"
       strokeLinecap="round"
     />

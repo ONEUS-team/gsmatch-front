@@ -30,14 +30,20 @@ export const SelectForm = styled.form`
 
 export const SelectItem = styled.div<{ isSelect: boolean }>`
   display: flex;
+  color: ${(props) => {
+    return props.isSelect ? "#FFFFFF" : "#777777";
+  }};
   flex-direction: column;
   align-items: center;
 `;
 
-export const Icon = styled.img`
+export const Icon = styled.img<{ isSelect: boolean }>`
   width: 160px;
   height: 160px;
-  border: 3px solid #777;
+  border: 3px solid
+    ${(props) => {
+      return props.isSelect ? "#F3A4B2" : "#777777";
+    }};
   padding: 0.625rem;
   border-radius: 1.875rem;
   cursor: pointer;
@@ -65,7 +71,7 @@ export const Button = styled.button`
   border: 0;
   width: 16rem;
   padding: 1rem 5.1875rem;
-  color: #292424;
+  color: black;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 120%;
