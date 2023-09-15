@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/signup" element={<P.SignupPage />} />
+        <Route path="/signup/*" element={<P.SignupPage />} />
         <Route path="/login" element={<P.LoginPage />} />
         <Route path="/main" element={<P.MainPage />} />
         <Route
