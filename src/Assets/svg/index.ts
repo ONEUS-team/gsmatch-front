@@ -8,3 +8,5 @@ export { default as MajorRequestIcon } from "./MajorRequestIcon";
 export { default as ArrowButtonIcon } from "./ArrowButtonIcon";
 export { default as GoBackIcon } from "./GoBackIcon";
 export { default as RequestBackIcon } from "./RequestBackIcon";
+export { default as CameraIcon } from "./CameraIcon";
+export { default as DeleteIcon } from "./DeleteIcon";
