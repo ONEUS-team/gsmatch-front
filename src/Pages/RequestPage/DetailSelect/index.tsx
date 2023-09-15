@@ -1,14 +1,13 @@
 import { useParams } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import * as C from "../../../components/index";
 
 const DetailSelect = () => {
   const { request } = useParams();
-  return (
-    <div>
-      {request}
-      <Outlet />
-    </div>
-  );
+  if (request === "genre") {
+    return <C.GenreRequsetSelect />;
+  } else if (request === "major") {
+    return <C.MajorRequsetSelect />;
+  }
 };
 
 export default DetailSelect;
