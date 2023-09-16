@@ -10,3 +10,5 @@ export { default as GoBackIcon } from "./GoBackIcon";
 export { default as RequestBackIcon } from "./RequestBackIcon";
 export { default as CameraIcon } from "./CameraIcon";
 export { default as DeleteIcon } from "./DeleteIcon";
+export { default as MessegeIcon } from "./MessegeIcon";
+export { default as MailIcon } from "./MailIcon";
