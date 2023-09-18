@@ -12,3 +12,4 @@ export { default as CameraIcon } from "./CameraIcon";
 export { default as DeleteIcon } from "./DeleteIcon";
 export { default as MessegeIcon } from "./MessegeIcon";
 export { default as MailIcon } from "./MailIcon";
+export { default as CheckArrowIcon } from "./CheckArrowIcon";
