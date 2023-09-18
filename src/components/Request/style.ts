@@ -24,6 +24,7 @@ export const TextItem = styled.h1`
   color: #eeeeee;
   font-weight: 700;
   font-size: 2rem;
+  line-height: 120%;
 `;
 
 export const SubTextItem = styled.p`
