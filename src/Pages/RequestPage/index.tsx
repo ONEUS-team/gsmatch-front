@@ -3,6 +3,7 @@ import RequestSelect from "./RequestSelect/index";
 import DetailSelect from "./DetailSelect";
 import RequestWrite from "./RequestWrite";
 import RequestCheck from "./RequestCheck";
+import RequestResult from "./RequestResult";
 
 const RequestPage = () => (
   <Routes>
@@ -10,6 +11,7 @@ const RequestPage = () => (
     <Route path="/:request" element={<DetailSelect />} />
     <Route path="/write" element={<RequestWrite />} />
     <Route path="/check" element={<RequestCheck />} />
+    <Route path="/finish/:result" element={<RequestResult />} />
   </Routes>
 );
 
