@@ -1,6 +1,6 @@
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const RequestWrite = () => {
