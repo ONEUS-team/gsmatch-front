@@ -1,3 +1,133 @@
+import { useState } from "react";
+import * as S from "./style";
+import * as I from "../../Assets/svg/index";
+
+const datas = [
+  {
+    id: 1,
+    title: "Sample Title 1",
+    content: "This is the content of sample post 1.",
+    requestType: "type",
+    isOnlyOne: false,
+    author: {
+      id: 101,
+      name: "John Doe",
+      major: "front-end",
+      type: "루피",
+      level: 1,
+      grade: 3,
+    },
+  },
+  {
+    id: 2,
+    title: "Sample Title 2",
+    content: "This is the content of sample post 2.",
+    requestType: "type",
+    isOnlyOne: true,
+    author: {
+      id: 102,
+      name: "Jane Smith",
+      major: "back-end",
+      type: "루피",
+      level: 2,
+      grade: 2,
+    },
+  },
+  {
+    id: 3,
+    title: "Sample Title 3",
+    content: "This is the content of sample post 3.",
+    requestType: "type",
+    isOnlyOne: false,
+    author: {
+      id: 103,
+      name: "Alice Johnson",
+      major: "dev-ops",
+      type: "뽀로로",
+      level: 3,
+      grade: 1,
+    },
+  },
+  {
+    id: 4,
+    title: "Sample Title 4",
+    content: "This is the content of sample post 4.",
+    requestType: "type",
+    isOnlyOne: true,
+    author: {
+      id: 104,
+      name: "Bob Wilson",
+      major: "front-end",
+      type: "루피",
+      level: 4,
+      grade: 2,
+    },
+  },
+  {
+    id: 5,
+    title: "Sample Title 5",
+    content: "This is the content of sample post 5.",
+    requestType: "type",
+    isOnlyOne: false,
+    author: {
+      id: 105,
+      name: "Eva Davis",
+      major: "back-end",
+      type: "뽀로로",
+      level: 5,
+      grade: 1,
+    },
+  },
+  {
+    id: 6,
+    title: "Sample Title 6",
+    content: "This is the content of sample post 6.",
+    requestType: "major",
+    isOnlyOne: true,
+    author: {
+      id: 106,
+      name: "Michael Lee",
+      major: "dev-ops",
+      type: "루피",
+      level: 1,
+      grade: 3,
+    },
+  },
+];
+
 export default function NoticePage() {
-  return <div>NoticePage</div>;
+  const [sort, setSort] = useState("전체");
+  return (
+    <S.Container>
+      <S.ListContainer>
+        {datas.map((data) => {
+          return (
+            <S.ListItem
+              key={data.id}
+              requestType={data.requestType}
+              isOnlyOne={data.isOnlyOne}
+            >
+              <S.ListHeader>
+                <S.ListType>
+                  {data.requestType === "type" ? "유형" : "전공"}
+                  {data.requestType === "type" ? (
+                    <I.PeopleIcon />
+                  ) : (
+                    <I.MacbookIcon />
+                  )}
+                </S.ListType>
+                <S.ListSub>
+                  <S.ListAuthor>{data.author.name}</S.ListAuthor>
+                  <S.ListTime>2분전</S.ListTime>
+                </S.ListSub>
+              </S.ListHeader>
+              <S.ListTitle>{data.title}</S.ListTitle>
+              <S.ListContent>{data.content}</S.ListContent>
+              <S.ListImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" />
+            </S.ListItem>
+          );
+        })}
+      </S.ListContainer>
+    </S.Container>
+  );
 }
