@@ -6,3 +6,5 @@ export { default as PasswordShowIcon } from "./PasswordShowIcon";
 export { default as GoBackIcon } from "./GoBackIcon";
 export { default as MacbookIcon } from "./MacbookIcon";
 export { default as PeopleIcon } from "./PeopleIcon";
+export { default as FilterIcon } from "./FilterIcon";
+export { default as XIcon } from "./XIcon";
