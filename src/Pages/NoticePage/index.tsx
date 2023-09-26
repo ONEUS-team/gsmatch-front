@@ -1,8 +1,9 @@
 import { useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
+import { Filter } from "../../components";
 
-const datas = [
+const mokdata = [
   {
     id: 1,
     title: "Sample Title 1",
@@ -96,9 +97,34 @@ const datas = [
 ];
 
 export default function NoticePage() {
-  const [sort, setSort] = useState("전체");
+  const [range, setRange] = useState<string>("전체");
+  const [kind, setKind] = useState<string>("전체");
+  const [datas, setDatas] = useState(mokdata);
+  const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
+
   return (
     <S.Container>
+      <S.FilterContainer>
+        {isFilterClick ? (
+          <S.CloseButton
+            onClick={() => {
+              setIsFilterClick(false);
+            }}
+          >
+            <I.XIcon />
+          </S.CloseButton>
+        ) : (
+          <S.FilterButton
+            onClick={() => {
+              setIsFilterClick(true);
+            }}
+          >
+            <I.FilterIcon />
+            필터
+          </S.FilterButton>
+        )}
+        {isFilterClick && <Filter setRange={setRange} setKind={setKind} />}
+      </S.FilterContainer>
       <S.ListContainer>
         {datas.map((data) => {
           return (
@@ -109,11 +135,16 @@ export default function NoticePage() {
             >
               <S.ListHeader>
                 <S.ListType>
-                  {data.requestType === "type" ? "유형" : "전공"}
                   {data.requestType === "type" ? (
-                    <I.PeopleIcon />
+                    <>
+                      유형
+                      <I.PeopleIcon />
+                    </>
                   ) : (
-                    <I.MacbookIcon />
+                    <>
+                      전공
+                      <I.MacbookIcon />
+                    </>
                   )}
                 </S.ListType>
                 <S.ListSub>
