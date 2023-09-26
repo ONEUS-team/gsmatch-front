@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Filter } from "../../components";
+
+interface FilterObject {
+  [key: string]: string;
+}
+
+const filterType: FilterObject = {
+  전체: "all",
+  유형: "type",
+  전공: "major",
+};
 
 const mokdata = [
   {
@@ -101,6 +111,28 @@ export default function NoticePage() {
   const [kind, setKind] = useState<string>("전체");
   const [datas, setDatas] = useState(mokdata);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
+
+  console.log(range, kind);
+
+  const dataFilter = () => {
+    const newData = mokdata.filter((d) => {
+      if (range === "전체" && kind === "전체") {
+        return d;
+      } else if (range === "전체" && kind !== "전체") {
+        return d.requestType === filterType[kind];
+      } else if (range !== "전체" && kind === "전체") {
+        return d;
+      } else {
+        return d.requestType === filterType[kind];
+      }
+    });
+    setDatas(newData);
+  };
+
+  useEffect(() => {
+    dataFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [range, kind]);
 
   return (
     <S.Container>
