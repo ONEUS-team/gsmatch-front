@@ -1,12 +1,14 @@
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RequestWrite = () => {
   const [images, setImages] = useState<string[]>([]);
   const [titleText, setTitleText] = useState("");
   const [mainText, setMainText] = useState("");
+
+  const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if ((images as string[]).length <= 10) {
@@ -51,6 +53,12 @@ const RequestWrite = () => {
     }
   };
 
+  const nextPage = () => {
+    titleText.length !== 0 && mainText.length !== 0
+      ? navigate("/request/check")
+      : alert("제목이나 내용을 입력해주세요");
+  };
+
   return (
     <S.Container>
       <S.AddImageContainer>
@@ -90,12 +98,10 @@ const RequestWrite = () => {
         onChange={handelTextChange}
         id="mainText"
       />
-      <Link to="/request/check">
-        <S.Button>
-          요청 쓰기
-          <I.ArrowButtonIcon />
-        </S.Button>
-      </Link>
+      <S.Button onClick={nextPage}>
+        요청 쓰기
+        <I.ArrowButtonIcon />
+      </S.Button>
     </S.Container>
   );
 };
