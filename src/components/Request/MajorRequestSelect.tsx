@@ -2,11 +2,12 @@ import { useState } from "react";
 import * as S from "./style";
 import * as T from "../../types/studentInfo";
 import * as I from "../../Assets/svg/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MajorRequestSelect = () => {
-  const [gradeValue, setGradeValue] = useState<T.Grade>(0);
-  const [majorValue, setMajorValue] = useState<T.Major>(0);
+  const [gradeValue, setGradeValue] = useState<T.Grade | null>(null);
+  const [majorValue, setMajorValue] = useState<T.Major[] | null>(null);
+  const navigate = useNavigate();
 
   const [grades, setGrades] = useState([
     { grade: 1, isSelect: false },
@@ -26,7 +27,7 @@ const MajorRequestSelect = () => {
     { major: "기능반", isSelect: false },
   ]);
 
-  const changeGrade = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: T.Grade = e.currentTarget.id as unknown as T.Grade;
     setGradeValue(ID);
     const newGrades = grades.map((g) =>
@@ -37,14 +38,25 @@ const MajorRequestSelect = () => {
     setGrades(newGrades);
   };
 
-  const changeMajor = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeMajor = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: T.Major = e.currentTarget.id as unknown as T.Major;
-    setMajorValue(ID);
     const newMajors = majors.map((m) =>
-      m.major === ID ? { ...m, isSelect: true } : { ...m, isSelect: false }
+      m.major === ID ? { ...m, isSelect: !m.isSelect } : m
     );
+    const newMajorValue = newMajors.filter((m) => {
+      return m.isSelect === true && m.major;
+    });
+    setMajorValue(newMajorValue.map((m) => m.major) as T.Major[]);
     setMajors(newMajors);
   };
+
+  const nextPage = () => {
+    gradeValue !== null && majorValue?.length !== 0
+      ? navigate("/request/write")
+      : alert("모두 선택해 주세요");
+  };
+
+  console.log(majorValue);
 
   return (
     <S.Container>
@@ -94,12 +106,10 @@ const MajorRequestSelect = () => {
           </S.LinkContainer>
         </Link>
       </S.MiddleContainer>
-      <Link to="/request/write">
-        <S.Button>
-          요청 쓰기
-          <I.ArrowButtonIcon />
-        </S.Button>
-      </Link>
+      <S.Button onClick={nextPage}>
+        요청 쓰기
+        <I.ArrowButtonIcon />
+      </S.Button>
     </S.Container>
   );
 };
