@@ -14,6 +14,7 @@ export const AddImageContainer = styled.div`
   margin-top: 2.34rem;
   margin-bottom: 1.31rem;
   column-gap: 0.75rem;
+  height: 4.5rem;
 `;
 
 export const AddImageButton = styled.label`
@@ -25,6 +26,8 @@ export const AddImageButton = styled.label`
   padding: 0.5rem 1.25rem;
   border: 1px solid #575757;
   border-radius: 0.625rem;
+  width: 4.5rem;
+  height: 4.5rem;
 `;
 
 export const AddImageInput = styled.input`
