@@ -50,13 +50,10 @@ const MajorRequestSelect = () => {
     setMajors(newMajors);
   };
 
-  const nextPage = () => {
+  const nextPage = () =>
     gradeValue !== null && majorValue?.length !== 0
       ? navigate("/request/write")
       : alert("모두 선택해 주세요");
-  };
-
-  console.log(majorValue);
 
   return (
     <S.Container>
