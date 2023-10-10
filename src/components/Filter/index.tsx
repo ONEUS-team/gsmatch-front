@@ -13,10 +13,10 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
     { range: "전체", isSelect: true },
     { range: "관심 목록", isSelect: false },
   ]);
-  const [kinds, setKinds] = useState([
-    { kind: "전체", isSelect: true },
-    { kind: "유형", isSelect: false },
-    { kind: "전공", isSelect: false },
+  const [types, setTypes] = useState([
+    { type: "전체", isSelect: true },
+    { type: "유형", isSelect: false },
+    { type: "전공", isSelect: false },
   ]);
 
   const handleRangeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,12 +28,12 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
     setRanges(newRanges);
   };
   const handleKindClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const ID: T.Kind = e.currentTarget.id as unknown as T.Kind;
+    const ID: T.Type = e.currentTarget.id as unknown as T.Type;
     setKind(ID);
-    const newKinds = kinds.map((k) =>
-      k.kind === ID ? { ...k, isSelect: true } : { ...k, isSelect: false }
+    const newTypes = types.map((k) =>
+      k.type === ID ? { ...k, isSelect: true } : { ...k, isSelect: false }
     );
-    setKinds(newKinds);
+    setTypes(newTypes);
   };
 
   return (
@@ -59,13 +59,13 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
       <S.SelectContainer>
         종류
         <S.SelectBox>
-          {kinds.map((k) => (
+          {types.map((k) => (
             <S.SelectBTN
-              id={k.kind}
+              id={k.type}
               isSelect={k.isSelect}
               onClick={handleKindClick}
             >
-              {k.kind}
+              {k.type}
             </S.SelectBTN>
           ))}
         </S.SelectBox>
