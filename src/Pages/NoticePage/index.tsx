@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Filter } from "../../components";
@@ -113,9 +113,7 @@ export default function NoticePage() {
   const [datas, setDatas] = useState(mokdata);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
 
-  console.log(range, kind);
-
-  const dataFilter = () => {
+  const dataFilter = useCallback(() => {
     const newData = mokdata.filter((d) => {
       if (range === "전체" && kind === "전체") {
         return d;
@@ -128,12 +126,11 @@ export default function NoticePage() {
       }
     });
     setDatas(newData);
-  };
+  }, [range, kind]);
 
   useEffect(() => {
     dataFilter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range, kind]);
+  }, [dataFilter]);
 
   return (
     <S.Container>
@@ -159,17 +156,17 @@ export default function NoticePage() {
         {isFilterClick && <Filter setRange={setRange} setKind={setKind} />}
       </S.FilterContainer>
       <S.ListContainer>
-        {datas.map((data) => {
-          return (
-            <NoticeItem
-              requestType={data.requestType}
-              isOnlyOne={data.isOnlyOne}
-              title={data.title}
-              content={data.content}
-              author={data.author}
-            />
-          );
-        })}
+        {datas.map((data) => (
+          <NoticeItem
+            key={data.id}
+            id={data.id}
+            requestType={data.requestType}
+            isOnlyOne={data.isOnlyOne}
+            title={data.title}
+            content={data.content}
+            author={data.author}
+          />
+        ))}
       </S.ListContainer>
     </S.Container>
   );
