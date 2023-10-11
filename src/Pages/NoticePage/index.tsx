@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Filter } from "../../components";
+import NoticeItem from "../../components/NoticeItem";
 
 interface FilterObject {
   [key: string]: string;
@@ -160,34 +161,13 @@ export default function NoticePage() {
       <S.ListContainer>
         {datas.map((data) => {
           return (
-            <S.ListItem
-              key={data.id}
+            <NoticeItem
               requestType={data.requestType}
               isOnlyOne={data.isOnlyOne}
-            >
-              <S.ListHeader>
-                <S.ListType>
-                  {data.requestType === "type" ? (
-                    <>
-                      유형
-                      <I.PeopleIcon />
-                    </>
-                  ) : (
-                    <>
-                      전공
-                      <I.MacbookIcon />
-                    </>
-                  )}
-                </S.ListType>
-                <S.ListSub>
-                  <S.ListAuthor>{data.author.name}</S.ListAuthor>
-                  <S.ListTime>2분전</S.ListTime>
-                </S.ListSub>
-              </S.ListHeader>
-              <S.ListTitle>{data.title}</S.ListTitle>
-              <S.ListContent>{data.content}</S.ListContent>
-              <S.ListImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" />
-            </S.ListItem>
+              title={data.title}
+              content={data.content}
+              author={data.author}
+            />
           );
         })}
       </S.ListContainer>
