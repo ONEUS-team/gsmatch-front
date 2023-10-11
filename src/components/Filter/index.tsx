@@ -47,6 +47,7 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
         <S.SelectBox>
           {ranges.map((r) => (
             <S.SelectBTN
+              key={r.range}
               id={r.range}
               isSelect={r.isSelect}
               onClick={handleRangeClick}
@@ -61,6 +62,7 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
         <S.SelectBox>
           {types.map((k) => (
             <S.SelectBTN
+              key={k.type}
               id={k.type}
               isSelect={k.isSelect}
               onClick={handleKindClick}
