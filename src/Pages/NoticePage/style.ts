@@ -67,10 +67,7 @@ export const ListContainer = styled.ul`
   align-items: center;
 `;
 
-export const ListItem = styled.li<{
-  requestType: string;
-  isOnlyOne: boolean;
-}>`
+export const ListItem = styled.li`
   position: relative;
   width: 47.5rem;
 `;
