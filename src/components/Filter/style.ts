@@ -38,8 +38,8 @@ export const SelectBox = styled.div`
 `;
 
 export const SelectBTN = styled.button<{ isSelect: boolean }>`
-  background-color: ${{isSelect} => isSelect ? "#F3A4B2" : "#292424"};
-  color: ${{isSelect} => isSelect ? "#000000" : "#777777"};
+  background-color: ${({ isSelect }) => (isSelect ? "#F3A4B2" : "#292424")};
+  color: ${({ isSelect }) => (isSelect ? "#000000" : "#777777")};
   cursor: pointer;
   display: flex;
   padding: 0.5rem 1.25rem;
