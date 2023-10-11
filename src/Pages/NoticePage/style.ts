@@ -67,10 +67,7 @@ export const ListContainer = styled.ul`
   align-items: center;
 `;
 
-export const ListItem = styled.li`
-  position: relative;
-  width: 47.5rem;
-`;
+export const ListItem = styled.li``;
 
 export const ListHeader = styled.header`
   display: flex;

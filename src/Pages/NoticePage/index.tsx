@@ -157,15 +157,16 @@ export default function NoticePage() {
       </S.FilterContainer>
       <S.ListContainer>
         {datas.map((data) => (
-          <NoticeItem
-            key={data.id}
-            id={data.id}
-            requestType={data.requestType}
-            isOnlyOne={data.isOnlyOne}
-            title={data.title}
-            content={data.content}
-            author={data.author}
-          />
+          <S.ListItem key={data.id}>
+            <NoticeItem
+              id={data.id}
+              requestType={data.requestType}
+              isOnlyOne={data.isOnlyOne}
+              title={data.title}
+              content={data.content}
+              author={data.author}
+            />
+          </S.ListItem>
         ))}
       </S.ListContainer>
     </S.Container>
