@@ -19,6 +19,7 @@ export const ListItem = styled.button<{
   background-color: rgba(0, 0, 0, 0);
   border: none;
   text-align: left;
+  cursor: pointer;
 `;
 
 export const ListHeader = styled.header`
