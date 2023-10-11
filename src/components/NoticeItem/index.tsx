@@ -1,7 +1,9 @@
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
+  id: number;
   requestType: string;
   isOnlyOne: boolean;
   title: string;
@@ -17,9 +19,22 @@ const NoticeItem: React.FC<Props> = ({
   title,
   content,
   author,
+  id,
 }) => {
+  const navigate = useNavigate();
+
+  const redirect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const ID: string = e.currentTarget.id;
+    ID !== null && navigate(`/request/${ID}`);
+  };
+
   return (
-    <S.ListItem requestType={requestType} isOnlyOne={isOnlyOne}>
+    <S.ListItem
+      id={id.toString()}
+      isOnlyOne={isOnlyOne}
+      requestType={requestType}
+      onClick={redirect}
+    >
       <S.ListHeader>
         <S.ListType>
           {requestType === "type" ? (
