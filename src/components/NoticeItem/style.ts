@@ -1,21 +1,14 @@
 import styled from "styled-components";
 
-export const ListContainer = styled.ul`
-  margin-top: 2.69rem;
-  width: 50rem;
-  padding: 0, 1.25rem;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.75rem;
-  align-items: center;
-`;
-
-export const ListItem = styled.li<{
+export const ListItem = styled.button<{
   requestType: string;
   isOnlyOne: boolean;
 }>`
   position: relative;
   width: 47.5rem;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 `;
 
 export const ListHeader = styled.header`
