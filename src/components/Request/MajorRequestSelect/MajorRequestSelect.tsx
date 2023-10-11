@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as S from "./style";
-import * as T from "../../types/studentInfo";
-import * as I from "../../Assets/svg/index";
+import * as T from "../../../types/studentInfo";
+import * as I from "../../../Assets/svg/index";
 import { Link, useNavigate } from "react-router-dom";
 
 const MajorRequestSelect = () => {

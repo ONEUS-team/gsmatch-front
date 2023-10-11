@@ -1,12 +1,13 @@
 import { useState } from "react";
 import * as S from "./style";
-import * as T from "../../types/studentInfo";
-import * as I from "../../Assets/svg/index";
-import { Link } from "react-router-dom";
+import * as T from "../../../types/studentInfo";
+import * as I from "../../../Assets/svg/index";
+import { Link, useNavigate } from "react-router-dom";
 
 const GenreRequsetSelect = () => {
-  const [gradeValue, setGradeValue] = useState<T.Grade>(0);
-  const [genderValue, setGenderValue] = useState<T.Gender>(0);
+  const [gradeValue, setGradeValue] = useState<T.Grade | null>(null);
+  const [genderValue, setGenderValue] = useState<T.Gender | null>(null);
+  const navigate = useNavigate();
 
   const [grades, setGrades] = useState([
     { grade: 1, isSelect: false },
@@ -19,7 +20,7 @@ const GenreRequsetSelect = () => {
     { gender: "여자", isSelect: false },
   ]);
 
-  const changeGrade = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: T.Grade = e.currentTarget.id as unknown as T.Grade;
     setGradeValue(ID);
     const newGrades = grades.map((g) =>
@@ -30,7 +31,7 @@ const GenreRequsetSelect = () => {
     setGrades(newGrades);
   };
 
-  const changeGender = (e: React.MouseEvent<HTMLDivElement>) => {
+  const changeGender = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: T.Gender = e.currentTarget.id as unknown as T.Gender;
     setGenderValue(ID);
     const newGenders = genders.map((g) =>
@@ -38,6 +39,11 @@ const GenreRequsetSelect = () => {
     );
     setGenders(newGenders);
   };
+
+  const nextPage = () =>
+    gradeValue !== null && genderValue! == null
+      ? navigate("/request/write")
+      : alert("모두 선택해주세요");
 
   return (
     <S.Container>
@@ -87,12 +93,10 @@ const GenreRequsetSelect = () => {
           </S.LinkContainer>
         </Link>
       </S.MiddleContainer>
-      <Link to="/request/write">
-        <S.Button>
-          요청 쓰기
-          <I.ArrowButtonIcon />
-        </S.Button>
-      </Link>
+      <S.Button onClick={nextPage}>
+        요청 쓰기
+        <I.ArrowButtonIcon />
+      </S.Button>
     </S.Container>
   );
 };

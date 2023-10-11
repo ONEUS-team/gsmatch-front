@@ -96,7 +96,7 @@ export const LinkText = styled.p`
 `;
 
 export const Button = styled.button`
-  margin-top: 16rem;
+  margin-top: 18.7rem;
   background-color: #f3a4b2;
   border: 0;
   /* width: 16rem; */
