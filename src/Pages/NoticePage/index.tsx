@@ -13,10 +13,27 @@ const filterType: FilterObject = {
   유형: "type",
   전공: "major",
 };
+
+interface INoticeData {
+  id: number;
+  title: string;
+  content: string;
+  requestType: string;
+  isOnlyOne: boolean;
+  author: {
+    id: number;
+    name: string;
+    major: string;
+    type: string;
+    level: number;
+    grade: number;
+  };
+}
+
 export default function NoticePage() {
   const [range, setRange] = useState<string>("전체");
   const [kind, setKind] = useState<string>("전체");
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<INoticeData[]>([]);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
 
   const dataFilter = useCallback(() => {
