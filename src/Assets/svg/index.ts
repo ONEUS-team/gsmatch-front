@@ -17,3 +17,6 @@ export { default as MacbookIcon } from "./MacbookIcon";
 export { default as PeopleIcon } from "./PeopleIcon";
 export { default as FilterIcon } from "./FilterIcon";
 export { default as XIcon } from "./XIcon";
+export { default as HeartIcon } from "./HeartIcon";
+export { default as FillHeartIcon } from "./FillHeartIcon";
+export { default as DefaultImg } from "./DefaultImg";
