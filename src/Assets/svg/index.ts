@@ -13,3 +13,7 @@ export { default as DeleteIcon } from "./DeleteIcon";
 export { default as MessegeIcon } from "./MessegeIcon";
 export { default as MailIcon } from "./MailIcon";
 export { default as CheckArrowIcon } from "./CheckArrowIcon";
+export { default as MacbookIcon } from "./MacbookIcon";
+export { default as PeopleIcon } from "./PeopleIcon";
+export { default as FilterIcon } from "./FilterIcon";
+export { default as XIcon } from "./XIcon";

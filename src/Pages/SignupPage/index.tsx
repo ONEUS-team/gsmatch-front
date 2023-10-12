@@ -15,6 +15,7 @@ export default function SignupPage() {
   const [majorValue, setMajorValue] = useState<T.Major[]>([]);
   const [passwordHide, setPasswordHide] = useState<boolean>(true);
   const [checkPasswordHide, setCheckPasswordHide] = useState<boolean>(true);
+
   const [grades, setGrades] = useState([
     { grade: 1, isSelect: false },
     { grade: 2, isSelect: false },
