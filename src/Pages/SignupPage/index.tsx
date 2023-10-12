@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
-import * as T from "../../types/signup";
+import * as T from "../../types/studentInfo";
 import { Link, Route, Routes } from "react-router-dom";
 
 export default function SignupPage() {

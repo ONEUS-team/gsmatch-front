@@ -14,7 +14,7 @@ function App() {
           element={<PrivateRouter element={<P.ProfilePage />} />}
         />
         <Route
-          path="/request"
+          path="/request/*"
           element={<PrivateRouter element={<P.RequestPage />} />}
         />
         <Route
