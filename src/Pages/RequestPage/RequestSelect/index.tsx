@@ -1,19 +1,23 @@
-import { useState } from "react";
 import * as I from "../../../Assets/svg/index";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
+import * as T from "../../../types/request";
 
-export default function RequestSelect() {
-  const [select, setSelect] = useState("");
+interface Props {
+  requestType: T.requestType | null;
+  setRequestType: React.Dispatch<React.SetStateAction<T.requestType | null>>;
+}
+
+const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
   const navigate = useNavigate();
 
   const handleRequestClick = (e: React.MouseEvent) => {
-    setSelect(e.currentTarget.id);
+    setRequestType(e.currentTarget.id as T.requestType);
   };
 
   const nextPage = () => {
-    if (select) {
-      navigate(`/request/${select}`);
+    if (requestType) {
+      navigate(`/request/${requestType}`);
     } else {
       alert("보낼 요청을 선택하세요");
     }
@@ -24,13 +28,13 @@ export default function RequestSelect() {
       <S.TextItem>어떤 요청을 보낼까요?</S.TextItem>
       <S.SubTextItem>요청은 최대 3개까지 보낼 수 있어요!</S.SubTextItem>
       <S.SelectForm>
-        <S.SelectItem isSelect={select === "genre" ? true : false}>
+        <S.SelectItem isSelect={requestType === "genre" ? true : false}>
           <S.Icon
             src="src\Assets\svg\Heart.png"
             alt="유형사진"
             id="genre"
             onClick={handleRequestClick}
-            isSelect={select === "genre" ? true : false}
+            isSelect={requestType === "genre" ? true : false}
           />
           <S.SelectTitle>유형</S.SelectTitle>
           <S.SelectInfo>
@@ -41,13 +45,13 @@ export default function RequestSelect() {
             요청을 보내요
           </S.SelectInfo>
         </S.SelectItem>
-        <S.SelectItem isSelect={select === "major" ? true : false}>
+        <S.SelectItem isSelect={requestType === "major" ? true : false}>
           <S.Icon
             src="src\Assets\svg\Hat.png"
             alt="전공사진"
             id="major"
             onClick={handleRequestClick}
-            isSelect={select === "major" ? true : false}
+            isSelect={requestType === "major" ? true : false}
           />
           <S.SelectTitle>전공</S.SelectTitle>
           <S.SelectInfo>
@@ -65,4 +69,6 @@ export default function RequestSelect() {
       </S.Button>
     </S.Container>
   );
-}
+};
+
+export default RequestSelect;

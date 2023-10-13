@@ -1,28 +1,39 @@
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const RequestWrite = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [titleText, setTitleText] = useState("");
-  const [mainText, setMainText] = useState("");
+interface Props {
+  requestTitle: string;
+  requestContent: string;
+  requestImg: string[];
+  setRequestTitle: React.Dispatch<React.SetStateAction<string>>;
+  setRequestContent: React.Dispatch<React.SetStateAction<string>>;
+  setRequestImg: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
+const RequestWrite: React.FC<Props> = ({
+  requestImg,
+  requestTitle,
+  requestContent,
+  setRequestImg,
+  setRequestTitle,
+  setRequestContent,
+}) => {
   const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if ((images as string[]).length <= 10) {
+    if (requestImg.length <= 3) {
       const fileReader = new FileReader();
 
       fileReader.readAsDataURL(e.target.files![0]);
 
       fileReader.onload = (e: ProgressEvent<FileReader>) => {
         const src = e.target!.result as string;
-        if (images.includes(src)) {
-          console.log("이미 추가한 사진 입니다");
+        if (requestImg.includes(src)) {
+          alert("이미 추가한 사진 입니다");
         } else {
-          const newImages = [src].concat(images);
-          setImages(newImages);
+          const newImages = [src].concat(requestImg);
+          setRequestImg(newImages);
         }
       };
     } else {
@@ -32,10 +43,10 @@ const RequestWrite = () => {
 
   const handleDeleteBtnClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const deleteID = e.currentTarget.parentElement!.id;
-    const newImages = images.filter((image) => {
+    const newImages = requestImg.filter((image) => {
       return image !== deleteID;
     });
-    setImages(newImages);
+    setRequestImg(newImages);
   };
 
   const handelTextChange = (
@@ -45,16 +56,16 @@ const RequestWrite = () => {
 
     switch (ID) {
       case "titleText":
-        setTitleText(e.target.value);
+        setRequestTitle(e.target.value);
         break;
       case "mainText":
-        setMainText(e.target.value);
+        setRequestContent(e.target.value);
         break;
     }
   };
 
   const nextPage = () => {
-    titleText.length !== 0 && mainText.length !== 0
+    requestTitle.length !== 0 && requestContent.length !== 0
       ? navigate("/request/check")
       : alert("제목이나 내용을 입력해주세요");
   };
@@ -70,11 +81,11 @@ const RequestWrite = () => {
           />
           <I.CameraIcon />
           <S.AddImageTextContainer>
-            <S.TextItem>{images.length}</S.TextItem>
+            <S.TextItem>{requestImg.length}</S.TextItem>
             /10
           </S.AddImageTextContainer>
         </S.AddImageButton>
-        {images.map((image) => {
+        {requestImg.map((image) => {
           return (
             <S.AddImageItemContainer key={image} id={image}>
               <S.AddImageItem src={image} />
@@ -88,13 +99,13 @@ const RequestWrite = () => {
       <S.TitleInput
         type="text"
         placeholder="요청 제목"
-        value={titleText}
+        value={requestTitle}
         onChange={handelTextChange}
         id="titleText"
       />
       <S.MainTextInput
         placeholder="내용을 적어주세요."
-        value={mainText}
+        value={requestContent}
         onChange={handelTextChange}
         id="mainText"
       />

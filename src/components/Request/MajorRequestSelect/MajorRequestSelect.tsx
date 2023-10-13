@@ -1,15 +1,27 @@
 import { useState } from "react";
 import * as S from "./style";
-import * as T from "../../../types/studentInfo";
 import * as I from "../../../Assets/svg/index";
 import { Link, useNavigate } from "react-router-dom";
+import * as T from "../../../types/request";
 
-const MajorRequestSelect = () => {
-  const [gradeValue, setGradeValue] = useState<T.Grade | null>(null);
-  const [majorValue, setMajorValue] = useState<T.Major[] | null>(null);
+interface Props {
+  requestGrade: T.requestGrade[];
+  requsetMajor: T.requestMajor[] | null;
+  setRequestGrade: React.Dispatch<React.SetStateAction<T.requestGrade[]>>;
+  setRequestMajor: React.Dispatch<
+    React.SetStateAction<T.requestMajor[] | null>
+  >;
+}
+
+const MajorRequestSelect: React.FC<Props> = ({
+  requestGrade,
+  requsetMajor,
+  setRequestGrade,
+  setRequestMajor,
+}) => {
   const navigate = useNavigate();
-
   const [grades, setGrades] = useState([
+    { grade: "모두", isSelect: true },
     { grade: 1, isSelect: false },
     { grade: 2, isSelect: false },
     { grade: 3, isSelect: false },
@@ -28,30 +40,45 @@ const MajorRequestSelect = () => {
   ]);
 
   const changeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const ID: T.Grade = e.currentTarget.id as unknown as T.Grade;
-    setGradeValue(ID);
-    const newGrades = grades.map((g) =>
-      g.grade === Number(ID)
-        ? { ...g, isSelect: true }
-        : { ...g, isSelect: false }
-    );
+    const ID: string = e.currentTarget.id;
+
+    const newGrades =
+      ID === "모두"
+        ? grades.map((g) =>
+            g.grade == ID ? { ...g, isSelect: true } : { ...g, isSelect: false }
+          )
+        : grades.map((g) =>
+            g.grade == ID
+              ? { ...g, isSelect: !g.isSelect }
+              : typeof g.grade === "string"
+              ? { ...g, isSelect: false }
+              : g
+          );
+
+    if (ID !== "모두") {
+      const newRequestGrade = newGrades.filter((g) => g.isSelect === true);
+
+      setRequestGrade(newRequestGrade.map((g) => g.grade) as T.requestGrade[]);
+    } else {
+      setRequestGrade(["1", "2", "3"]);
+    }
     setGrades(newGrades);
   };
 
   const changeMajor = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const ID: T.Major = e.currentTarget.id as unknown as T.Major;
+    const ID: string = e.currentTarget.id;
     const newMajors = majors.map((m) =>
       m.major === ID ? { ...m, isSelect: !m.isSelect } : m
     );
     const newMajorValue = newMajors.filter((m) => {
-      return m.isSelect === true && m.major;
+      return m.isSelect === true;
     });
-    setMajorValue(newMajorValue.map((m) => m.major) as T.Major[]);
+    setRequestMajor(newMajorValue.map((m) => m.major) as T.requestMajor[]);
     setMajors(newMajors);
   };
 
   const nextPage = () =>
-    gradeValue !== null && majorValue?.length !== 0
+    requestGrade !== null && requsetMajor?.length !== 0
       ? navigate("/request/write")
       : alert("모두 선택해 주세요");
 
@@ -71,7 +98,11 @@ const MajorRequestSelect = () => {
                   isSelect={grade.isSelect}
                   onClick={changeGrade}
                 >
-                  {grade.grade}학년
+                  {grade.grade === "모두" ? (
+                    <>{grade.grade}</>
+                  ) : (
+                    <>{grade.grade}학년</>
+                  )}
                 </S.SelectButton>
               );
             })}
@@ -94,14 +125,14 @@ const MajorRequestSelect = () => {
             })}
           </S.SelectContainer>
         </S.MajorContainer>
-        <Link to="/request">
-          <S.LinkContainer>
+        <S.LinkContainer>
+          <Link to="/request">
             <S.LinkText>
               <I.RequestBackIcon />
               이전 페이지로 이동하기
             </S.LinkText>
-          </S.LinkContainer>
-        </Link>
+          </Link>
+        </S.LinkContainer>
       </S.MiddleContainer>
       <S.Button onClick={nextPage}>
         요청 쓰기
