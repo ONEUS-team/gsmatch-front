@@ -109,7 +109,10 @@ const MajorRequestSelect: React.FC<Props> = ({
           </S.SelectContainer>
         </S.GradeContainer>
         <S.MajorContainer>
-          <S.SelectText>전공</S.SelectText>
+          <S.SelectText>
+            전공
+            <S.RefText>*복수 선택 가능합니다</S.RefText>
+          </S.SelectText>
           <S.SelectContainer>
             {majors.map((major) => {
               return (

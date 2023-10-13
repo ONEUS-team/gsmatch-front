@@ -50,6 +50,9 @@ export const SelectText = styled.p`
   color: #eeeeee;
   font-weight: 700;
   margin-bottom: 15px;
+  display: flex;
+  column-gap: 0.25rem;
+  align-items: center;
 `;
 
 export const GradeContainer = styled.div`
@@ -111,4 +114,13 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+`;
+
+export const RefText = styled.p`
+  color: #f3a4b2;
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
 `;
