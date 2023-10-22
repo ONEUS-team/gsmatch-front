@@ -1,7 +1,7 @@
-import { useState } from "react";
 import * as S from "./style";
-import * as I from "../../Assets/svg/index";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import * as I from "../../Assets/svg/index";
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState<string>("");
@@ -40,16 +40,16 @@ export default function LoginPage() {
         </S.InputContainer>
         <S.InputContainer>
           <S.InputText>비밀번호</S.InputText>
-          <S.PasswordContainer>
+          <S.PasswrdContainer>
             <S.InputItem
               type={isHide ? "password" : "text"}
               value={passwordValue}
               onChange={changePassword}
             />
-            <S.PasswordToggleButton onClick={toggleIsHide}>
+            <S.PasswrdToggleButton onClick={toggleIsHide}>
               {isHide ? <I.PasswordHideIcon /> : <I.PasswordShowIcon />}
-            </S.PasswordToggleButton>
-          </S.PasswordContainer>
+            </S.PasswrdToggleButton>
+          </S.PasswrdContainer>
         </S.InputContainer>
         <S.Button>로그인</S.Button>
       </S.FormContainer>
