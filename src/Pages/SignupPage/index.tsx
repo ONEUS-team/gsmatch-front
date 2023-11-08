@@ -33,6 +33,10 @@ const SignupPage = () => {
         path="/next"
         element={
           <MajorInfo
+            signupName={signupName}
+            signupEmail={signupEmail}
+            signupPassword={signupPassword}
+            signupCheckPassword={signupCheckPassword}
             signupGrade={signupGrade}
             signupGender={signupGender}
             signupMajor={signupMajor}
