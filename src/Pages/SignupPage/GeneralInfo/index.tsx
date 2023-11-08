@@ -54,13 +54,16 @@ const index: React.FC<Props> = ({
   };
 
   const goToNextPage = () => {
+    const nameMatch = signupName.length >= 2 && signupName.length <= 4;
     const emailMatch = signupEmail.length > 0 && emailRegex.test(signupEmail);
     const passwordMatch =
       signupPassword.length > 8 && passwordRegex.test(signupPassword);
     const checkPasswordMatch = signupCheckPassword == signupPassword;
 
-    if (emailMatch && passwordMatch && checkPasswordMatch) {
+    if (nameMatch && emailMatch && passwordMatch && checkPasswordMatch) {
       navigate("/signup/next");
+    } else {
+      alert("형식을 맞게 채웠는지 확인해주세요");
     }
   };
 
