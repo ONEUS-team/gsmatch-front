@@ -17,3 +17,5 @@ export { default as MacbookIcon } from "./MacbookIcon";
 export { default as PeopleIcon } from "./PeopleIcon";
 export { default as FilterIcon } from "./FilterIcon";
 export { default as XIcon } from "./XIcon";
+export { default as NoticeIcon } from "./NoticeIcon";
+export { default as ChatIcon } from "./ChatIcon";
