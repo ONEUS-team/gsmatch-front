@@ -67,6 +67,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+html, body {
+  width: 100%;
+}
 `;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
