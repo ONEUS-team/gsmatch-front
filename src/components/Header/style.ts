@@ -27,16 +27,6 @@ export const IconBox = styled.button`
   cursor: pointer;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-
-  & :hover {
-    svg {
-      fill: #f3a4b2;
-
-      path {
-        fill: #f3a4b2;
-      }
-    }
-  }
 `;
 
 export const RightBox = styled.div`
