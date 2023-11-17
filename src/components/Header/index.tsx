@@ -21,9 +21,9 @@ const Header = () => {
           <S.NoticeIconBox onClick={handleNoticeIconClick}>
             <I.NoticeIcon />
           </S.NoticeIconBox>
-          <S.IconBox onClick={handleChatIconClick}>
+          <S.ChatIconBox onClick={handleChatIconClick}>
             <I.ChatIcon />
-          </S.IconBox>
+          </S.ChatIconBox>
         </S.RightBox>
       </S.Inner>
     </S.header>
