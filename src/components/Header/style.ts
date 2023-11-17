@@ -29,6 +29,18 @@ export const IconBox = styled.button`
   background-color: rgba(0, 0, 0, 0);
 `;
 
+export const NoticeIconBox = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+
+  &:hover {
+    .notice {
+      fill: #f3a4b2;
+    }
+  }
+`;
+
 export const RightBox = styled.div`
   display: flex;
   column-gap: 1.25rem;
