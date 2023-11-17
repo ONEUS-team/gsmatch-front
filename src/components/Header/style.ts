@@ -23,19 +23,25 @@ export const LogoBox = styled.button`
   background-color: rgba(0, 0, 0, 0);
 `;
 
-export const IconBox = styled.button`
-  cursor: pointer;
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-`;
-
 export const NoticeIconBox = styled.button`
   cursor: pointer;
   border: none;
   background-color: rgba(0, 0, 0, 0);
 
-  &:hover {
+  svg:hover {
     .notice {
+      fill: #f3a4b2;
+    }
+  }
+`;
+
+export const ChatIconBox = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+
+  svg:hover {
+    .chat {
       fill: #f3a4b2;
     }
   }
