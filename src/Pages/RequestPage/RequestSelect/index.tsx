@@ -2,7 +2,6 @@ import * as I from "../../../Assets/svg/index";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import * as T from "../../../types/request";
-import { Header } from "../../../components";
 
 interface Props {
   requestType: T.requestType | null;
@@ -26,7 +25,6 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
 
   return (
     <S.Container>
-      <Header />
       <S.TextItem>어떤 요청을 보낼까요?</S.TextItem>
       <S.SubTextItem>요청은 최대 3개까지 보낼 수 있어요!</S.SubTextItem>
       <S.SelectForm>
