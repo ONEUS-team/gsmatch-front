@@ -30,7 +30,7 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
       <S.SelectForm>
         <S.SelectItem isSelect={requestType === "genre" ? true : false}>
           <S.Icon
-            src="src\Assets\svg\Heart.png"
+            src="src\Assets\png\Heart.png"
             alt="유형사진"
             id="genre"
             onClick={handleRequestClick}
@@ -47,7 +47,7 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
         </S.SelectItem>
         <S.SelectItem isSelect={requestType === "major" ? true : false}>
           <S.Icon
-            src="src\Assets\svg\Hat.png"
+            src="src\Assets\png\Hat.png"
             alt="전공사진"
             id="major"
             onClick={handleRequestClick}
