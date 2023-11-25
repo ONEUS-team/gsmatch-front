@@ -1,6 +1,6 @@
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,21 +12,24 @@ const Header = () => {
   const handleChatIconClick = () => navigate("/chat");
 
   return (
-    <S.header>
-      <S.Inner>
-        <S.LogoBox onClick={handleLogoClick}>
-          <I.HeaderLogo />
-        </S.LogoBox>
-        <S.RightBox>
-          <S.NoticeIconBox onClick={handleNoticeIconClick}>
-            <I.NoticeIcon />
-          </S.NoticeIconBox>
-          <S.ChatIconBox onClick={handleChatIconClick}>
-            <I.ChatIcon />
-          </S.ChatIconBox>
-        </S.RightBox>
-      </S.Inner>
-    </S.header>
+    <>
+      <S.header>
+        <S.Inner>
+          <S.LogoBox onClick={handleLogoClick}>
+            <I.HeaderLogo />
+          </S.LogoBox>
+          <S.RightBox>
+            <S.NoticeIconBox onClick={handleNoticeIconClick}>
+              <I.NoticeIcon />
+            </S.NoticeIconBox>
+            <S.ChatIconBox onClick={handleChatIconClick}>
+              <I.ChatIcon />
+            </S.ChatIconBox>
+          </S.RightBox>
+        </S.Inner>
+      </S.header>
+      <Outlet />
+    </>
   );
 };
 
