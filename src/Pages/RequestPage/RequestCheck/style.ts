@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const MessegeIconContainer = styled.div`
-  margin-top: 9.31rem;
+  margin-top: 19.81rem;
 `;
 
 export const MainText = styled.p`

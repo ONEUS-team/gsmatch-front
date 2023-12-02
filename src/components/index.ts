@@ -6,3 +6,4 @@ export { default as RequestFailed } from "./Request/Result/RequestFailed";
 export { default as Filter } from "./Filter";
 export { default as Input } from "./Input";
 export { default as BlindInput } from "./BlindInput";
+export { default as Header } from "./Header";
