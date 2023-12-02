@@ -6,6 +6,7 @@ import RequestCheck from "./RequestCheck";
 import RequestResult from "./RequestResult";
 import { useState } from "react";
 import * as T from "../../types/request";
+import React from "react";
 
 const RequestPage = () => {
   const [requestType, setRequestType] = useState<T.requestType | null>(null);
