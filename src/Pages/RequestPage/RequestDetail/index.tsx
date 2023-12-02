@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+// import { useParams } from "react-router";
 import * as S from "./style";
 import { Major } from "../../../types/major";
 import * as I from "../../../Assets/svg/index";
@@ -35,7 +35,11 @@ const majorList: Major = {
 const RequestDetail = () => {
   const [data, setData] = useState(mokdata);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
-  const { id } = useParams();
+  // const { id } = useParams();
+  useEffect(() => {
+    setData(mokdata);
+  }, []);
+
   return (
     <S.Container>
       {/* <S.ItemImg src="" alt="기본 이미지" /> */}
