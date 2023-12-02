@@ -1,15 +1,15 @@
 const GoBack = () => (
   <svg
-    width="16"
-    height="28"
-    viewBox="0 0 16 28"
-    fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    width="10"
+    height="19"
+    viewBox="0 0 10 19"
+    fill="none"
   >
     <path
-      d="M14 2L2.70711 13.2929C2.31658 13.6834 2.31658 14.3166 2.70711 14.7071L14 26"
+      d="M9 1.5L1.70711 8.79289C1.31658 9.18342 1.31658 9.81658 1.70711 10.2071L9 17.5"
       stroke="#EEEEEE"
-      strokeWidth="3"
+      strokeWidth="2"
       strokeLinecap="round"
     />
   </svg>

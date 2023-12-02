@@ -4,3 +4,5 @@ export { default as MajorRequsetSelect } from "./Request/MajorRequestSelect/Majo
 export { default as RequestSucceed } from "./Request/Result/RequestSucceed";
 export { default as RequestFailed } from "./Request/Result/RequestFailed";
 export { default as Filter } from "./Filter";
+export { default as Input } from "./Input";
+export { default as BlindInput } from "./BlindInput";
