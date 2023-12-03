@@ -6,6 +6,7 @@ export const MainContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -14,8 +15,9 @@ export const SurveMainyBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 80px;
 `;
 
 export const SurveyMainTitle = styled.h1`
@@ -30,8 +32,22 @@ export const SurveyMainTitle = styled.h1`
   align-items: center;
 `;
 
-export const SurveyMainItemBox = styled.div``;
+export const SurveyMainItemBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+`;
 
-export const SurveyMainItem = styled.div``;
+export const SurveyMainItem = styled.img``;
 
-export const SurveyMainNextButton = styled.button``;
+export const SurveyMainNextButton = styled.button`
+  margin-top: 100px;
+  background-color: #f3a4b2;
+  padding: 15px 60px;
+  border-radius: 180px;
+  outline: none;
+  border: none;
+  font-weight: 550;
+  font-size: 15px;
+  cursor: pointer;
+`;

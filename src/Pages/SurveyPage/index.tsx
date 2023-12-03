@@ -1,5 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import * as S from "./style";
+import PORORO from "../../Assets/png/pororo.png";
+import POBI from "../../Assets/png/pobi.png";
+import RUPI from "../../Assets/png/rupi.png";
+import EDI from "../../Assets/png/edi.png";
 
 const EDI_Q = [
   {
@@ -117,10 +121,10 @@ export default function SurveyPage() {
                     나의 유형을 찾아보세요!
                   </S.SurveyMainTitle>
                   <S.SurveyMainItemBox>
-                    <S.SurveyMainItem></S.SurveyMainItem>
-                    <S.SurveyMainItem></S.SurveyMainItem>
-                    <S.SurveyMainItem></S.SurveyMainItem>
-                    <S.SurveyMainItem></S.SurveyMainItem>
+                    <S.SurveyMainItem src={PORORO}></S.SurveyMainItem>
+                    <S.SurveyMainItem src={POBI}></S.SurveyMainItem>
+                    <S.SurveyMainItem src={RUPI}></S.SurveyMainItem>
+                    <S.SurveyMainItem src={EDI}></S.SurveyMainItem>
                   </S.SurveyMainItemBox>
                   <S.SurveyMainNextButton>
                     유형검사 하러가기
