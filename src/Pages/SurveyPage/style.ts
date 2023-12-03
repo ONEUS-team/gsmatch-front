@@ -17,7 +17,7 @@ export const SurveMainyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 80px;
+  gap: 35px;
 `;
 
 export const SurveyMainTitle = styled.h1`
@@ -38,7 +38,11 @@ export const SurveyMainItemBox = styled.div`
   gap: 30px;
 `;
 
-export const SurveyMainItem = styled.img``;
+export const SurveyMainItem = styled.img<{ selected: boolean }>`
+  cursor: pointer;
+  filter: ${(props) =>
+    props.selected ? "brightness(100%)" : "brightness(0.4)"};
+`;
 
 export const SurveyMainNextButton = styled.button`
   margin-top: 100px;
@@ -50,4 +54,35 @@ export const SurveyMainNextButton = styled.button`
   font-weight: 550;
   font-size: 15px;
   cursor: pointer;
+`;
+
+export const HashTagContainer = styled.div`
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const HashTagTitle = styled.h2`
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  height: 30px;
+`;
+
+export const HashTagBox = styled.div`
+  display: flex;
+  gap: 10px;
+  height: 30px;
+`;
+
+export const HashTag = styled.div`
+  border: 1px solid #f0a0bd;
+  color: #f0a0bd;
+  width: 90px;
+  padding: 7px 0px;
+  text-align: center;
+  border-radius: 120px;
 `;
