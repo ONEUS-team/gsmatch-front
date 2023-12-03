@@ -4,6 +4,7 @@ import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
 import RUPI from "../../Assets/png/rupi.png";
 import EDI from "../../Assets/png/edi.png";
+import { useState } from "react";
 
 const EDI_Q = [
   {
@@ -106,6 +107,10 @@ const PORORO_Q = [
 ];
 
 export default function SurveyPage() {
+  const [selectedType, setSelectedType] = useState<
+    "PORORO" | "POBI" | "RUPI" | "EDI" | null
+  >();
+
   return (
     <>
       <Routes>
@@ -121,11 +126,75 @@ export default function SurveyPage() {
                     나의 유형을 찾아보세요!
                   </S.SurveyMainTitle>
                   <S.SurveyMainItemBox>
-                    <S.SurveyMainItem src={PORORO}></S.SurveyMainItem>
-                    <S.SurveyMainItem src={POBI}></S.SurveyMainItem>
-                    <S.SurveyMainItem src={RUPI}></S.SurveyMainItem>
-                    <S.SurveyMainItem src={EDI}></S.SurveyMainItem>
+                    <S.SurveyMainItem
+                      selected={selectedType == "PORORO"}
+                      src={PORORO}
+                      onClick={() => {
+                        setSelectedType("PORORO");
+                      }}
+                    ></S.SurveyMainItem>
+                    <S.SurveyMainItem
+                      selected={selectedType == "POBI"}
+                      src={POBI}
+                      onClick={() => {
+                        setSelectedType("POBI");
+                      }}
+                    ></S.SurveyMainItem>
+                    <S.SurveyMainItem
+                      selected={selectedType == "RUPI"}
+                      src={RUPI}
+                      onClick={() => {
+                        setSelectedType("RUPI");
+                      }}
+                    ></S.SurveyMainItem>
+                    <S.SurveyMainItem
+                      selected={selectedType == "EDI"}
+                      src={EDI}
+                      onClick={() => {
+                        setSelectedType("EDI");
+                      }}
+                    ></S.SurveyMainItem>
                   </S.SurveyMainItemBox>
+                  <S.HashTagContainer>
+                    <S.HashTagTitle>
+                      {selectedType == "PORORO"
+                        ? "뽀로로 유형"
+                        : selectedType == "POBI"
+                        ? "포비 유형"
+                        : selectedType == "RUPI"
+                        ? "루피 유형"
+                        : selectedType == "EDI"
+                        ? "에디 유형"
+                        : null}
+                    </S.HashTagTitle>
+                    <S.HashTagBox>
+                      {selectedType == "PORORO" ? (
+                        <>
+                          <S.HashTag>#퀘활</S.HashTag>
+                          <S.HashTag>#명량</S.HashTag>
+                          <S.HashTag>#긍정</S.HashTag>
+                        </>
+                      ) : selectedType == "POBI" ? (
+                        <>
+                          <S.HashTag>#순함</S.HashTag>
+                          <S.HashTag>#냉정</S.HashTag>
+                          <S.HashTag>#침착</S.HashTag>
+                        </>
+                      ) : selectedType == "RUPI" ? (
+                        <>
+                          <S.HashTag>#친절</S.HashTag>
+                          <S.HashTag>#포근</S.HashTag>
+                          <S.HashTag>#밝음</S.HashTag>
+                        </>
+                      ) : selectedType == "EDI" ? (
+                        <>
+                          <S.HashTag>#호기심</S.HashTag>
+                          <S.HashTag>#열정</S.HashTag>
+                          <S.HashTag>#창의적</S.HashTag>
+                        </>
+                      ) : null}
+                    </S.HashTagBox>
+                  </S.HashTagContainer>
                   <S.SurveyMainNextButton>
                     유형검사 하러가기
                   </S.SurveyMainNextButton>
