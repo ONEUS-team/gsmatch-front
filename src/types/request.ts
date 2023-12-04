@@ -11,3 +11,11 @@ export type requestMajor =
   | "기능반"
   | "IOT"
   | "AI";
+
+export interface MyRequest {
+  requestId: number;
+  title: string;
+  content: string;
+  requestType: string;
+  authorName: string;
+}
