@@ -12,12 +12,12 @@ export const MainContainer = styled.div`
 
 export const SurveMainyBox = styled.div`
   width: 800px;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 35px;
+  gap: 30px;
 `;
 
 export const SurveyMainTitle = styled.h1`
@@ -45,7 +45,7 @@ export const SurveyMainItem = styled.img<{ selected: boolean }>`
 `;
 
 export const SurveyMainNextButton = styled.button`
-  margin-top: 100px;
+  margin-top: 30px;
   background-color: #f3a4b2;
   padding: 15px 60px;
   border-radius: 180px;
