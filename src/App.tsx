@@ -16,6 +16,10 @@ function App() {
           path="/"
           element={<PrivateRouter element={<P.ProfilePage />} />}
         />
+        <Route
+          path="/notice"
+          element={<PrivateRouter element={<P.NoticePage />} />}
+        />
       </Route>
       <Route path="/signup/*" element={<P.SignupPage />} />
       <Route path="/login" element={<P.LoginPage />} />
