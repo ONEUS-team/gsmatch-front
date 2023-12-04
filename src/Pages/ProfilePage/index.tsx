@@ -1,3 +1,103 @@
-export default function ProfilePage() {
-  return <div>ProfilePage</div>;
-}
+import { useEffect, useState } from "react";
+import * as S from "./style";
+import { RequestList } from "../../components";
+import { ArrowButtonIcon } from "../../Assets/svg";
+import { UserInfo } from "../../types/user";
+import { Type } from "../../types/type";
+
+const data = {
+  id: 12,
+  username: "안철수",
+  grade: 1,
+  level: 13,
+  gender: "MALE",
+  type: "PORORO",
+  point: 0,
+  major: "FRONT",
+  requestList: [
+    {
+      requestId: 12,
+      title: "안녕하세요",
+      content: "아니 이거 맞아 내가 할말이 없다",
+      requestType: "TYPE",
+      authorName: "박미리",
+    },
+    {
+      requestId: 12,
+      title: "안녕하세요",
+      content: "아니 이거 맞아 내가 할말이 없다",
+      requestType: "STUDY",
+      authorName: "박미리",
+    },
+    {
+      requestId: 12,
+      title: "안녕하세요",
+      content: "아니 이거 맞아 내가 할말이 없다",
+      requestType: "TYPE",
+      authorName: "박미리",
+    },
+  ],
+};
+
+const typeList: Type = {
+  PORORO: "뽀로로",
+  LUPI: "루피",
+  POBI: "포비",
+  EDI: "에디",
+};
+
+const ProfilePage = () => {
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    id: null,
+    username: null,
+    grade: null,
+    level: null,
+    gender: null,
+    type: null,
+    point: null,
+    major: null,
+    requestList: [],
+  });
+
+  const gender = userInfo.gender === "MALE" ? "남자" : "여자";
+  const type = typeList[userInfo.type! as keyof Type];
+  const profileSrc = `src\\Assets\\png\\${userInfo.type}.png`;
+  console.log(profileSrc);
+
+  useEffect(() => {
+    setUserInfo(data);
+  }, []);
+
+  return (
+    <S.Container>
+      <S.ProfileBox>
+        <S.ProfileImg src="src\Assets\png\PORORO.png" />
+        <S.InfoBox>
+          <S.TopInfo>
+            Level {userInfo.level} {userInfo.username}
+          </S.TopInfo>
+          <S.BottomInfo>
+            {userInfo.grade}학년 {gender} {type} 유형
+          </S.BottomInfo>
+        </S.InfoBox>
+      </S.ProfileBox>
+      <S.RequestBanner>
+        <S.BannerImg src="src\Assets\png\Message.png" alt="배너 이미지" />
+        <S.TextBox>
+          <S.BannerText>
+            원하는 사람들과
+            <br />
+            대화하세요
+          </S.BannerText>
+          <S.BannerLink to="/request">
+            요청 보내기
+            <ArrowButtonIcon />
+          </S.BannerLink>
+        </S.TextBox>
+      </S.RequestBanner>
+      <RequestList requestList={userInfo.requestList} />
+    </S.Container>
+  );
+};
+
+export default ProfilePage;
