@@ -86,3 +86,10 @@ export const HashTag = styled.div`
   text-align: center;
   border-radius: 120px;
 `;
+
+//
+
+export const SurveyContent = styled.p`
+  color: white;
+  font-size: 30px;
+`;
