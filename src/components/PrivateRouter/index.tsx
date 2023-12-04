@@ -2,9 +2,9 @@ import { ReactNode, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ element }: { element: ReactNode }) => {
-  const [isLoggedin, setIsLoggedin] = useState(false);
+  const [isLoggedin, setIsLoggedin] = useState(true);
 
-  setIsLoggedin(true);
+  // setIsLoggedin(true);
 
   return isLoggedin ? element : <Navigate to="/main"></Navigate>;
 };
