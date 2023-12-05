@@ -1,11 +1,18 @@
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {
+  Params,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import * as S from "./style";
 import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
-import RUPI from "../../Assets/png/rupi.png";
+import LUPI from "../../Assets/png/rupi.png";
 import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
+import { LoginPageButton } from "../MainPage/style";
 
 const Q = [
   [
@@ -199,7 +206,7 @@ export default function SurveyPage() {
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
                       selected={selectedType == "LUPI"}
-                      src={RUPI}
+                      src={LUPI}
                       onClick={() => {
                         setSelectedType("LUPI");
                       }}
@@ -313,7 +320,7 @@ function SurveyInfo({
   ed_point,
   setResult,
 }) {
-  const { page } = useParams();
+  const { page }: Readonly<Params<string>> = useParams();
 
   const [currentQuestion, setCurrentQuestion] = useState(
     question[questionNumber[page - 1]]
@@ -406,5 +413,47 @@ function SurveyResult({ result, navigate }) {
     }
   });
 
-  return <div>{result}</div>;
+  return (
+    <S.MainContainer>
+      <S.SurveyResultBox>
+        <S.SurveyResultImg
+          src={
+            result == "PORORO"
+              ? PORORO
+              : result == "POBI"
+              ? POBI
+              : result == "LUPI"
+              ? LUPI
+              : result == "EDI"
+              ? EDI
+              : ""
+          }
+        />
+        <S.SurveyResultTitle>
+          {result == "PORORO"
+            ? "뽀뽀로 유형입니다!"
+            : result == "POBI"
+            ? "포비 유형입니다!"
+            : result == "LUPI"
+            ? "루피 유형입니다!"
+            : result == "EDI"
+            ? "에디 유형입니다!"
+            : ""}
+        </S.SurveyResultTitle>
+        <S.SurveyDescriptionBox>
+          <S.SurveyDescription>
+            일상에서 주변에 긍정적인 에너지를 전파하고, 다른 사람들과의 활발한
+            교류를 즐겨요.
+          </S.SurveyDescription>
+          <S.SurveyDescription>
+            다양한 일에 도전하는 걸 좋아하는 유형이에요.
+          </S.SurveyDescription>
+          <S.SurveyDescription>
+            조금 고집이 있기도 하지만 융통성이 좋아 잘 해결해요.
+          </S.SurveyDescription>
+        </S.SurveyDescriptionBox>
+        <S.SurveyFinishButton>GSMATCH 시작하기</S.SurveyFinishButton>
+      </S.SurveyResultBox>
+    </S.MainContainer>
+  );
 }
