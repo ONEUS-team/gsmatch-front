@@ -351,7 +351,7 @@ function SurveyInfo({
   });
 
   return (
-    <S.MainContainer>
+    <S.SurveyMainContainer>
       <S.SurveyBox>
         <S.SurveyTitle>유형검사를 진행하고 있어요!</S.SurveyTitle>
         <S.SurveyContent>{currentQuestion?.content}</S.SurveyContent>
@@ -394,7 +394,8 @@ function SurveyInfo({
           </S.SurveyButton>
         </S.SurveyButtonBox>
       </S.SurveyBox>
-    </S.MainContainer>
+      <S.SurveyBar page={page} />
+    </S.SurveyMainContainer>
   );
 }
 
