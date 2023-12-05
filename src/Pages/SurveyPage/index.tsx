@@ -279,10 +279,15 @@ export default function SurveyPage() {
               setED_point={setED_point}
               navigate={navigate}
               enablePrevent={enablePrevent}
+              po_point={po_point}
+              pb_point={pb_point}
+              lp_point={lp_point}
+              ed_point={ed_point}
+              setResult={setResult}
             />
           }
         />
-        <Route path="/result" element={<div>requl</div>} />
+        <Route path="/result" element={<SurveyResult result={result} />} />
       </Routes>
     </>
   );
@@ -299,6 +304,11 @@ function SurveyInfo({
   setED_point,
   navigate,
   enablePrevent,
+  po_point,
+  pb_point,
+  lp_point,
+  ed_point,
+  setResult,
 }) {
   const { page } = useParams();
 
@@ -319,6 +329,20 @@ function SurveyInfo({
       setPB_point(0);
       setLP_point(0);
       setED_point(0);
+      const maxPoints = Math.max(po_point, pb_point, lp_point, ed_point);
+
+      let resultType;
+      if (maxPoints === po_point) {
+        resultType = "PORORO";
+      } else if (maxPoints === pb_point) {
+        resultType = "POBI";
+      } else if (maxPoints === lp_point) {
+        resultType = "LUPI";
+      } else if (maxPoints === ed_point) {
+        resultType = "EDI";
+      }
+
+      setResult(resultType);
       navigate("/survey/result");
     }
   });
@@ -364,4 +388,8 @@ function SurveyInfo({
       </S.SurveyButton>
     </>
   );
+}
+
+function SurveyResult({ result }) {
+  return <div>{result}</div>;
 }
