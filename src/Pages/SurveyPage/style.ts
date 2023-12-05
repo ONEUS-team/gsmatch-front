@@ -87,6 +87,10 @@ export const HashTag = styled.div`
   border-radius: 120px;
 `;
 
+export const SurveyMainContainer = styled(MainContainer)`
+  gap: 120px;
+`;
+
 export const SurveyBox = styled.div`
   display: flex;
   height: 500px;
@@ -131,4 +135,14 @@ export const SurveyButton = styled.button`
   }
 `;
 
-export const SurveyBar = styled.button``;
+export const SurveyBar = styled.div<{ page: number }>`
+  padding: 8px 200px;
+  border-radius: 50px;
+  background: linear-gradient(
+    90deg,
+    #f3a4b2 0%,
+    #f3a4b2 ${(props) => "" + ((props.page - 1) / 12) * 100 + "%"},
+    #eee ${(props) => "" + ((props.page - 1) / 12) * 100 + "%"},
+    #eee 100%
+  );
+`;
