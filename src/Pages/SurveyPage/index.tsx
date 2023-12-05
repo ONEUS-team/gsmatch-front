@@ -441,16 +441,61 @@ function SurveyResult({ result, navigate }) {
             : ""}
         </S.SurveyResultTitle>
         <S.SurveyDescriptionBox>
-          <S.SurveyDescription>
-            일상에서 주변에 긍정적인 에너지를 전파하고, 다른 사람들과의 활발한
-            교류를 즐겨요.
-          </S.SurveyDescription>
-          <S.SurveyDescription>
-            다양한 일에 도전하는 걸 좋아하는 유형이에요.
-          </S.SurveyDescription>
-          <S.SurveyDescription>
-            조금 고집이 있기도 하지만 융통성이 좋아 잘 해결해요.
-          </S.SurveyDescription>
+          {result == "PORORO" ? (
+            <>
+              <S.SurveyDescription>
+                • 일상에서 주변에 긍정적인 에너지를 전파하고, 다른 사람들과의
+                활발한 교류를 즐겨요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 다양한 일에 도전하는 걸 좋아하는 유형이에요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 조금 고집이 있기도 하지만 융통성이 좋아 잘 해결해요.
+              </S.SurveyDescription>
+            </>
+          ) : result == "POBI" ? (
+            <>
+              <S.SurveyDescription>
+                • 어려운 상황에서도 차분하게 대처함, 든든한 성격을 지녔고
+                전략적인 사고를 해요
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 천천히 꼼꼼하게 일을 진행해요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 조용하지만 대범한 모습을 보일 때도 있어요.
+              </S.SurveyDescription>
+            </>
+          ) : result == "LUPI" ? (
+            <>
+              <S.SurveyDescription>
+                • 사람들과의 소통을 중요시하고, 주변인들에게 관심이 많고, 친절과
+                배려를 중요하게 생각해요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 깊은 관계를 중요하게 여겨요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 의견을 조율하거나 소통을 연결시키는 능력이 뛰어나요.
+              </S.SurveyDescription>
+            </>
+          ) : result == "EDI" ? (
+            <>
+              <S.SurveyDescription>
+                • 새로운 분야나 아이디어에 대한 호기심이 많고, 문제 해결과
+                창의적인 접근을 즐겨요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 본인이 흥미로워 하는 일이라면 깊게 파고들고 그 과정을 즐겨요.
+              </S.SurveyDescription>
+              <S.SurveyDescription>
+                • 한 번 빠져들면 그 일이 질릴 때까지 몰두해요.
+              </S.SurveyDescription>
+            </>
+          ) : (
+            <></>
+          )}
         </S.SurveyDescriptionBox>
         <S.SurveyFinishButton>GSMATCH 시작하기</S.SurveyFinishButton>
       </S.SurveyResultBox>
