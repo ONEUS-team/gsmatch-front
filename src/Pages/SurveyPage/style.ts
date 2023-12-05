@@ -146,3 +146,32 @@ export const SurveyBar = styled.div<{ page: number }>`
     #eee 100%
   );
 `;
+
+export const SurveyResultBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+`;
+
+export const SurveyResultTitle = styled.div`
+  color: white;
+  font-size: 25px;
+`;
+
+export const SurveyResultImg = styled.img``;
+
+export const SurveyDescriptionBox = styled.div`
+  background-color: #292424;
+  width: 700px;
+  padding: 30px;
+`;
+
+export const SurveyDescription = styled.p`
+  color: white;
+  font-weight: 300;
+  margin: 25px 0;
+`;
+
+export const SurveyFinishButton = styled(SurveyMainNextButton)``;
