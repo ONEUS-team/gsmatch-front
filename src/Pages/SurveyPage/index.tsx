@@ -112,16 +112,19 @@ const Q = [
 
 export default function SurveyPage() {
   const [selectedType, setSelectedType] = useState<
-    "PORORO" | "POBI" | "RUPI" | "EDI" | null
+    "PORORO" | "POBI" | "LUPI" | "EDI"
   >();
   const [po_point, setPO_point] = useState(0);
   const [pb_point, setPB_point] = useState(0);
-  const [rb_point, setRB_point] = useState(0);
+  const [lp_point, setLP_point] = useState(0);
   const [ed_point, setED_point] = useState(0);
+
+  const [result, setResult] = useState<"PORORO" | "POBI" | "LUPI" | "EDI">();
 
   const [status, setStatus] = useState(1);
 
   const navigate = useNavigate();
+  const { enablePrevent, disablePrevent } = usePreventLeave();
 
   interface IQuestion {
     content: string;
@@ -132,7 +135,7 @@ export default function SurveyPage() {
   const [questionNumber, setQuestionNumber] = useState<number[]>([]);
 
   const initQuestion = () => {
-    if (question[0]) return;
+    setQuestion([]);
 
     for (let i = 0; i < 4; i++) {
       const selectedValues: number[] = [];
@@ -144,7 +147,7 @@ export default function SurveyPage() {
       }
 
       for (let j = 0; j < selectedValues.length; j++) {
-        question.push(Q[i][selectedValues[j]]);
+        setQuestion((prev) => [...prev, Q[i][selectedValues[j]]]);
       }
     }
   };
@@ -162,7 +165,7 @@ export default function SurveyPage() {
 
   useEffect(() => {
     initQuestion();
-    console.log(question);
+    disablePrevent();
   }, []);
 
   return (
@@ -195,10 +198,10 @@ export default function SurveyPage() {
                       }}
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
-                      selected={selectedType == "RUPI"}
+                      selected={selectedType == "LUPI"}
                       src={RUPI}
                       onClick={() => {
-                        setSelectedType("RUPI");
+                        setSelectedType("LUPI");
                       }}
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
@@ -215,7 +218,7 @@ export default function SurveyPage() {
                         ? "뽀로로 유형"
                         : selectedType == "POBI"
                         ? "포비 유형"
-                        : selectedType == "RUPI"
+                        : selectedType == "LUPI"
                         ? "루피 유형"
                         : selectedType == "EDI"
                         ? "에디 유형"
@@ -234,7 +237,7 @@ export default function SurveyPage() {
                           <S.HashTag>#냉정</S.HashTag>
                           <S.HashTag>#침착</S.HashTag>
                         </>
-                      ) : selectedType == "RUPI" ? (
+                      ) : selectedType == "LUPI" ? (
                         <>
                           <S.HashTag>#친절</S.HashTag>
                           <S.HashTag>#포근</S.HashTag>
@@ -251,6 +254,7 @@ export default function SurveyPage() {
                   </S.HashTagContainer>
                   <S.SurveyMainNextButton
                     onClick={() => {
+                      initQuestion();
                       initQuestionNumber();
                     }}
                   >
@@ -269,23 +273,38 @@ export default function SurveyPage() {
               questionNumber={questionNumber}
               status={status}
               setStatus={setStatus}
+              setPO_point={setPO_point}
+              setPB_point={setPB_point}
+              setLP_point={setLP_point}
+              setED_point={setED_point}
+              navigate={navigate}
+              enablePrevent={enablePrevent}
             />
           }
         />
+        <Route path="/result" element={<div>requl</div>} />
       </Routes>
     </>
   );
 }
 
-function SurveyInfo({ question, questionNumber, status, setStatus }) {
+function SurveyInfo({
+  question,
+  questionNumber,
+  status,
+  setStatus,
+  setPO_point,
+  setPB_point,
+  setLP_point,
+  setED_point,
+  navigate,
+  enablePrevent,
+}) {
   const { page } = useParams();
 
   const [currentQuestion, setCurrentQuestion] = useState(
     question[questionNumber[page - 1]]
   );
-
-  const { enablePrevent, disablePrevent } = usePreventLeave();
-  const navigate = useNavigate();
 
   useEffect(() => {
     enablePrevent();
@@ -293,19 +312,56 @@ function SurveyInfo({ question, questionNumber, status, setStatus }) {
       navigate("/survey");
     }
     setCurrentQuestion(question[questionNumber[page - 1]]);
+
+    if (page > 12) {
+      setStatus(1);
+      setPO_point(0);
+      setPB_point(0);
+      setLP_point(0);
+      setED_point(0);
+      navigate("/survey/result");
+    }
   });
 
   return (
     <>
       <S.SurveyContent>{currentQuestion?.content}</S.SurveyContent>
-      <button
+      <S.SurveyButton
         onClick={() => {
+          currentQuestion?.type == "PORORO"
+            ? setPO_point((prev: number) => prev + 1)
+            : currentQuestion?.type == "POBI"
+            ? setPB_point((prev: number) => prev + 1)
+            : currentQuestion?.type == "LUPI"
+            ? setLP_point((prev: number) => prev + 1)
+            : currentQuestion?.type == "EDI"
+            ? setED_point((prev: number) => prev + 1)
+            : null;
+
           navigate("/survey/" + (status + 1));
           setStatus((prev: number) => prev + 1);
         }}
       >
-        다음!!
-      </button>
+        맞아요
+      </S.SurveyButton>
+      <S.SurveyButton
+        onClick={() => {
+          currentQuestion?.type == "PORORO"
+            ? setPO_point((prev: number) => prev - 1)
+            : currentQuestion?.type == "POBI"
+            ? setPB_point((prev: number) => prev - 1)
+            : currentQuestion?.type == "LUPI"
+            ? setLP_point((prev: number) => prev - 1)
+            : currentQuestion?.type == "EDI"
+            ? setED_point((prev: number) => prev - 1)
+            : null;
+
+          navigate("/survey/" + (status + 1));
+          setStatus((prev: number) => prev + 1);
+        }}
+      >
+        아니에요
+      </S.SurveyButton>
     </>
   );
 }
