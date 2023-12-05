@@ -234,7 +234,7 @@ export default function SurveyPage() {
                     <S.HashTagBox>
                       {selectedType == "PORORO" ? (
                         <>
-                          <S.HashTag>#퀘활</S.HashTag>
+                          <S.HashTag>#쾌활</S.HashTag>
                           <S.HashTag>#명량</S.HashTag>
                           <S.HashTag>#긍정</S.HashTag>
                         </>
@@ -335,10 +335,7 @@ function SurveyInfo({
 
     if (page > 12) {
       setStatus(1);
-      setPO_point(0);
-      setPB_point(0);
-      setLP_point(0);
-      setED_point(0);
+
       const maxPoints = Math.max(po_point, pb_point, lp_point, ed_point);
 
       let resultType;
@@ -353,6 +350,12 @@ function SurveyInfo({
       }
 
       setResult(resultType);
+
+      setPO_point(0);
+      setPB_point(0);
+      setLP_point(0);
+      setED_point(0);
+
       navigate("/survey/result");
     }
   });
