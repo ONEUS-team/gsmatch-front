@@ -87,9 +87,9 @@ export const HashTag = styled.div`
   border-radius: 120px;
 `;
 
-//
-
 export const SurveyContent = styled.p`
   color: white;
   font-size: 30px;
 `;
+
+export const SurveyButton = styled.button``;
