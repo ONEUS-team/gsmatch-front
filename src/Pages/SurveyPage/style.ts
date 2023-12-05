@@ -87,9 +87,48 @@ export const HashTag = styled.div`
   border-radius: 120px;
 `;
 
-export const SurveyContent = styled.p`
-  color: white;
-  font-size: 30px;
+export const SurveyBox = styled.div`
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
 
-export const SurveyButton = styled.button``;
+export const SurveyTitle = styled.h1`
+  font-size: 35px;
+  color: #f3a4b2;
+`;
+
+export const SurveyContent = styled.p`
+  color: white;
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  line-height: 40px;
+`;
+
+export const SurveyButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+export const SurveyButton = styled.button`
+  background-color: #292424;
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  padding: 19px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: rgba(243, 164, 178, 0.5);
+    transition: all 0.3s;
+  }
+`;
+
+export const SurveyBar = styled.button``;

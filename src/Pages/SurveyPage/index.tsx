@@ -287,7 +287,10 @@ export default function SurveyPage() {
             />
           }
         />
-        <Route path="/result" element={<SurveyResult result={result} />} />
+        <Route
+          path="/result"
+          element={<SurveyResult result={result} navigate={navigate} />}
+        />
       </Routes>
     </>
   );
@@ -348,48 +351,59 @@ function SurveyInfo({
   });
 
   return (
-    <>
-      <S.SurveyContent>{currentQuestion?.content}</S.SurveyContent>
-      <S.SurveyButton
-        onClick={() => {
-          currentQuestion?.type == "PORORO"
-            ? setPO_point((prev: number) => prev + 1)
-            : currentQuestion?.type == "POBI"
-            ? setPB_point((prev: number) => prev + 1)
-            : currentQuestion?.type == "LUPI"
-            ? setLP_point((prev: number) => prev + 1)
-            : currentQuestion?.type == "EDI"
-            ? setED_point((prev: number) => prev + 1)
-            : null;
+    <S.MainContainer>
+      <S.SurveyBox>
+        <S.SurveyTitle>유형검사를 진행하고 있어요!</S.SurveyTitle>
+        <S.SurveyContent>{currentQuestion?.content}</S.SurveyContent>
+        <S.SurveyButtonBox>
+          <S.SurveyButton
+            onClick={() => {
+              currentQuestion?.type == "PORORO"
+                ? setPO_point((prev: number) => prev + 1)
+                : currentQuestion?.type == "POBI"
+                ? setPB_point((prev: number) => prev + 1)
+                : currentQuestion?.type == "LUPI"
+                ? setLP_point((prev: number) => prev + 1)
+                : currentQuestion?.type == "EDI"
+                ? setED_point((prev: number) => prev + 1)
+                : null;
 
-          navigate("/survey/" + (status + 1));
-          setStatus((prev: number) => prev + 1);
-        }}
-      >
-        맞아요
-      </S.SurveyButton>
-      <S.SurveyButton
-        onClick={() => {
-          currentQuestion?.type == "PORORO"
-            ? setPO_point((prev: number) => prev - 1)
-            : currentQuestion?.type == "POBI"
-            ? setPB_point((prev: number) => prev - 1)
-            : currentQuestion?.type == "LUPI"
-            ? setLP_point((prev: number) => prev - 1)
-            : currentQuestion?.type == "EDI"
-            ? setED_point((prev: number) => prev - 1)
-            : null;
+              navigate("/survey/" + (status + 1));
+              setStatus((prev: number) => prev + 1);
+            }}
+          >
+            맞아요
+          </S.SurveyButton>
+          <S.SurveyButton
+            onClick={() => {
+              currentQuestion?.type == "PORORO"
+                ? setPO_point((prev: number) => prev - 1)
+                : currentQuestion?.type == "POBI"
+                ? setPB_point((prev: number) => prev - 1)
+                : currentQuestion?.type == "LUPI"
+                ? setLP_point((prev: number) => prev - 1)
+                : currentQuestion?.type == "EDI"
+                ? setED_point((prev: number) => prev - 1)
+                : null;
 
-          navigate("/survey/" + (status + 1));
-          setStatus((prev: number) => prev + 1);
-        }}
-      >
-        아니에요
-      </S.SurveyButton>
-    </>
+              navigate("/survey/" + (status + 1));
+              setStatus((prev: number) => prev + 1);
+            }}
+          >
+            아니에요
+          </S.SurveyButton>
+        </S.SurveyButtonBox>
+      </S.SurveyBox>
+    </S.MainContainer>
   );
 }
 
-function SurveyResult({ result }) {
+function SurveyResult({ result, navigate }) {
+  useEffect(() => {
+    if (result == null) {
+      navigate("/survey");
+    }
+  });
+
   return <div>{result}</div>;
 }
