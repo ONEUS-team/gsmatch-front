@@ -12,7 +12,7 @@ const RequestCheck = () => {
   return (
     <S.Container>
       <S.MessegeIconContainer>
-        <I.MessegeIcon />
+        <S.IconImg src="..\src\Assets\png\Message.png" alt="메시지 이미지" />
       </S.MessegeIconContainer>
       <S.MainText>
         13명의 사람들에게
