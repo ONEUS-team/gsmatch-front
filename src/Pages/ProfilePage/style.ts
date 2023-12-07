@@ -7,6 +7,8 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  padding-bottom: 5rem;
+  overflow-y: auto;
 `;
 
 export const ProfileBox = styled.div`
