@@ -9,8 +9,9 @@ interface Props {
 
 const RequestCard: React.FC<Props> = ({ request }) => {
   const type = request.requestType === "TYPE" ? "유형" : "전공";
+
   return (
-    <S.Card>
+    <S.Card to={`/request/detail/${request.requestId}`}>
       <S.RequestBox>
         <S.TopBox>
           <S.Type>
