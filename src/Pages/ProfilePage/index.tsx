@@ -16,7 +16,7 @@ const data = {
   major: "FRONT",
   requestList: [
     {
-      requestId: 12,
+      requestId: 11,
       title: "안녕하세요",
       content: "아니 이거 맞아 내가 할말이 없다",
       requestType: "TYPE",
@@ -30,7 +30,7 @@ const data = {
       authorName: "박미리",
     },
     {
-      requestId: 12,
+      requestId: 13,
       title: "안녕하세요",
       content: "아니 이거 맞아 내가 할말이 없다",
       requestType: "TYPE",
@@ -62,7 +62,6 @@ const ProfilePage = () => {
   const gender = userInfo.gender === "MALE" ? "남자" : "여자";
   const type = typeList[userInfo.type! as keyof Type];
   const profileSrc = `src\\Assets\\png\\${userInfo.type}.png`;
-  console.log(profileSrc);
 
   useEffect(() => {
     setUserInfo(data);
@@ -71,7 +70,7 @@ const ProfilePage = () => {
   return (
     <S.Container>
       <S.ProfileBox>
-        <S.ProfileImg src="src\Assets\png\PORORO.png" />
+        <S.ProfileImg src={profileSrc} />
         <S.InfoBox>
           <S.TopInfo>
             Level {userInfo.level} {userInfo.username}
