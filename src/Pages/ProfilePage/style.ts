@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ isScrollable: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #111;
   height: 100vh;
-  padding-bottom: 5rem;
+  padding-bottom: ${({ isScrollable }) => isScrollable && "5rem"};
   overflow-y: auto;
 `;
 
