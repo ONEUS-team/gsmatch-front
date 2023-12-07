@@ -81,20 +81,37 @@ const ProfilePage = () => {
           </S.BottomInfo>
         </S.InfoBox>
       </S.ProfileBox>
-      <S.RequestBanner>
-        <S.BannerImg src="src\Assets\png\Message.png" alt="배너 이미지" />
-        <S.TextBox>
-          <S.BannerText>
-            원하는 사람들과
-            <br />
-            대화하세요
-          </S.BannerText>
-          <S.BannerLink to="/request">
-            요청 보내기
-            <ArrowButtonIcon />
-          </S.BannerLink>
-        </S.TextBox>
-      </S.RequestBanner>
+      <S.BannerContainer>
+        <S.BannerItem>
+          <S.BannerImg src="src\Assets\png\Message.png" alt="배너 이미지" />
+          <S.TextBox>
+            <S.RequestBannerText>
+              원하는 사람들과
+              <br />
+              대화하세요
+            </S.RequestBannerText>
+            <S.BannerLink to="/request">
+              요청 보내기
+              <ArrowButtonIcon />
+            </S.BannerLink>
+          </S.TextBox>
+        </S.BannerItem>
+
+        <S.BannerItem>
+          <S.BannerImg src="src\Assets\png\Arrow.png" alt="배너 이미지" />
+          <S.TextBox>
+            <S.TypeBannerText>
+              내 유형,
+              <br />
+              혹시 바뀌진 않았을까
+            </S.TypeBannerText>
+            <S.BannerLink to="/survey">
+              정확한 내 유형 알아보기
+              <ArrowButtonIcon />
+            </S.BannerLink>
+          </S.TextBox>
+        </S.BannerItem>
+      </S.BannerContainer>
       <RequestList requestList={userInfo.requestList} />
     </S.Container>
   );
