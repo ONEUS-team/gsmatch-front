@@ -1,4 +1,3 @@
-import React from "react";
 import { MyRequest } from "../../types/request";
 import * as S from "./style";
 import { MacbookIcon, PeopleIcon } from "../../Assets/svg";
