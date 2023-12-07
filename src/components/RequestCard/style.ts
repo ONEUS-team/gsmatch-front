@@ -1,10 +1,18 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Card = styled.div`
+export const Card = styled(Link)`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+
+  &:hover {
+    h1 {
+      color: #f3a4b2;
+    }
+  }
 `;
 
 export const RequestBox = styled.div`
