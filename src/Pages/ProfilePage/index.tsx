@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as S from "./style";
 import { RequestList } from "../../components";
 import { ArrowButtonIcon } from "../../Assets/svg";
@@ -47,6 +47,7 @@ const typeList: Type = {
 };
 
 const ProfilePage = () => {
+  const [isScrollable, setIsScrollable] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     id: null,
     username: null,
@@ -59,6 +60,7 @@ const ProfilePage = () => {
     requestList: [],
   });
 
+  const ref = useRef<HTMLDivElement>(null);
   const gender = userInfo.gender === "MALE" ? "남자" : "여자";
   const type = typeList[userInfo.type! as keyof Type];
   const profileSrc = `src\\Assets\\png\\${userInfo.type}.png`;
@@ -67,8 +69,17 @@ const ProfilePage = () => {
     setUserInfo(data);
   }, []);
 
+  const handleWindowResize = () =>
+    window.innerHeight < 1012 ? setIsScrollable(true) : setIsScrollable(false);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   return (
-    <S.Container>
+    <S.Container ref={ref} isScrollable={isScrollable}>
       <S.ProfileBox>
         <S.ProfileImg src={profileSrc} />
         <S.InfoBox>
