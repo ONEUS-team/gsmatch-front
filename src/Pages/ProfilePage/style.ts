@@ -47,9 +47,15 @@ export const BottomInfo = styled.p`
   line-height: 120%;
 `;
 
-export const RequestBanner = styled.div`
-  margin-top: 3.12rem;
-  width: 50rem;
+export const BannerContainer = styled.div`
+  margin-top: 3.19rem;
+  display: flex;
+  column-gap: 0.75rem;
+  width: 50.125rem;
+`;
+
+export const BannerItem = styled.div`
+  width: 24.6875rem;
   height: 8rem;
   padding-left: 1.25rem;
   display: flex;
@@ -69,7 +75,7 @@ export const TextBox = styled.div`
   row-gap: 0.38rem;
 `;
 
-export const BannerText = styled.p`
+export const RequestBannerText = styled.p`
   color: #fff;
   font-size: 1.25rem;
   font-style: normal;
@@ -100,5 +106,12 @@ export const BannerLink = styled(Link)`
     .arrowIcon {
       stroke: #c0c0c0;
     }
+  }
+`;
+
+export const TypeBannerText = styled(RequestBannerText)`
+  &::after {
+    content: "?";
+    color: #f0a0bd;
   }
 `;
