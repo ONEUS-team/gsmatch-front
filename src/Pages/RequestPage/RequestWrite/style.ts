@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  position: relative;
 `;
 
 export const AddImageContainer = styled.div`
@@ -103,10 +104,10 @@ export const MainTextInput = styled.textarea`
 `;
 
 export const Button = styled.button`
-  margin-top: 8.3rem;
+  position: absolute;
+  bottom: 5rem;
   background-color: #f3a4b2;
-  border: 0;
-  /* width: 16rem; */
+  border: none;
   padding: 1rem 5.1875rem;
   color: black;
   font-size: 1.125rem;
