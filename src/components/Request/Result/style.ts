@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  position: relative;
 `;
 
 export const IconContainer = styled.div`
@@ -30,7 +31,8 @@ export const SubTextItem = styled.p`
 `;
 
 export const FailedButton = styled.button`
-  margin-top: 16rem;
+  position: absolute;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   padding: 1rem 5.1875rem;
@@ -47,7 +49,8 @@ export const FailedButton = styled.button`
 `;
 
 export const SucceedButton = styled.button`
-  margin-top: 18.06rem;
+  position: absolute;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   padding: 1rem 5.1875rem;

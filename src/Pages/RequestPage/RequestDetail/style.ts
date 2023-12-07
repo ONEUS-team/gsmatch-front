@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  position: relative;
 `;
 
 export const ItemImg = styled.img`
@@ -100,7 +101,8 @@ export const RequestContent = styled.p`
 `;
 
 export const Button = styled.button`
-  margin-top: 3rem;
+  position: absolute;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   padding: 1rem 5.1875rem;
