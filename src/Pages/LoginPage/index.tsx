@@ -2,10 +2,18 @@ import { useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../libs/api/axiosInstance";
+
+const login = async (email: string, password: string): Promise<void> => {
+  const body = { email: email, password: password };
+  const response = await axiosInstance.post("/api/auth/login", body);
+  console.log(response);
+};
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const [isHide, setIsHide] = useState<boolean>(true);
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +26,9 @@ export default function LoginPage() {
 
   const loginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsDisabled(true);
+    login(emailValue, passwordValue);
+    setIsDisabled(false);
   };
 
   const toggleIsHide = () => {
@@ -49,7 +60,7 @@ export default function LoginPage() {
             {isHide ? <I.PasswordBlindIcon /> : <I.PasswordShowIcon />}
           </S.PasswordToggleButton>
         </S.InputContainer>
-        <S.Button>로그인</S.Button>
+        <S.Button disabled={isDisabled}>로그인</S.Button>
       </S.FormContainer>
       <S.SignupContainer>
         <S.SignupText>GSMATCH가 처음이라면?</S.SignupText>
