@@ -2,11 +2,11 @@ import { useState } from "react";
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../libs/api/axiosInstance";
+import axios from "axios";
 
-const login = async (email: string, password: string): Promise<void> => {
+const login = async (email: string, password: string) => {
   const body = { email: email, password: password };
-  const response = await axiosInstance.post("/api/auth/login", body);
+  const response = await axios.post("api/login", body);
   console.log(response);
 };
 
