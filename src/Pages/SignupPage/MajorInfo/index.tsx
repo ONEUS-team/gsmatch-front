@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { GoBackIcon } from "../../../Assets/svg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface Props {
   signupName: string;
@@ -45,13 +46,13 @@ const MajorInfo: React.FC<Props> = ({
   ]);
 
   const [majors, setMajors] = useState([
-    { major: "프론트엔드", isSelect: false },
-    { major: "백엔드", isSelect: false },
-    { major: "디자이너", isSelect: false },
+    { major: "FRONT", isSelect: false },
+    { major: "BACK", isSelect: false },
+    { major: "DESIGN", isSelect: false },
     { major: "IOS", isSelect: false },
-    { major: "안드로이드", isSelect: false },
-    { major: "DevOps", isSelect: false },
-    { major: "기능반", isSelect: false },
+    { major: "AOS", isSelect: false },
+    { major: "DEVOPS", isSelect: false },
+    { major: "WORLD_SKILL", isSelect: false },
     { major: "IOT", isSelect: false },
     { major: "AI", isSelect: false },
   ]);
@@ -92,9 +93,36 @@ const MajorInfo: React.FC<Props> = ({
   };
 
   const goToNextPage = () => {
-    if (signupGender !== null && signupGrade !== null && signupMajor !== null)
-      alert("성공");
-    else alert("실패");
+    if (signupGender !== null && signupGrade !== null && signupMajor !== null) {
+      axios
+        .post("http://localhost:8080/api/auth/signup", {
+          username: signupName,
+          password: signupPassword,
+          email: signupEmail,
+          grade:
+            signupGrade == "1"
+              ? "ONE"
+              : signupGrade == "2"
+              ? "TWO"
+              : signupGrade == "3"
+              ? "THREE"
+              : null,
+          gender:
+            signupGender == "남자"
+              ? "MALE"
+              : signupGender == "여자"
+              ? "FEMALE"
+              : null,
+          major: signupMajor,
+        })
+        .then((response) => console.log(response.data))
+        .catch((error) => {
+          console.error("에러:", error);
+          alert("에러 발생");
+        });
+    } else {
+      alert("실패");
+    }
   };
 
   const checkGeneralInfo = () => {
