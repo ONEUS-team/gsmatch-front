@@ -115,8 +115,10 @@ const MajorInfo: React.FC<Props> = ({
               : null,
           major: signupMajor,
         })
-        .then((response) => console.log(response.data))
-        .catch((error) => {});
+        .then(() => {
+          navigate("/login");
+        })
+        .catch(() => {});
     }
   };
 
