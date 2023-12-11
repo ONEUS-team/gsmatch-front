@@ -116,12 +116,7 @@ const MajorInfo: React.FC<Props> = ({
           major: signupMajor,
         })
         .then((response) => console.log(response.data))
-        .catch((error) => {
-          console.error("에러:", error);
-          alert("에러 발생");
-        });
-    } else {
-      alert("실패");
+        .catch((error) => {});
     }
   };
 
