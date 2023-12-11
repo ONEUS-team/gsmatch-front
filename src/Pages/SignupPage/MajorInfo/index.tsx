@@ -95,26 +95,29 @@ const MajorInfo: React.FC<Props> = ({
   const goToNextPage = () => {
     if (signupGender !== null && signupGrade !== null && signupMajor !== null) {
       axios
-        .post("http://localhost:8080/api/auth/signup", {
-          username: signupName,
-          password: signupPassword,
-          email: signupEmail,
-          grade:
-            signupGrade == "1"
-              ? "ONE"
-              : signupGrade == "2"
-              ? "TWO"
-              : signupGrade == "3"
-              ? "THREE"
-              : null,
-          gender:
-            signupGender == "남자"
-              ? "MALE"
-              : signupGender == "여자"
-              ? "FEMALE"
-              : null,
-          major: signupMajor,
-        })
+        .post(
+          "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api/auth/signup",
+          {
+            username: signupName,
+            password: signupPassword,
+            email: signupEmail,
+            grade:
+              signupGrade == "1"
+                ? "ONE"
+                : signupGrade == "2"
+                ? "TWO"
+                : signupGrade == "3"
+                ? "THREE"
+                : null,
+            gender:
+              signupGender == "남자"
+                ? "MALE"
+                : signupGender == "여자"
+                ? "FEMALE"
+                : null,
+            major: signupMajor,
+          }
+        )
         .then(() => {
           navigate("/login");
         })

@@ -23,10 +23,13 @@ export default function LoginPage() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/api/auth/login", {
-        username: usernameValue,
-        password: passwordValue,
-      })
+      .post(
+        "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api/auth/login",
+        {
+          username: usernameValue,
+          password: passwordValue,
+        }
+      )
       .then((response) => {
         localStorage.clear();
         localStorage.setItem(
@@ -39,7 +42,7 @@ export default function LoginPage() {
         );
         navigate("/");
       })
-      .catch((error) => {});
+      .catch(() => {});
   };
 
   const toggleIsHide = () => {

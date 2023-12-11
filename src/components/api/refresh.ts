@@ -6,13 +6,16 @@ export const refresh = (
   callBack: null | (() => void)
 ) => {
   axios
-    .get("http://localhost:8080/refresh", {
-      headers: {
-        Authorization: `Bearer${localStorage.getItem("Authorization")}`,
-        "Refresh-Token": `Bearer${localStorage.getItem("Refresh-Token")}`,
-      },
-      withCredentials: true,
-    })
+    .get(
+      "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/refresh",
+      {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("Authorization")}`,
+          "Refresh-Token": `Bearer${localStorage.getItem("Refresh-Token")}`,
+        },
+        withCredentials: true,
+      }
+    )
     .then((response) => {
       localStorage.setItem(
         "Access-Token",
