@@ -75,7 +75,9 @@ const ProfilePage = () => {
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
-    return window.removeEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
 
   return (
