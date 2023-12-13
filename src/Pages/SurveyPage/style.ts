@@ -40,8 +40,8 @@ export const SurveyMainItemBox = styled.div`
 
 export const SurveyMainItem = styled.img<{ selected: boolean }>`
   cursor: pointer;
-  filter: ${(props) =>
-    props.selected ? "brightness(100%)" : "brightness(0.4)"};
+  filter: ${({selected}) =>
+    selected ? "brightness(100%)" : "brightness(0.4)"};
 `;
 
 export const SurveyMainNextButton = styled.button`
