@@ -1,4 +1,5 @@
 import {
+  NavigateFunction,
   Params,
   Route,
   Routes,
@@ -303,6 +304,31 @@ export default function SurveyPage() {
   );
 }
 
+interface IQuestion {
+  content: string;
+  type: string;
+}
+
+type UserType = "PORORO" | "POBI" | "LUPI" | "EDI";
+
+interface SurveyInfoProps {
+  question: IQuestion[];
+  questionNumber: number[];
+  status: number;
+  setStatus: React.Dispatch<React.SetStateAction<number>>;
+  setPO_point: React.Dispatch<React.SetStateAction<number>>;
+  setPB_point: React.Dispatch<React.SetStateAction<number>>;
+  setLP_point: React.Dispatch<React.SetStateAction<number>>;
+  setED_point: React.Dispatch<React.SetStateAction<number>>;
+  navigate: NavigateFunction;
+  enablePrevent: () => void;
+  po_point: number;
+  pb_point: number;
+  lp_point: number;
+  ed_point: number;
+  setResult: React.Dispatch<React.SetStateAction<UserType | undefined>>;
+}
+
 function SurveyInfo({
   question,
   questionNumber,
@@ -319,11 +345,12 @@ function SurveyInfo({
   lp_point,
   ed_point,
   setResult,
-}) {
+}: SurveyInfoProps) {
   const { page }: Readonly<Params<string>> = useParams();
 
+  const pageNumber = parseInt(page ?? "1", 10) - 1;
   const [currentQuestion, setCurrentQuestion] = useState(
-    question[questionNumber[page - 1]]
+    question[questionNumber[pageNumber]]
   );
 
   useEffect(() => {
@@ -331,14 +358,14 @@ function SurveyInfo({
     if (currentQuestion == null) {
       navigate("/survey");
     }
-    setCurrentQuestion(question[questionNumber[page - 1]]);
+    setCurrentQuestion(question[questionNumber[pageNumber]]);
 
-    if (page > 12) {
+    if (pageNumber + 1 > 12) {
       setStatus(1);
 
       const maxPoints = Math.max(po_point, pb_point, lp_point, ed_point);
 
-      let resultType;
+      let resultType: UserType = "PORORO";
       if (maxPoints === po_point) {
         resultType = "PORORO";
       } else if (maxPoints === pb_point) {
@@ -404,12 +431,18 @@ function SurveyInfo({
           </S.SurveyButton>
         </S.SurveyButtonBox>
       </S.SurveyBox>
-      <S.SurveyBar page={page} />
+      <S.SurveyBar page={pageNumber} />
     </S.SurveyMainContainer>
   );
 }
 
-function SurveyResult({ result, navigate }) {
+function SurveyResult({
+  result,
+  navigate,
+}: {
+  result: UserType | undefined;
+  navigate: NavigateFunction;
+}) {
   useEffect(() => {
     if (result == null) {
       navigate("/survey");
