@@ -139,7 +139,7 @@ export default function SurveyPage() {
   }
 
   const [question, setQuestion] = useState<IQuestion[]>([]);
-  const [questionNumber, setQuestionNumber] = useState<number[]>([]);
+  const [questionNumber] = useState<number[]>([]);
 
   const initQuestion = () => {
     setQuestion([]);
