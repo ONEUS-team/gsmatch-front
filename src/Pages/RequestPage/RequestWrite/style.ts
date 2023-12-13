@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const AddImageContainer = styled.div`
   display: flex;
   width: 50rem;
-  margin-top: 2.34rem;
+  margin-top: 7.215rem;
   margin-bottom: 1.31rem;
   column-gap: 0.75rem;
   height: 4.5rem;

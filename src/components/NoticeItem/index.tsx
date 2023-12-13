@@ -25,7 +25,7 @@ const NoticeItem: React.FC<Props> = ({
 
   const redirect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: string = e.currentTarget.id;
-    ID !== null && navigate(`/request/${ID}`);
+    ID !== null && navigate(`/request/detail/${ID}`);
   };
 
   return (

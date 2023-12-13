@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const MiddleContainer = styled.div`
-  margin-top: 13rem;
+  margin-top: 16.38rem;
   width: 50rem;
   display: flex;
   flex-direction: column;

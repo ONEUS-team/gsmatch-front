@@ -1,7 +1,7 @@
 export { default as ArrowHeadIcon } from "./ArrowHeadIcon";
 export { default as MainPageLogo } from "./MainPageLogo";
 export { default as HeaderLogo } from "./HeaderLogo";
-export { default as PasswordHideIcon } from "./PasswordHideIcon";
+export { default as PasswordBlindIcon } from "./PasswordBlindIcon";
 export { default as PasswordShowIcon } from "./PasswordShowIcon";
 export { default as GenreRequestIcon } from "./GenreRequestIcon";
 export { default as MajorRequestIcon } from "./MajorRequestIcon";
@@ -17,3 +17,8 @@ export { default as MacbookIcon } from "./MacbookIcon";
 export { default as PeopleIcon } from "./PeopleIcon";
 export { default as FilterIcon } from "./FilterIcon";
 export { default as XIcon } from "./XIcon";
+export { default as NoticeIcon } from "./NoticeIcon";
+export { default as ChatIcon } from "./ChatIcon";
+export { default as HeartIcon } from "./HeartIcon";
+export { default as FillHeartIcon } from "./FillHeartIcon";
+export { default as DefaultImg } from "./DefaultImg";

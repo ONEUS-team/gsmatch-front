@@ -1,9 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const GlobalStyle = createGlobalStyle`
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css");
 
@@ -66,6 +66,10 @@ a {
 }
 * {
   box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
 }
 `;
 
