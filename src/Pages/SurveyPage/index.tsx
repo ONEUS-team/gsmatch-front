@@ -430,7 +430,7 @@ function SurveyInfo({
           </S.SurveyButton>
         </S.SurveyButtonBox>
       </S.SurveyBox>
-      <S.SurveyBar page={pageNumber} />
+      <S.SurveyBar page={pageNumber + 1} />
     </S.SurveyMainContainer>
   );
 }
