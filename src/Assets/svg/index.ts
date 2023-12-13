@@ -23,3 +23,4 @@ export { default as HeartIcon } from "./HeartIcon";
 export { default as FillHeartIcon } from "./FillHeartIcon";
 export { default as DefaultImg } from "./DefaultImg";
 export { default as FixIcon } from "./FIxIcon";
+export { default as MoreShowButton } from "./MoreShowButton";
