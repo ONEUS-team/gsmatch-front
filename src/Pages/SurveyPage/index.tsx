@@ -13,7 +13,6 @@ import LUPI from "../../Assets/png/rupi.png";
 import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
-import { LoginPageButton } from "../MainPage/style";
 
 const Q = [
   [
