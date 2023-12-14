@@ -8,7 +8,7 @@ export const ChattingInput = styled.div`
   align-items: center;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   display: flex;
   column-gap: 1.25rem;
 `;
