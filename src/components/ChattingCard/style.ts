@@ -12,7 +12,7 @@ export const InnerCard = styled.div`
   column-gap: 1rem;
 `;
 
-export const OpponentImg = styled.img`
+export const PartnerImg = styled.img`
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -33,37 +33,30 @@ export const TopBox = styled.div`
   justify-content: space-between;
 `;
 
-export const BottomBox = styled.div`
-  width: 100%;
-  overflow-x: hidden;
-  color: #c0c0c0;
-  font-size: 1rem;
+export const RoomName = styled.h1`
   font-style: normal;
-  font-weight: 500;
+  width: 14.5625rem;
   line-height: 150%;
-`;
-
-export const OpponentName = styled.p`
-  font-size: 1.25rem;
-  font-style: normal;
-  line-height: 120%;
-  font-weight: 600;
+  font-weight: 500;
+  overflow: hidden;
+  font-size: 1rem;
   color: #fff;
 `;
 
-export const NameTimeBox = styled.div`
-  justify-content: center;
-  column-gap: 0.38rem;
-  align-items: center;
+export const FixBox = styled.button`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 `;
-
-export const LastTime = styled.p`
-  line-height: normal;
-  font-size: 0.75rem;
+export const PartnerInfo = styled.div`
+  color: #c0c0c0;
+  font-size: 0.875rem;
   font-style: normal;
-  font-weight: 400;
-  color: #777;
+  font-weight: 500;
+  line-height: 150%;
+  width: 100%;
 `;
-
-export const FixBox = styled.div``;
