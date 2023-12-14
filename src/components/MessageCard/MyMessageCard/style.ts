@@ -5,6 +5,7 @@ export const MessageContainer = styled.div`
   display: flex;
   column-gap: 0.5rem;
   align-items: end;
+  margin-right: 4rem;
 `;
 
 export const Message = styled.div`
@@ -26,4 +27,10 @@ export const TimeCard = styled.div`
   font-style: normal;
   font-weight: 200;
   line-height: 1rem;
+`;
+
+export const LineContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
 `;

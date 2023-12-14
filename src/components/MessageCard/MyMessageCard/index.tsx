@@ -14,10 +14,12 @@ interface Props {
 
 const MyMessageCard: React.FC<Props> = ({ chat }) => {
   return (
-    <S.MessageContainer>
-      <S.TimeCard>오후 9 : 21</S.TimeCard>
-      <S.Message>{chat.message}</S.Message>
-    </S.MessageContainer>
+    <S.LineContainer>
+      <S.MessageContainer>
+        <S.TimeCard>오후 9 : 21</S.TimeCard>
+        <S.Message>{chat.message}</S.Message>
+      </S.MessageContainer>
+    </S.LineContainer>
   );
 };
 
