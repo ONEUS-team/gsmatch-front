@@ -9,3 +9,4 @@ export { default as BlindInput } from "./BlindInput";
 export { default as Header } from "./Header";
 export { default as ChattingCard } from "./ChattingCard";
 export { default as ChattingCardList } from "./ChattingCardList";
+export { default as ChattingModal } from "./ChattingModal";
