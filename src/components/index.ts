@@ -10,3 +10,4 @@ export { default as Header } from "./Header";
 export { default as ChattingCard } from "./ChattingCard";
 export { default as ChattingCardList } from "./ChattingCardList";
 export { default as ChattingModal } from "./ChattingModal";
+export { default as ChattingInput } from "./ChattingInput";
