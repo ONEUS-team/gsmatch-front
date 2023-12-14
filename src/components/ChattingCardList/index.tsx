@@ -2,22 +2,24 @@ import { useNavigate } from "react-router-dom";
 import { GoBackIcon } from "../../Assets/svg";
 import * as S from "./style";
 import { ChattingCard } from "..";
+import { ChattingCard as CardType } from "../../types/chattingCard";
 
 interface Props {
-  chatList: {
-    message: string;
-    roomId: string;
-    sendDate: string;
-    sender: {
-      senderName: string;
-      senderId: string;
-      type: string;
-    };
-  }[];
+  cardList: CardType[];
 }
 
-const ChattingCardList: React.FC<Props> = ({ chatList }) => {
+const ChattingCardList: React.FC<Props> = ({ cardList }) => {
   const navigate = useNavigate();
+
+  const localfFxList = JSON.parse(localStorage.getItem("fixList")!);
+
+  const fixCardList = cardList.filter((card) =>
+    localfFxList?.includes(card.id)
+  );
+
+  const notFixCardList = cardList.filter(
+    (card) => !localfFxList?.includes(card.id)
+  );
 
   const handleIconButtonClick = () => navigate("/");
   return (
@@ -28,8 +30,8 @@ const ChattingCardList: React.FC<Props> = ({ chatList }) => {
         </S.IconButton>
         채팅
       </S.AbsoluteBox>
-      {chatList.map((chat) => (
-        <ChattingCard key={chat.roomId} chat={chat} />
+      {fixCardList.concat(notFixCardList).map((card) => (
+        <ChattingCard key={card.id} card={card} />
       ))}
     </S.Container>
   );

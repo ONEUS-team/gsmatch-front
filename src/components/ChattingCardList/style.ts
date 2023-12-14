@@ -5,7 +5,7 @@ export const Container = styled.div`
   background-color: #121212;
   flex-direction: column;
   position: relative;
-  width: 31.3125rem;
+  min-width: 31.3125rem;
   overflow-y: auto;
   height: 100vh;
   display: flex;
