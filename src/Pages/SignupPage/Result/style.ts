@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Cotainer = styled.div`
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #121212;
 `;
 
-export const IconBox = styled.div`
-  margin-top: 19.17rem;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
+export const IconBox = styled.div``;
 
 export const MainText = styled.h1`
   margin-top: 1.64rem;
@@ -31,10 +35,9 @@ export const SubText = styled.p`
 `;
 
 export const Button = styled.button`
+  margin-top: 3.75rem;
   background-color: #f3a4b2;
   border: 0;
-  position: absolute;
-  bottom: 19.19rem;
   padding: 0.94rem 3.52rem;
   color: black;
   font-size: 1.125rem;

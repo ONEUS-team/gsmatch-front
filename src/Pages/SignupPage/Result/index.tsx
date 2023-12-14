@@ -31,17 +31,19 @@ const Result: React.FC<Props> = ({
   useEffect(() => {}, []);
 
   return (
-    <S.Container>
-      <S.IconBox>
-        <ThumbMessageIcon />
-      </S.IconBox>
-      <S.MainText>회원가입을 성공적으로 마쳤어요!</S.MainText>
-      <S.SubText>이제 공통점을 가진 사람들과 이야기를 나눠볼까요?</S.SubText>
-      <S.Button onClick={handleButtonClick}>
-        이야기 나누러 가기
-        <ArrowButtonIcon />
-      </S.Button>
-    </S.Container>
+    <S.Cotainer>
+      <S.Wrapper>
+        <S.IconBox>
+          <ThumbMessageIcon />
+        </S.IconBox>
+        <S.MainText>회원가입을 성공적으로 마쳤어요!</S.MainText>
+        <S.SubText>이제 공통점을 가진 사람들과 이야기를 나눠볼까요?</S.SubText>
+        <S.Button onClick={handleButtonClick}>
+          이야기 나누러 가기
+          <ArrowButtonIcon />
+        </S.Button>
+      </S.Wrapper>
+    </S.Cotainer>
   );
 };
 
