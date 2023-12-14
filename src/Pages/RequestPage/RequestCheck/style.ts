@@ -6,11 +6,14 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  position: relative;
 `;
 
 export const MessegeIconContainer = styled.div`
   margin-top: 19.81rem;
 `;
+
+export const IconImg = styled.img``;
 
 export const MainText = styled.p`
   margin-top: 2rem;
@@ -49,10 +52,8 @@ export const ExplainText = styled.p`
 `;
 
 export const Button = styled.button`
-  margin-top: 8.3rem;
   background-color: #f3a4b2;
-  border: 0;
-  /* width: 16rem; */
+  border: none;
   padding: 1rem 5.1875rem;
   color: black;
   font-size: 1.125rem;
@@ -64,4 +65,6 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+  position: absolute;
+  bottom: 5rem;
 `;

@@ -6,3 +6,4 @@ export { default as RequestPage } from "./RequestPage/index.tsx";
 export { default as SignupPage } from "./SignupPage";
 export { default as SurveyPage } from "./SurveyPage";
 export { default as MainPage } from "./MainPage";
+export { default as NotFoundPage } from "./NotFoundPage";

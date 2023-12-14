@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
 
-  const handleLogoClick = () => navigate("/profile");
+  const handleLogoClick = () => navigate("/");
 
   const handleNoticeIconClick = () => navigate("/notice");
 

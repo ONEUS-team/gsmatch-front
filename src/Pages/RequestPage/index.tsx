@@ -4,6 +4,7 @@ import DetailSelect from "./DetailSelect";
 import RequestWrite from "./RequestWrite";
 import RequestCheck from "./RequestCheck";
 import RequestResult from "./RequestResult";
+import RequestDetail from "./RequestDetail";
 import { useState } from "react";
 import * as T from "../../types/request";
 
@@ -64,6 +65,7 @@ const RequestPage = () => {
       />
       <Route path="/check" element={<RequestCheck />} />
       <Route path="/finish/:result" element={<RequestResult />} />
+      <Route path="/detail/:requestId" element={<RequestDetail />} />
     </Routes>
   );
 };

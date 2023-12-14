@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: #111;
   height: 100vh;
+  position: relative;
 `;
 
 export const MiddleContainer = styled.div`
@@ -96,7 +97,8 @@ export const LinkText = styled.p`
 `;
 
 export const Button = styled.button`
-  margin-top: 18.7rem;
+  position: absolute;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   /* width: 16rem; */
