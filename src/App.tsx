@@ -38,7 +38,7 @@ function App() {
         element={<PrivateRouter element={<P.SurveyPage />} />}
       />
 
-      <Route path="*" element={<h1>404 Not Found</h1>} />
+      <Route path="*" element={<P.NotFoundPage />} />
     </Routes>
   );
 }
