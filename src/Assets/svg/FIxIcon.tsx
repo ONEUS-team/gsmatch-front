@@ -14,16 +14,6 @@ const FixIcon = () => (
         fill="#F3A4B2"
       />
     </g>
-    <defs>
-      <clipPath id="clip0_829_2704">
-        <rect
-          width="16.9412"
-          height="16.9412"
-          fill="white"
-          transform="translate(11.9792) rotate(45)"
-        />
-      </clipPath>
-    </defs>
   </svg>
 );
 
