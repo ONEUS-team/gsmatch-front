@@ -2,17 +2,19 @@ import styled from "styled-components";
 
 export const NotFoundContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #111;
   height: 100vh;
+
+  gap: 50px;
 `;
 
 export const NotFoundBox = styled.div`
   text-align: left;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
 `;
 
