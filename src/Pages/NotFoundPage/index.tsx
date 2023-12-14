@@ -1,8 +1,10 @@
+import NotFoundIcon from "../../Assets/svg/NotFoundIcon";
 import * as S from "./style";
 
 export default function NotFoundPage() {
   return (
     <S.NotFoundContainer>
+      <NotFoundIcon />
       <S.NotFoundBox>
         <S.NotFoundTitle>
           <S.HighLight>404 </S.HighLight>
