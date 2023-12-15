@@ -12,7 +12,7 @@ export const FilterContainer = styled.header`
   width: 50rem;
   padding: 0, 1.25rem;
   display: flex;
-  margin-top: 2.5rem;
+  margin-top: 7.375rem;
   position: relative;
 
   & > div {

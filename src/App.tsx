@@ -13,8 +13,16 @@ function App() {
         />
 
         <Route
+          path="/survey/*"
+          element={<PrivateRouter element={<P.SurveyPage />} />}
+        />
+        <Route
           path="/"
           element={<PrivateRouter element={<P.ProfilePage />} />}
+        />
+        <Route
+          path="/notice"
+          element={<PrivateRouter element={<P.NoticePage />} />}
         />
       </Route>
       <Route path="/signup/*" element={<P.SignupPage />} />
@@ -25,16 +33,16 @@ function App() {
         element={<PrivateRouter element={<P.NoticePage />} />}
       />
       <Route
-        path="/chat"
+        path="/chat/*"
         element={<PrivateRouter element={<P.ChattingPage />} />}
       />
 
       <Route
-        path="/survey"
+        path="/survey/*"
         element={<PrivateRouter element={<P.SurveyPage />} />}
       />
 
-      <Route path="*" element={<h1>404 Not Found</h1>} />
+      <Route path="*" element={<P.NotFoundPage />} />
     </Routes>
   );
 }
