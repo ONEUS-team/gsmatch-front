@@ -7,6 +7,7 @@ import {
   GenderConvert,
   MajorConvert,
 } from "../../../types/convert";
+import axiosInstance from "../../../libs/api/axiosInstance";
 
 interface Props {
   signupName: string;
@@ -57,9 +58,26 @@ const MajorInfo: React.FC<Props> = ({
   setSignupMajor,
 }) => {
   const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const emailRegex = /^[sS][0-9]{5}@gsm\.hs\.kr$/;
   const passwordRegex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%^&*])[A-Za-z0-9@#$!%^&*]{8,20}$/;
+
+  const signup = async (body: {
+    username: string;
+    password: string;
+    email: string;
+    grade: string;
+    gender: string;
+    major: string;
+  }) => {
+    try {
+      await axiosInstance.post("/api/auth/signup", body);
+      navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const [grades, setGrades] = useState([
     { grade: "ONE", isSelect: false },
@@ -116,10 +134,22 @@ const MajorInfo: React.FC<Props> = ({
     setMajors(newMajors);
   };
 
-  const goToNextPage = () => {
-    if (signupGender !== null && signupGrade !== null && signupMajor !== null)
-      navigate("/signup/resultx");
-    else alert("실패");
+  const goToNextPage = async () => {
+    if (signupGender !== null && signupGrade !== null && signupMajor !== null) {
+      setIsDisabled(true);
+
+      await signup({
+        username: signupName,
+        password: signupPassword,
+        email: signupEmail,
+        grade: signupGrade,
+        gender: signupGender,
+        major: signupMajor,
+      });
+
+      setIsDisabled(false);
+      navigate("/signup/result");
+    } else alert("실패");
   };
 
   const checkGeneralInfo = () => {
@@ -197,7 +227,9 @@ const MajorInfo: React.FC<Props> = ({
           </S.SelectBox>
         </S.SelectContainer>
       </S.SelectForm>
-      <S.Button onClick={goToNextPage}>다음</S.Button>
+      <S.Button disabled={isDisabled} onClick={goToNextPage}>
+        다음
+      </S.Button>
     </S.Container>
   );
 };
