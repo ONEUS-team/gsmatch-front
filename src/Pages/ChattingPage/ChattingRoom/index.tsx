@@ -213,6 +213,7 @@ const chatData = {
 };
 
 const myData = {
+  id: 1,
   username: "방가온",
 };
 
@@ -274,13 +275,13 @@ const ChattingRoom = () => {
           <S.MessageDisplayBox ref={MessageBoxRef}>
             <S.PartnerInfo>
               <S.PartnerTypeImg src="" />
-              <S.PartnerName>홍길동</S.PartnerName>
+              <S.PartnerName>홍길동</S.PartnerName>s
               <S.PartnerType>뽀로로 유형</S.PartnerType>
             </S.PartnerInfo>
             {chatData.chats.map((chat) => (
               <MessageCard
                 chat={chat}
-                isMine={chat.sender.senderName === myData.username}
+                isMine={chat.sender.id === myData.id}
                 partnerType={roomData.partner.type}
               />
             ))}
