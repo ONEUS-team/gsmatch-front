@@ -26,3 +26,4 @@ export { default as MoreShowButton } from "./MoreShowButton";
 export { default as SendIcon } from "./SendIcon";
 export { default as ThumbMessageIcon } from "./ThumbMessageIcon";
 export { default as SpeechBalloon } from "./SpeechBalloon";
+export { default as PencilIcon } from "./PencilIcon";
