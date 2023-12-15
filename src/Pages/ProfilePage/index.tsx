@@ -4,6 +4,7 @@ import { RequestList } from "../../components";
 import { ArrowButtonIcon } from "../../Assets/svg";
 import { UserInfo } from "../../types/user";
 import { Type } from "../../types/type";
+import axiosInstance from "../../libs/api/axiosInstance";
 
 const data = {
   id: 12,
@@ -78,6 +79,25 @@ const ProfilePage = () => {
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
+  }, []);
+
+  const sendUserRequest = async () => {
+    try {
+      const response = await axiosInstance.get("/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    sendUserRequest();
   }, []);
 
   return (
