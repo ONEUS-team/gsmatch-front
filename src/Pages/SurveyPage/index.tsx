@@ -13,6 +13,7 @@ import LUPI from "../../Assets/png/lupi.png";
 import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
+import axiosInstance from "../../libs/api/axiosInstance";
 
 const Q = [
   [
@@ -175,6 +176,25 @@ export default function SurveyPage() {
     disablePrevent();
   }, []);
 
+  const sendType = async (type: UserType) => {
+    try {
+      await axiosInstance.put(
+        "/user/type",
+        { type },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <Routes>
@@ -296,7 +316,13 @@ export default function SurveyPage() {
         />
         <Route
           path="/result"
-          element={<SurveyResult result={result} navigate={navigate} />}
+          element={
+            <SurveyResult
+              result={result}
+              navigate={navigate}
+              sendType={sendType}
+            />
+          }
         />
       </Routes>
     </>
@@ -438,9 +464,11 @@ function SurveyInfo({
 function SurveyResult({
   result,
   navigate,
+  sendType,
 }: {
   result: UserType | undefined;
   navigate: NavigateFunction;
+  sendType: (type: UserType) => void;
 }) {
   useEffect(() => {
     if (result == null) {
@@ -532,7 +560,13 @@ function SurveyResult({
             <></>
           )}
         </S.SurveyDescriptionBox>
-        <S.SurveyFinishButton>GSMATCH 시작하기</S.SurveyFinishButton>
+        <S.SurveyFinishButton
+          onClick={() => {
+            if (result) sendType(result);
+          }}
+        >
+          GSMATCH 시작하기
+        </S.SurveyFinishButton>
       </S.SurveyResultBox>
     </S.MainContainer>
   );

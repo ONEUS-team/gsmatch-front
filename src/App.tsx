@@ -11,11 +11,6 @@ function App() {
           path="/request/*"
           element={<PrivateRouter element={<P.RequestPage />} />}
         />
-
-        <Route
-          path="/survey/*"
-          element={<PrivateRouter element={<P.SurveyPage />} />}
-        />
         <Route
           path="/"
           element={<PrivateRouter element={<P.ProfilePage />} />}
@@ -25,6 +20,10 @@ function App() {
           element={<PrivateRouter element={<P.NoticePage />} />}
         />
       </Route>
+      <Route
+        path="/survey/*"
+        element={<PrivateRouter element={<P.SurveyPage />} />}
+      />
       <Route path="/signup/*" element={<P.SignupPage />} />
       <Route path="/login" element={<P.LoginPage />} />
       <Route path="/main" element={<P.MainPage />} />
