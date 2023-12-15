@@ -1,10 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import * as S from "./style";
 import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
 import RUPI from "../../Assets/png/rupi.png";
 import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
+import { usePreventLeave } from "../../hooks/usePreventLeave";
 
 const Q = [
   [
@@ -113,15 +114,26 @@ export default function SurveyPage() {
   const [selectedType, setSelectedType] = useState<
     "PORORO" | "POBI" | "RUPI" | "EDI" | null
   >();
+  const [po_point, setPO_point] = useState(0);
+  const [pb_point, setPB_point] = useState(0);
+  const [rb_point, setRB_point] = useState(0);
+  const [ed_point, setED_point] = useState(0);
+
+  const [status, setStatus] = useState(1);
+
+  const navigate = useNavigate();
 
   interface IQuestion {
     content: string;
     type: string;
   }
 
-  const question: IQuestion[] = [];
+  const [question, setQuestion] = useState<IQuestion[]>([]);
+  const [questionNumber, setQuestionNumber] = useState<number[]>([]);
 
   const initQuestion = () => {
+    if (question[0]) return;
+
     for (let i = 0; i < 4; i++) {
       const selectedValues: number[] = [];
       while (selectedValues.length < 3) {
@@ -137,8 +149,20 @@ export default function SurveyPage() {
     }
   };
 
+  const initQuestionNumber = () => {
+    while (questionNumber.length < 12) {
+      const randomValue = Math.floor(Math.random() * 12);
+      if (!questionNumber.includes(randomValue)) {
+        questionNumber.push(randomValue);
+      }
+    }
+
+    navigate("/survey/" + status);
+  };
+
   useEffect(() => {
     initQuestion();
+    console.log(question);
   }, []);
 
   return (
@@ -225,7 +249,11 @@ export default function SurveyPage() {
                       ) : null}
                     </S.HashTagBox>
                   </S.HashTagContainer>
-                  <S.SurveyMainNextButton>
+                  <S.SurveyMainNextButton
+                    onClick={() => {
+                      initQuestionNumber();
+                    }}
+                  >
                     유형검사 하러가기
                   </S.SurveyMainNextButton>
                 </S.SurveMainyBox>
@@ -233,8 +261,51 @@ export default function SurveyPage() {
             </>
           }
         />
-        <Route path="/1" element={<div>asd</div>} />
+        <Route
+          path="/:page"
+          element={
+            <SurveyInfo
+              question={question}
+              questionNumber={questionNumber}
+              status={status}
+              setStatus={setStatus}
+            />
+          }
+        />
       </Routes>
+    </>
+  );
+}
+
+function SurveyInfo({ question, questionNumber, status, setStatus }) {
+  const { page } = useParams();
+
+  const [currentQuestion, setCurrentQuestion] = useState(
+    question[questionNumber[page - 1]]
+  );
+
+  const { enablePrevent, disablePrevent } = usePreventLeave();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    enablePrevent();
+    if (currentQuestion == null) {
+      navigate("/survey");
+    }
+    setCurrentQuestion(question[questionNumber[page - 1]]);
+  });
+
+  return (
+    <>
+      <S.SurveyContent>{currentQuestion?.content}</S.SurveyContent>
+      <button
+        onClick={() => {
+          navigate("/survey/" + (status + 1));
+          setStatus((prev: number) => prev + 1);
+        }}
+      >
+        다음!!
+      </button>
     </>
   );
 }
