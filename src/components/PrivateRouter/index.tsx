@@ -1,5 +1,4 @@
-import { ReactNode, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
 
 const PrivateRoute = ({ element }: { element: ReactNode }) => {
   // const [isLoggedin, setIsLoggedin] = useState(true);

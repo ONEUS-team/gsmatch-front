@@ -29,12 +29,16 @@ function App() {
       <Route path="/login" element={<P.LoginPage />} />
       <Route path="/main" element={<P.MainPage />} />
       <Route
-        path="/chat"
+        path="/notice"
+        element={<PrivateRouter element={<P.NoticePage />} />}
+      />
+      <Route
+        path="/chat/*"
         element={<PrivateRouter element={<P.ChattingPage />} />}
       />
 
       <Route
-        path="/survey"
+        path="/survey/*"
         element={<PrivateRouter element={<P.SurveyPage />} />}
       />
 

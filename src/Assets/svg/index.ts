@@ -21,5 +21,8 @@ export { default as ChatIcon } from "./ChatIcon";
 export { default as HeartIcon } from "./HeartIcon";
 export { default as FillHeartIcon } from "./FillHeartIcon";
 export { default as DefaultImg } from "./DefaultImg";
+export { default as FixIcon } from "./FIxIcon";
+export { default as MoreShowButton } from "./MoreShowButton";
+export { default as SendIcon } from "./SendIcon";
 export { default as ThumbMessageIcon } from "./ThumbMessageIcon";
 export { default as SpeechBalloon } from "./SpeechBalloon";

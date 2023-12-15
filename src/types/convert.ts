@@ -20,3 +20,10 @@ export interface MajorConvert {
   IOT: "IOT";
   AI: "AI";
 }
+
+export interface TypeConvert {
+  PORORO: "뽀로로";
+  LUPI: "루피";
+  POBI: "포비";
+  EDI: "에디";
+}
