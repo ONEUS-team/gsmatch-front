@@ -2,15 +2,16 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import GeneralInfo from "./GeneralInfo";
 import MajorInfo from "./MajorInfo";
+import Result from "./Result";
 
 const SignupPage = () => {
   const [signupName, setSignupName] = useState<string>("");
   const [signupEmail, setSignupEmail] = useState<string>("");
   const [signupPassword, setSignupPassword] = useState<string>("");
   const [signupCheckPassword, setSignupCheckPassword] = useState<string>("");
-  const [signupGrade, setSignupGrade] = useState<string | null>(null);
-  const [signupGender, setSignupGender] = useState<string | null>(null);
-  const [signupMajor, setSignupMajor] = useState<string | null>(null);
+  const [signupGrade, setSignupGrade] = useState<string>("");
+  const [signupGender, setSignupGender] = useState<string>("");
+  const [signupMajor, setSignupMajor] = useState<string>("");
 
   return (
     <Routes>
@@ -43,6 +44,20 @@ const SignupPage = () => {
             setSignupGrade={setSignupGrade}
             setSignupGender={setSignupGender}
             setSignupMajor={setSignupMajor}
+          />
+        }
+      />
+      <Route
+        path="/result"
+        element={
+          <Result
+            signupName={signupName}
+            signupEmail={signupEmail}
+            signupPassword={signupPassword}
+            signupCheckPassword={signupCheckPassword}
+            signupGrade={signupGrade}
+            signupGender={signupGender}
+            signupMajor={signupMajor}
           />
         }
       />
