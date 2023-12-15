@@ -13,6 +13,10 @@ function App() {
         />
 
         <Route
+          path="/survey/*"
+          element={<PrivateRouter element={<P.SurveyPage />} />}
+        />
+        <Route
           path="/"
           element={<PrivateRouter element={<P.ProfilePage />} />}
         />

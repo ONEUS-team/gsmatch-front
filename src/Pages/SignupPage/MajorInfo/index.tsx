@@ -2,19 +2,47 @@ import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { GoBackIcon } from "../../../Assets/svg";
 import { useNavigate } from "react-router-dom";
+import {
+  GradeConvert,
+  GenderConvert,
+  MajorConvert,
+} from "../../../types/convert";
 
 interface Props {
   signupName: string;
   signupEmail: string;
   signupPassword: string;
   signupCheckPassword: string;
-  signupGrade: string | null;
-  signupGender: string | null;
-  signupMajor: string | null;
-  setSignupGrade: React.Dispatch<React.SetStateAction<string | null>>;
-  setSignupGender: React.Dispatch<React.SetStateAction<string | null>>;
-  setSignupMajor: React.Dispatch<React.SetStateAction<string | null>>;
+  signupGrade: string;
+  signupGender: string;
+  signupMajor: string;
+  setSignupGrade: React.Dispatch<React.SetStateAction<string>>;
+  setSignupGender: React.Dispatch<React.SetStateAction<string>>;
+  setSignupMajor: React.Dispatch<React.SetStateAction<string>>;
 }
+
+const gradeConvert: GradeConvert = {
+  ONE: "1",
+  TWO: "2",
+  THREE: "3",
+};
+
+const genderConvert: GenderConvert = {
+  MALE: "남자",
+  FEMALE: "여자",
+};
+
+const majorConvert: MajorConvert = {
+  FRONT: "프론트엔드",
+  BACK: "백엔드",
+  DESIGN: "디자인",
+  IOS: "IOS",
+  AOS: "안드로이드",
+  DEVOPS: "DevOps",
+  WORLD_SKILL: "기능반",
+  IOT: "IOT",
+  AI: "AI",
+};
 
 const MajorInfo: React.FC<Props> = ({
   signupName,
@@ -34,24 +62,24 @@ const MajorInfo: React.FC<Props> = ({
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%^&*])[A-Za-z0-9@#$!%^&*]{8,20}$/;
 
   const [grades, setGrades] = useState([
-    { grade: 1, isSelect: false },
-    { grade: 2, isSelect: false },
-    { grade: 3, isSelect: false },
+    { grade: "ONE", isSelect: false },
+    { grade: "TWO", isSelect: false },
+    { grade: "THREE", isSelect: false },
   ]);
 
   const [genders, setGenders] = useState([
-    { gender: "남자", isSelect: false },
-    { gender: "여자", isSelect: false },
+    { gender: "MALE", isSelect: false },
+    { gender: "FEMALE", isSelect: false },
   ]);
 
   const [majors, setMajors] = useState([
-    { major: "프론트엔드", isSelect: false },
-    { major: "백엔드", isSelect: false },
-    { major: "디자이너", isSelect: false },
+    { major: "FRONT", isSelect: false },
+    { major: "BACK", isSelect: false },
+    { major: "DESIGN", isSelect: false },
     { major: "IOS", isSelect: false },
-    { major: "안드로이드", isSelect: false },
-    { major: "DevOps", isSelect: false },
-    { major: "기능반", isSelect: false },
+    { major: "AOS", isSelect: false },
+    { major: "DEVOPS", isSelect: false },
+    { major: "WORLD_SKILL", isSelect: false },
     { major: "IOT", isSelect: false },
     { major: "AI", isSelect: false },
   ]);
@@ -60,11 +88,8 @@ const MajorInfo: React.FC<Props> = ({
     const ID: string = e.currentTarget.id;
 
     const newGrades = grades.map((g) =>
-      g.grade === Number(ID)
-        ? { ...g, isSelect: true }
-        : { ...g, isSelect: false }
+      g.grade === ID ? { ...g, isSelect: true } : { ...g, isSelect: false }
     );
-
     setSignupGrade(ID);
     setGrades(newGrades);
   };
@@ -93,7 +118,7 @@ const MajorInfo: React.FC<Props> = ({
 
   const goToNextPage = () => {
     if (signupGender !== null && signupGrade !== null && signupMajor !== null)
-      alert("성공");
+      navigate("/signup/resultx");
     else alert("실패");
   };
 
@@ -132,11 +157,11 @@ const MajorInfo: React.FC<Props> = ({
             {grades.map((g) => (
               <S.SelectButton
                 key={g.grade}
-                id={g.grade.toString()}
+                id={g.grade}
                 isSelect={g.isSelect}
                 onClick={changeGrade}
               >
-                {g.grade}학년
+                {gradeConvert[g.grade as keyof GradeConvert]}학년
               </S.SelectButton>
             ))}
           </S.SelectBox>
@@ -151,7 +176,7 @@ const MajorInfo: React.FC<Props> = ({
                 onClick={changeGender}
                 isSelect={g.isSelect}
               >
-                {g.gender}
+                {genderConvert[g.gender as keyof GenderConvert]}
               </S.SelectButton>
             ))}
           </S.SelectBox>
@@ -166,7 +191,7 @@ const MajorInfo: React.FC<Props> = ({
                 onClick={changeMajor}
                 isSelect={m.isSelect}
               >
-                {m.major}
+                {majorConvert[m.major as keyof MajorConvert]}
               </S.SelectButton>
             ))}
           </S.SelectBox>
