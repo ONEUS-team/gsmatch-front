@@ -6,6 +6,8 @@ import { UserInfo } from "../../types/user";
 import { Type } from "../../types/type";
 import axiosInstance from "../../libs/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import { refresh } from "../../components/api/refresh";
 
 const typeList: Type = {
   PORORO: "뽀로로",
@@ -69,7 +71,7 @@ const ProfilePage = () => {
 
       setUserInfo(response.data);
     } catch (error) {
-      console.error("Error:", error);
+      refresh(naviagte, sendUserRequest);
     }
   };
 

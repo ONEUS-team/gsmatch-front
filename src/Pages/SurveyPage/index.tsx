@@ -14,6 +14,7 @@ import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
 import axiosInstance from "../../libs/api/axiosInstance";
+import { refresh } from "../../components/api/refresh";
 
 const Q = [
   [
@@ -191,7 +192,9 @@ export default function SurveyPage() {
 
       navigate("/");
     } catch (error) {
-      console.error("Error:", error);
+      refresh(navigate, () => {
+        sendType(type);
+      });
     }
   };
 
