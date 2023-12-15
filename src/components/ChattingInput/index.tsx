@@ -11,7 +11,7 @@ const ChattingInput: React.FC<Props> = ({ inputValue, setInputValue }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
 
-  const handleSendClick = () => {
+  const handleSendSubmit = () => {
     // 요청 보내기
   };
 
