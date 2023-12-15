@@ -91,11 +91,10 @@ export const SignupText = styled.p`
   margin-right: 5px;
 `;
 
-export const PasswordToggleButton = styled.button`
+export const PasswordToggleButton = styled.div`
   position: absolute;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0);
-  border: none;
   right: 1.25rem;
   top: 50%;
   transform: translateY(-50%);

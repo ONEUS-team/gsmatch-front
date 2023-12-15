@@ -1,34 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowButtonIcon, ThumbMessageIcon } from "../../../Assets/svg";
 import * as S from "./style";
-import { useEffect } from "react";
-import axios from "axios";
 
-interface Props {
-  signupName: string;
-  signupEmail: string;
-  signupPassword: string;
-  signupCheckPassword: string;
-  signupGrade: string;
-  signupGender: string;
-  signupMajor: string;
-}
-
-// const signup = () => {};
-
-const Result: React.FC<Props> = ({
-  signupName,
-  signupEmail,
-  signupPassword,
-  signupCheckPassword,
-  signupGrade,
-  signupGender,
-  signupMajor,
-}) => {
+const Result = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => navigate("/login");
-
-  useEffect(() => {}, []);
 
   return (
     <S.Cotainer>
