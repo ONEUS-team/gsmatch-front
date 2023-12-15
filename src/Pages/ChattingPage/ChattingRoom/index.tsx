@@ -281,7 +281,7 @@ const ChattingRoom = () => {
             {chatData.chats.map((chat) => (
               <MessageCard
                 chat={chat}
-                isMine={chat.sender.id === myData.id}
+                isMine={Number(chat.sender.senderId) === myData.id}
                 partnerType={roomData.partner.type}
               />
             ))}

@@ -9,7 +9,7 @@ import {
 import * as S from "./style";
 import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
-import LUPI from "../../Assets/png/rupi.png";
+import LUPI from "../../Assets/png/lupi.png";
 import EDI from "../../Assets/png/edi.png";
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
