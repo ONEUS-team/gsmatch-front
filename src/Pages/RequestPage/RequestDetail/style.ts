@@ -7,6 +7,7 @@ export const Container = styled.div`
   background-color: #111;
   height: 100vh;
   position: relative;
+  padding-top: 4.875rem;
 `;
 
 export const ItemImg = styled.img`
@@ -28,7 +29,7 @@ export const UserBox = styled.div`
   align-items: center;
 `;
 
-export const HeartBox = styled.div`
+export const IconBox = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
@@ -46,6 +47,8 @@ export const HeartButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const EditButton = styled(HeartButton)``;
 
 export const UserImg = styled.img`
   border: 1px solid #f3a4b2;
@@ -116,4 +119,53 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+`;
+
+export const EditForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const TitleInput = styled.input`
+  margin-top: 1.63rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 170%;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  width: 50rem;
+  height: 4.5rem;
+  border-top: 1px solid #575757;
+  border-bottom: 1px solid #575757;
+  border-left: 0;
+  border-right: 0;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const contentInput = styled.textarea`
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 170%;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  width: 50rem;
+  height: 35rem;
+  padding-top: 1.2rem;
+  border: 0;
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const EditCompleteButton = styled(Button)`
+  width: 16.5rem;
 `;
