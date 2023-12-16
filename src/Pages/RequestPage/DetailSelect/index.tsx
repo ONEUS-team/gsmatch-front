@@ -1,16 +1,14 @@
 import { useParams } from "react-router-dom";
 import * as C from "../../../components/index";
-import * as T from "../../../types/request";
+import { Gender, Grade, Major } from "../../../types/utilType";
 
 interface Props {
-  requestGender: T.requestGender[];
-  requsetMajor: T.requestMajor[] | null;
-  requestGrade: T.requestGrade[];
-  setRequestGender: React.Dispatch<React.SetStateAction<T.requestGender[]>>;
-  setRequestMajor: React.Dispatch<
-    React.SetStateAction<T.requestMajor[] | null>
-  >;
-  setRequestGrade: React.Dispatch<React.SetStateAction<T.requestGrade[]>>;
+  requestGender: Gender[];
+  requsetMajor: Major[] | null;
+  requestGrade: Grade[];
+  setRequestGender: React.Dispatch<React.SetStateAction<Gender[]>>;
+  setRequestMajor: React.Dispatch<React.SetStateAction<Major[] | null>>;
+  setRequestGrade: React.Dispatch<React.SetStateAction<Grade[]>>;
 }
 
 const DetailSelect: React.FC<Props> = ({
@@ -22,7 +20,7 @@ const DetailSelect: React.FC<Props> = ({
   setRequestGrade,
 }) => {
   const { requestType } = useParams();
-  if (requestType === "genre") {
+  if (requestType === "type") {
     return (
       <C.GenreRequsetSelect
         requestGender={requestGender}
@@ -31,7 +29,7 @@ const DetailSelect: React.FC<Props> = ({
         setRequestGrade={setRequestGrade}
       />
     );
-  } else if (requestType === "major") {
+  } else if (requestType === "study") {
     return (
       <C.MajorRequsetSelect
         requestGrade={requestGrade}
