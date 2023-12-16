@@ -29,7 +29,7 @@ const RequestCard: React.FC<Props> = ({ request }) => {
         </S.BottomBox>
       </S.RequestBox>
       <S.ImgBox>
-        <S.PreviewImg src={""} />
+        <S.PreviewImg src={request.image} />
       </S.ImgBox>
     </S.Card>
   );
