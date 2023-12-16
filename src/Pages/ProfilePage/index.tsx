@@ -4,40 +4,9 @@ import { RequestList } from "../../components";
 import { ArrowButtonIcon } from "../../Assets/svg";
 import { UserInfo } from "../../types/user";
 import { Type } from "../../types/type";
-
-const data = {
-  id: 12,
-  username: "안철수",
-  grade: 1,
-  level: 13,
-  gender: "MALE",
-  type: "PORORO",
-  point: 0,
-  major: "FRONT",
-  requestList: [
-    {
-      requestId: 11,
-      title: "안녕하세요",
-      content: "아니 이거 맞아 내가 할말이 없다",
-      requestType: "TYPE",
-      authorName: "박미리",
-    },
-    {
-      requestId: 12,
-      title: "안녕하세요",
-      content: "아니 이거 맞아 내가 할말이 없다",
-      requestType: "STUDY",
-      authorName: "박미리",
-    },
-    {
-      requestId: 13,
-      title: "안녕하세요",
-      content: "아니 이거 맞아 내가 할말이 없다",
-      requestType: "TYPE",
-      authorName: "박미리",
-    },
-  ],
-};
+import axiosInstance from "../../libs/api/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import { refresh } from "../../components/api/refresh";
 
 const typeList: Type = {
   PORORO: "뽀로로",
@@ -61,13 +30,19 @@ const ProfilePage = () => {
   });
 
   const ref = useRef<HTMLDivElement>(null);
+  const grade =
+    userInfo.grade === "ONE"
+      ? 1
+      : userInfo.grade === "TWO"
+      ? 2
+      : userInfo.grade === "THREE"
+      ? 3
+      : null;
   const gender = userInfo.gender === "MALE" ? "남자" : "여자";
   const type = typeList[userInfo.type! as keyof Type];
   const profileSrc = `src\\Assets\\png\\${userInfo.type}.png`;
 
-  useEffect(() => {
-    setUserInfo(data);
-  }, []);
+  const naviagte = useNavigate();
 
   const handleWindowResize = () =>
     window.innerHeight < 1012 ? setIsScrollable(true) : setIsScrollable(false);
@@ -80,6 +55,29 @@ const ProfilePage = () => {
     };
   }, []);
 
+  const sendUserRequest = async () => {
+    try {
+      const response = await axiosInstance.get("/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      if (response.data.type === null) {
+        naviagte("/survey");
+      }
+
+      setUserInfo(response.data);
+    } catch (error) {
+      refresh(naviagte, sendUserRequest);
+    }
+  };
+
+  useEffect(() => {
+    sendUserRequest();
+  }, []);
+
   return (
     <S.Container ref={ref} isScrollable={isScrollable}>
       <S.ProfileBox>
@@ -89,7 +87,7 @@ const ProfilePage = () => {
             Level {userInfo.level} {userInfo.username}
           </S.TopInfo>
           <S.BottomInfo>
-            {userInfo.grade}학년 {gender} {type} 유형
+            {grade}학년 {gender} {type} 유형
           </S.BottomInfo>
         </S.InfoBox>
       </S.ProfileBox>
