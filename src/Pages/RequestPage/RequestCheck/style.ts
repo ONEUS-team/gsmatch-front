@@ -33,12 +33,16 @@ export const LinkTextContainer = styled.div`
   column-gap: 0.5rem;
 `;
 
-export const LinkTextItem = styled.p`
+export const LinkTextItem = styled.button`
   color: #f3a4b2;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  padding: 0;
+  cursor: pointer;
 `;
 
 export const ExplainText = styled.p`
