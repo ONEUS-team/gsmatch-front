@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   requestTitle: string;
   requestContent: string;
-  requestImg: string[];
+  requestImg: { imgFile: File; img: string }[];
   setRequestTitle: React.Dispatch<React.SetStateAction<string>>;
   setRequestContent: React.Dispatch<React.SetStateAction<string>>;
-  setRequestImg: React.Dispatch<React.SetStateAction<string[]>>;
+  setRequestImg: React.Dispatch<
+    React.SetStateAction<{ imgFile: File; img: string }[]>
+  >;
 }
 
 const RequestWrite: React.FC<Props> = ({
@@ -24,16 +26,15 @@ const RequestWrite: React.FC<Props> = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (requestImg.length <= 3) {
       const fileReader = new FileReader();
-
-      fileReader.readAsDataURL(e.target.files![0]);
+      const imgFile = e.target.files![0];
+      fileReader.readAsDataURL(imgFile);
 
       fileReader.onload = (e: ProgressEvent<FileReader>) => {
         const src = e.target!.result as string;
-        if (requestImg.includes(src)) {
+        if (requestImg.flatMap((i) => [i.img]).includes(src)) {
           alert("이미 추가한 사진 입니다");
         } else {
-          const newImages = [src].concat(requestImg);
-          setRequestImg(newImages);
+          setRequestImg((prev) => [...prev, { imgFile: imgFile, img: src }]);
         }
       };
     } else {
@@ -44,7 +45,7 @@ const RequestWrite: React.FC<Props> = ({
   const handleDeleteBtnClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const deleteID = e.currentTarget.parentElement!.id;
     const newImages = requestImg.filter((image) => {
-      return image !== deleteID;
+      return image.img !== deleteID;
     });
     setRequestImg(newImages);
   };
@@ -87,8 +88,8 @@ const RequestWrite: React.FC<Props> = ({
         </S.AddImageButton>
         {requestImg.map((image) => {
           return (
-            <S.AddImageItemContainer key={image} id={image}>
-              <S.AddImageItem src={image} />
+            <S.AddImageItemContainer key={image.img} id={image.img}>
+              <S.AddImageItem src={image.img} />
               <S.DeleteButton onClick={handleDeleteBtnClick}>
                 <I.DeleteIcon />
               </S.DeleteButton>
