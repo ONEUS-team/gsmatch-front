@@ -18,4 +18,5 @@ export interface MyRequest {
   content: string;
   requestType: string;
   authorName: string;
+  image: string;
 }
