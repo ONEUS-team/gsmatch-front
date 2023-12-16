@@ -81,6 +81,8 @@ export const UserGradeMajor = styled.p`
 
 export const RequestBox = styled.div`
   width: 50rem;
+  height: 33vh;
+  overflow-y: scroll;
 `;
 
 export const RequestTitle = styled.h1`
