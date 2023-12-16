@@ -13,7 +13,7 @@ interface Props {
   requestGrade: Grade[];
   requestTitle: string;
   requestContent: string;
-  requestImg: string[];
+  requestImg: { imgFile: File; img: string }[];
 }
 
 const RequestCheck: React.FC<Props> = ({
@@ -32,8 +32,6 @@ const RequestCheck: React.FC<Props> = ({
   const handleBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsOnlyone(e.currentTarget?.id === "isOnlyone" ? true : false);
     await request();
-
-    // navigate(`/request/finish/succeed`);
   };
 
   const request = async () => {
@@ -58,7 +56,7 @@ const RequestCheck: React.FC<Props> = ({
     );
 
     requestImg.forEach((img) => {
-      body.append("images", img);
+      body.append("images", img.imgFile);
     });
 
     const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
@@ -72,9 +70,10 @@ const RequestCheck: React.FC<Props> = ({
     };
     try {
       await axiosInstance.post("/request", body, config);
+      navigate(`/request/finish/succeed`);
     } catch (error) {
-      console.log(error);
       refresh(navigate, request);
+      navigate(`/request/finish/failed`);
     }
   };
 
@@ -99,9 +98,7 @@ const RequestCheck: React.FC<Props> = ({
     try {
       const response = await axiosInstance.post("/request/range", body, config);
       setRange(response.data.range);
-      console.log(response);
     } catch (error) {
-      console.log(error);
       refresh(navigate, requestRange);
     }
   };
