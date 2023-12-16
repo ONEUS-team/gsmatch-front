@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Gender, Grade, Major, RequestType } from "../../../types/utilType";
 import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   requestType: RequestType | null;
@@ -26,6 +26,7 @@ const RequestCheck: React.FC<Props> = ({
   requestImg,
 }) => {
   const [isOnlyone, setIsOnlyone] = useState<boolean>(false);
+  const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
   const handleBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -60,8 +61,6 @@ const RequestCheck: React.FC<Props> = ({
       body.append("images", img);
     });
 
-    console.log(body);
-
     const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
 
     const config = {
@@ -79,13 +78,46 @@ const RequestCheck: React.FC<Props> = ({
     }
   };
 
+  const requestRange = async () => {
+    const body = {
+      title: requestTitle,
+      content: requestContent,
+      requestType: requestType,
+      requestGrades: requestGrade,
+      requestGenders: requestGender,
+      requestMajors: requsetMajor,
+    };
+
+    const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+    const config = {
+      headers: {
+        Authorization: authorization,
+      },
+      withCredentials: true,
+    };
+    try {
+      const response = await axiosInstance.post("/request/range", body, config);
+      setRange(response.data.range);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      refresh(navigate, requestRange);
+    }
+  };
+
+  useEffect(() => {
+    requestRange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <S.Container>
       <S.MessegeIconContainer>
         <S.IconImg src="..\src\Assets\png\Message.png" alt="메시지 이미지" />
       </S.MessegeIconContainer>
       <S.MainText>
-        13명의 사람들에게
+        {range}명의 사람들에게
         <br />
         요청을 보낼 수 있어요!
       </S.MainText>
