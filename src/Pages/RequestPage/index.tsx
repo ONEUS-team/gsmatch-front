@@ -22,7 +22,9 @@ const RequestPage = () => {
   ]);
   const [requestTitle, setRequestTitle] = useState<string>("");
   const [requestContent, setRequestContent] = useState<string>("");
-  const [requestImg, setRequestImg] = useState<string[]>([]);
+  const [requestImg, setRequestImg] = useState<
+    { imgFile: File; img: string }[]
+  >([]);
 
   return (
     <Routes>
