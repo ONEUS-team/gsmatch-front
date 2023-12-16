@@ -2,14 +2,26 @@ import { useState } from "react";
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
 import { Link, useNavigate } from "react-router-dom";
-import * as T from "../../../types/request";
+import { Gender, Grade } from "../../../types/utilType";
+import { GenderConvert, GradeConvert } from "../../../types/convert";
 
 interface Props {
-  requestGender: T.requestGender[];
-  requestGrade: T.requestGrade[];
-  setRequestGender: React.Dispatch<React.SetStateAction<T.requestGender[]>>;
-  setRequestGrade: React.Dispatch<React.SetStateAction<T.requestGrade[]>>;
+  requestGender: Gender[];
+  requestGrade: Grade[];
+  setRequestGender: React.Dispatch<React.SetStateAction<Gender[]>>;
+  setRequestGrade: React.Dispatch<React.SetStateAction<Grade[]>>;
 }
+
+const gradeConvert: GradeConvert = {
+  ONE: "1",
+  TWO: "2",
+  THREE: "3",
+};
+
+const genderConvert: GenderConvert = {
+  MALE: "남자",
+  FEMALE: "여자",
+};
 
 const GenreRequsetSelect: React.FC<Props> = ({
   requestGender,
@@ -21,15 +33,15 @@ const GenreRequsetSelect: React.FC<Props> = ({
 
   const [grades, setGrades] = useState([
     { grade: "모두", isSelect: true },
-    { grade: 1, isSelect: false },
-    { grade: 2, isSelect: false },
-    { grade: 3, isSelect: false },
+    { grade: "ONE", isSelect: false },
+    { grade: "TWO", isSelect: false },
+    { grade: "THREE", isSelect: false },
   ]);
 
   const [genders, setGenders] = useState([
     { gender: "모두", isSelect: true },
-    { gender: "남자", isSelect: false },
-    { gender: "여자", isSelect: false },
+    { gender: "MALE", isSelect: false },
+    { gender: "FEMALE", isSelect: false },
   ]);
 
   const changeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,9 +63,9 @@ const GenreRequsetSelect: React.FC<Props> = ({
     if (ID !== "모두") {
       const newRequestGrade = newGrades.filter((g) => g.isSelect === true);
 
-      setRequestGrade(newRequestGrade.map((g) => g.grade) as T.requestGrade[]);
+      setRequestGrade(newRequestGrade.map((g) => g.grade) as Grade[]);
     } else {
-      setRequestGrade(["1", "2", "3"]);
+      setRequestGrade(["ONE", "TWO", "THREE"]);
     }
     setGrades(newGrades);
   };
@@ -67,11 +79,9 @@ const GenreRequsetSelect: React.FC<Props> = ({
 
     if (ID !== "모두") {
       const newRequestGender = newGenders.filter((g) => g.isSelect === true);
-      setRequestGender(
-        newRequestGender.map((g) => g.gender) as T.requestGender[]
-      );
+      setRequestGender(newRequestGender.map((g) => g.gender) as Gender[]);
     } else {
-      setRequestGender(["남자", "여자"]);
+      setRequestGender(["MALE", "FEMALE"]);
     }
     setGenders(newGenders);
   };
@@ -99,7 +109,7 @@ const GenreRequsetSelect: React.FC<Props> = ({
                 {grade.grade === "모두" ? (
                   <>{grade.grade}</>
                 ) : (
-                  <>{grade.grade}학년</>
+                  <>{gradeConvert[grade.grade as Grade]}학년</>
                 )}
               </S.SelectButton>
             ))}
@@ -115,7 +125,9 @@ const GenreRequsetSelect: React.FC<Props> = ({
                 id={gender.gender}
                 onClick={changeGender}
               >
-                {gender.gender}
+                {gender.gender === "모두"
+                  ? gender.gender
+                  : genderConvert[gender.gender as Gender]}
               </S.SelectButton>
             ))}
           </S.SelectContainer>
