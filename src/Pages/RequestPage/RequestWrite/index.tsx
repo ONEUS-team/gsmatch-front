@@ -37,7 +37,7 @@ const RequestWrite: React.FC<Props> = ({
         }
       };
     } else {
-      alert("10개가 최대 입니다");
+      alert("3개가 최대 입니다");
     }
   };
 
@@ -82,7 +82,7 @@ const RequestWrite: React.FC<Props> = ({
           <I.CameraIcon />
           <S.AddImageTextContainer>
             <S.TextItem>{requestImg.length}</S.TextItem>
-            /10
+            /3
           </S.AddImageTextContainer>
         </S.AddImageButton>
         {requestImg.map((image) => {
