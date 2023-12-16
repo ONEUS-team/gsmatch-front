@@ -19,7 +19,7 @@ export const refresh = (
     .then((response) => {
       localStorage.setItem(
         "accessToken",
-        response.headers.authorization.replace("Bearer", "")
+        response.headers.authorization.replace("Bearer ", "")
       );
       if (callBack != null) callBack();
     })
