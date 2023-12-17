@@ -149,7 +149,7 @@ export const TitleInput = styled.input`
   }
 `;
 
-export const contentInput = styled.textarea`
+export const ContentInput = styled.textarea`
   font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
