@@ -3,35 +3,19 @@ import { useEffect, useState } from "react";
 import * as S from "./style";
 import { Major } from "../../../types/major";
 import * as I from "../../../Assets/svg/index";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "../../../libs/api/axiosInstance";
+import { CharacterType, Grade, RequestType } from "../../../types/utilType";
+import { MyInfo, DetailType } from "../../../types/request";
+import { GradeConvert } from "../../../types/convert";
 
-const mokdata = {
-  id: 11,
-  title: "Sample Title 1",
-  content: "This is the content of sample post 1.",
-  requestType: "type",
-  isOnlyOne: false,
-  author: {
-    id: 101,
-    name: "John Doe",
-    major: "FRONT",
-    type: "루피",
-    level: 1,
-    grade: 3,
-  },
+const gradeConvert: GradeConvert = {
+  ONE: "1",
+  TWO: "2",
+  THREE: "3",
 };
 
-const myData = {
-  id: 101,
-  username: "john_doe",
-  grade: "ONE",
-  level: 5,
-  gender: "male",
-  type: "student",
-  point: 100,
-  major: "FRONT",
-};
-
-const majorList: Major = {
+const majorConvert: Major = {
   FRONT: "프론트엔드",
   BACK: "백엔드",
   DESIGN: "디자이너",
@@ -43,26 +27,145 @@ const majorList: Major = {
   AI: "AI",
 };
 
+const defaultDetail = {
+  id: 0,
+  title: "",
+  content: "",
+  requestType: "" as RequestType,
+  isOnlyOne: false,
+  author: {
+    id: 0,
+    name: "",
+    major: "" as unknown as Major,
+    type: "" as CharacterType,
+    level: 0,
+    grade: "" as Grade,
+  },
+} as unknown as DetailType;
+
+const defaultMyInfo = {
+  id: 0,
+  username: "",
+  grade: 0,
+  type: "",
+} as unknown as MyInfo;
+
 const RequestDetail = () => {
-  const [data, setData] = useState(mokdata);
+  const [detailData, setDetailData] = useState<DetailType>(defaultDetail);
+  const [myInfoData, setMyInfoData] = useState<MyInfo>(defaultMyInfo);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean>(false);
   const [state, setStaete] = useState<"edit" | "view">("view");
-  const [editTitle, setEditTitle] = useState<string>(data.title);
-  const [editContent, setEditContent] = useState<string>(data.content);
+  const [editTitle, setEditTitle] = useState<string>("");
+  const [editContent, setEditContent] = useState<string>("");
+  const [imgIndex, setImgIndex] = useState<number>(0);
+  const imgList = detailData?.imageNames?.map((img) => img);
+  const navigate = useNavigate();
 
-  const handleEditClick = () => setStaete("edit");
+  const typeImg = `../../src/Assets/png/${myInfoData.type}.png`;
+
+  const handleEditClick = () => {
+    setStaete("edit");
+  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  // const { id } = useParams();
+  const { requestId } = useParams();
 
-  useEffect(() => {
-    setData(mokdata);
-    if (myData.id === data.author.id) {
+  const fetchDetailData = async () => {
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      const { data } = await axiosInstance.get(`/request/${requestId}`, config);
+      setDetailData(data);
+      setEditTitle(data.title);
+      setEditContent(data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchMyInfoData = async () => {
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      const { data } = await axiosInstance.get("/user", config);
+      setMyInfoData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      await axiosInstance.delete(`/request/${requestId}`, config);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEditCompletetClick = async () => {
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      const body = {
+        title: editTitle,
+        content: editContent,
+      };
+
+      await axiosInstance.put(`/request/${requestId}`, body, config);
+      setStaete("view");
+      init();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const init = async () => {
+    await fetchDetailData();
+    await fetchMyInfoData();
+
+    if (detailData.id === myInfoData!.id) {
       setIsMine(true);
     }
+  };
+
+  useEffect(() => {
+    init();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (state === "edit")
@@ -73,11 +176,11 @@ const RequestDetail = () => {
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
           />
-          <S.contentInput
+          <S.ContentInput
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
           />
-          <S.EditCompleteButton>
+          <S.EditCompleteButton onClick={handleEditCompletetClick}>
             수정
             <I.ArrowButtonIcon />
           </S.EditCompleteButton>
@@ -85,49 +188,57 @@ const RequestDetail = () => {
       </S.Container>
     );
 
-  return (
-    <S.Container>
-      {/* <S.ItemImg src="" alt="기본 이미지" /> */}
-      <I.DefaultImg />
-      <S.MiddleBox>
-        <S.UserBox>
-          <S.UserImg
-            src="https://i.namu.wiki/i/oaOZE-a9jn7PYSFduvq3BYriDAAwGWJ8AJhau5GiqVf_FSD6NbYzsg7Nsoawz3bHCt0hx8YPoQw_o51LcH73Sg.webp"
-            alt="유저 프로필"
+  console.log(detailData);
+
+  if (detailData !== null && state === "view")
+    return (
+      <S.Container>
+        {detailData?.imageNames?.length > 0 ? (
+          <S.ItemImg
+            src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
+            alt="요청 이미지"
           />
-          <S.UserInfoBox>
-            <S.UserName>{data.author.name}</S.UserName>
-            <S.UserGradeMajor>
-              {data.author.grade}학년 {majorList[data.author.major]}
-            </S.UserGradeMajor>
-          </S.UserInfoBox>
-        </S.UserBox>
-        <S.IconBox>
-          {isMine ? (
-            <S.EditButton onClick={handleEditClick}>
-              <I.PencilIcon />
-            </S.EditButton>
-          ) : (
-            <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
-              {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
-            </S.HeartButton>
-          )}
-        </S.IconBox>
-      </S.MiddleBox>
-      <S.RequestBox>
-        <S.RequestTitle>{data.title}</S.RequestTitle>
-        <S.RequestContent>{data.content}</S.RequestContent>
-      </S.RequestBox>
-      {isMine ? (
-        <S.Button>삭제하기</S.Button>
-      ) : (
-        <S.Button>
-          답변하기
-          <I.ArrowButtonIcon />
-        </S.Button>
-      )}
-    </S.Container>
-  );
+        ) : (
+          <I.DefaultImg />
+        )}
+        <S.MiddleBox>
+          <S.UserBox>
+            <S.UserImg src={typeImg} alt="유저 프로필" />
+            <S.UserInfoBox>
+              <S.UserName>{detailData!.author.name}</S.UserName>
+              <S.UserGradeMajor>
+                {gradeConvert[detailData!.author.grade]}학년{" "}
+                {majorConvert[detailData!.author.major]}
+              </S.UserGradeMajor>
+            </S.UserInfoBox>
+          </S.UserBox>
+          <S.IconBox>
+            {isMine ? (
+              <S.EditButton onClick={handleEditClick}>
+                <I.PencilIcon />
+              </S.EditButton>
+            ) : (
+              <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
+                {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
+              </S.HeartButton>
+            )}
+          </S.IconBox>
+        </S.MiddleBox>
+        <S.RequestBox>
+          <S.RequestTitle>{detailData!.title}</S.RequestTitle>
+          <S.RequestContent>{detailData!.content}</S.RequestContent>
+        </S.RequestBox>
+        {isMine ? (
+          <S.Button onClick={handleDeleteClick}>삭제하기</S.Button>
+        ) : (
+          <S.Button>
+            답변하기
+            <I.ArrowButtonIcon />
+          </S.Button>
+        )}
+      </S.Container>
+    );
+  else return <S.Container></S.Container>;
 };
 
 export default RequestDetail;
