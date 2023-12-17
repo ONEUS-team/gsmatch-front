@@ -9,6 +9,7 @@ export const header = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
+  z-index: 10;
 `;
 
 export const Inner = styled.div`

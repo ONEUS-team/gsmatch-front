@@ -5,7 +5,7 @@ import { Major } from "../../../types/major";
 import * as I from "../../../Assets/svg/index";
 
 const mokdata = {
-  id: 1,
+  id: 11,
   title: "Sample Title 1",
   content: "This is the content of sample post 1.",
   requestType: "type",
@@ -18,6 +18,17 @@ const mokdata = {
     level: 1,
     grade: 3,
   },
+};
+
+const myData = {
+  id: 101,
+  username: "john_doe",
+  grade: "ONE",
+  level: 5,
+  gender: "male",
+  type: "student",
+  point: 100,
+  major: "FRONT",
 };
 
 const majorList: Major = {
@@ -35,10 +46,44 @@ const majorList: Major = {
 const RequestDetail = () => {
   const [data, setData] = useState(mokdata);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
+  const [isMine, setIsMine] = useState<boolean>(false);
+  const [state, setStaete] = useState<"edit" | "view">("view");
+  const [editTitle, setEditTitle] = useState<string>(data.title);
+  const [editContent, setEditContent] = useState<string>(data.content);
+
+  const handleEditClick = () => setStaete("edit");
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   // const { id } = useParams();
+
   useEffect(() => {
     setData(mokdata);
+    if (myData.id === data.author.id) {
+      setIsMine(true);
+    }
   }, []);
+
+  if (state === "edit")
+    return (
+      <S.Container>
+        <S.EditForm onSubmit={handleFormSubmit}>
+          <S.TitleInput
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+          />
+          <S.contentInput
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+          />
+          <S.EditCompleteButton>
+            수정
+            <I.ArrowButtonIcon />
+          </S.EditCompleteButton>
+        </S.EditForm>
+      </S.Container>
+    );
 
   return (
     <S.Container>
@@ -57,20 +102,30 @@ const RequestDetail = () => {
             </S.UserGradeMajor>
           </S.UserInfoBox>
         </S.UserBox>
-        <S.HeartBox>
-          <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
-            {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
-          </S.HeartButton>
-        </S.HeartBox>
+        <S.IconBox>
+          {isMine ? (
+            <S.EditButton onClick={handleEditClick}>
+              <I.PencilIcon />
+            </S.EditButton>
+          ) : (
+            <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
+              {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
+            </S.HeartButton>
+          )}
+        </S.IconBox>
       </S.MiddleBox>
       <S.RequestBox>
         <S.RequestTitle>{data.title}</S.RequestTitle>
         <S.RequestContent>{data.content}</S.RequestContent>
       </S.RequestBox>
-      <S.Button>
-        답변하기
-        <I.ArrowButtonIcon />
-      </S.Button>
+      {isMine ? (
+        <S.Button>삭제하기</S.Button>
+      ) : (
+        <S.Button>
+          답변하기
+          <I.ArrowButtonIcon />
+        </S.Button>
+      )}
     </S.Container>
   );
 };
