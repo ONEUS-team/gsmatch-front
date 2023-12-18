@@ -24,12 +24,13 @@ export interface MyRequest {
 }
 
 export interface DetailType {
-  id: number;
+  responseId: number;
   title: string;
   content: string;
   imageNames: string[];
   requestType: RequestType;
   isOnlyOne: boolean;
+  likes: boolean;
   author: {
     id: number;
     name: string;

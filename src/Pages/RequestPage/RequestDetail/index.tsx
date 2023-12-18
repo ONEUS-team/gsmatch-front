@@ -90,7 +90,6 @@ const RequestDetail = () => {
       };
 
       const dataDetail = await axiosInstance.get("/user", configDetail);
-      console.log(dataDetail.data);
 
       setMyInfoData(dataDetail.data);
 
@@ -106,10 +105,12 @@ const RequestDetail = () => {
       };
 
       const dataMyInfo = await axiosInstance.get(
-        `/request/${requestId}`,
+        `/response/${requestId}`,
         configMyInfo
       );
       setDetailData(dataMyInfo.data);
+
+      console.log(dataMyInfo.data);
 
       if (dataMyInfo.data?.author.id === dataDetail.data?.id) {
         setIsMine(true);
@@ -165,6 +166,26 @@ const RequestDetail = () => {
       init();
     } catch (error) {
       refresh(navigate, handleEditCompletetClick);
+    } finally {
+      setIsDIsabled(false);
+    }
+  };
+
+  const handleLikeClick = async (responseId: number) => {
+    setIsDIsabled(true);
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      await axiosInstance.post(`/response/likes`, { responseId }, config);
+    } catch (error) {
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }
@@ -250,8 +271,18 @@ const RequestDetail = () => {
                     <I.PencilIcon />
                   </S.EditButton>
                 ) : (
-                  <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
-                    {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
+                  <S.HeartButton
+                    disabled={isDisabled}
+                    onClick={() => {
+                      handleLikeClick(detailData.responseId);
+                      setIsHeartClick(!isHeartClick);
+                    }}
+                  >
+                    {isHeartClick || detailData.likes ? (
+                      <I.FillHeartIcon />
+                    ) : (
+                      <I.HeartIcon />
+                    )}
                   </S.HeartButton>
                 )}
               </S.IconBox>
