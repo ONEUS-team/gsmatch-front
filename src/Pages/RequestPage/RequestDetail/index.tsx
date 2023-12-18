@@ -218,7 +218,8 @@ const RequestDetail = () => {
         withCredentials: true,
       };
 
-      await axiosInstance.post(`/room`, { requestId }, config);
+      const response = await axiosInstance.post(`/room`, { requestId }, config);
+      navigate("/chat/" + response.data.roomId);
     } catch (error) {
       refresh(navigate, null);
     } finally {

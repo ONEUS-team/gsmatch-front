@@ -39,9 +39,7 @@ export default function LoginPage() {
       localStorage.setItem("refreshToken", refreshToken);
 
       navigate("/");
-    } catch (e) {
-      alert(e);
-    }
+    } catch (e) {}
   };
 
   return (
