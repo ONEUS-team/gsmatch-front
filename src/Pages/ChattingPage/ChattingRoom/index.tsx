@@ -7,42 +7,10 @@ import {
 import ChattingHeader from "../../../components/ChattingHeader";
 import * as S from "./style";
 import MessageCard from "../../../components/MessageCard";
-
-const data = [
-  {
-    id: 1,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1110,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "PORORO",
-    },
-  },
-  {
-    id: 2,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1210,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "TWO",
-      type: "EDI",
-    },
-  },
-  {
-    id: 3,
-    roomName: "아니 왜 손흥민123456789",
-    partner: {
-      id: 1130,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "POBI",
-    },
-  },
-];
+import axiosInstance from "../../../libs/api/axiosInstance";
+import { refresh } from "../../../components/api/refresh";
+import { useNavigate } from "react-router-dom";
+import { ChattingCard } from "../../../types/chattingCard";
 
 const chatData = {
   roomName: "방가온 화이팅",
@@ -232,8 +200,11 @@ const roomData = {
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const [data, setData] = useState<ChattingCard[]>([]);
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
 
   const [fristScroll, setFirstScroll] = useState(true);
 
@@ -241,6 +212,21 @@ const ChattingRoom = () => {
     if (!MessageBoxRef.current) return;
 
     MessageBoxRef.current.scrollTop = MessageBoxRef.current.scrollHeight;
+  };
+
+  const getRoomList = async () => {
+    try {
+      const response = await axiosInstance.get("/room", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
   };
 
   useEffect(() => {
@@ -262,6 +248,10 @@ const ChattingRoom = () => {
       scrollInit();
     }
   }, []);
+
+  useEffect(() => {
+    getRoomList();
+  });
 
   return (
     <>

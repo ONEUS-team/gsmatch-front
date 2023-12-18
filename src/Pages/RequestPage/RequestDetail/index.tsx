@@ -104,18 +104,22 @@ const RequestDetail = () => {
         withCredentials: true,
       };
 
-      const dataDetail = await axiosInstance.get(
+      const requestDataDetail = await axiosInstance.get(
+        `/request/${requestId}`,
+        configMyInfo
+      );
+
+      const responseDataDetail = await axiosInstance.get(
         `/response/${requestId}`,
         configMyInfo
       );
-      setDetailData(dataDetail.data);
 
-      console.log(dataDetail.data);
-
-      if (dataDetail.data?.author.id === dataMyInfo.data?.id) {
+      if (requestDataDetail.data?.author.id === dataMyInfo.data?.id) {
         setIsMine(true);
+        setDetailData(requestDataDetail.data);
       } else {
         setIsMine(false);
+        setDetailData(responseDataDetail.data);
       }
 
       setEditTitle(dataMyInfo.data.title);

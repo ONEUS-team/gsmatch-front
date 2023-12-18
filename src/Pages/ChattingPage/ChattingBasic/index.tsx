@@ -1,43 +1,32 @@
+import { useEffect, useState } from "react";
 import { ChattingCardList } from "../../../components";
 import * as S from "./style";
-
-const data = [
-  {
-    id: 1,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1110,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "PORORO",
-    },
-  },
-  {
-    id: 2,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1210,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "TWO",
-      type: "EDI",
-    },
-  },
-  {
-    id: 3,
-    roomName: "아니 왜 손흥민123456789",
-    partner: {
-      id: 1130,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "POBI",
-    },
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { refresh } from "../../../components/api/refresh";
+import axiosInstance from "../../../libs/api/axiosInstance";
 
 const ChattingBasic = () => {
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  const getRoomList = async () => {
+    try {
+      const response = await axiosInstance.get("/room", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  useEffect(() => {
+    getRoomList();
+  }, []);
   return (
     <S.Container>
       <ChattingCardList cardList={data} />
