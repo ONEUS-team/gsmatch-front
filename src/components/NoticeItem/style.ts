@@ -14,6 +14,7 @@ export const ListItem = styled.button<{
   requestType: string;
   isOnlyOne: boolean;
 }>`
+  height: 4.75rem;
   position: relative;
   width: 47.5rem;
   background-color: rgba(0, 0, 0, 0);
@@ -79,4 +80,20 @@ export const ListImg = styled.img`
   position: absolute;
   right: 0rem;
   top: 0.15rem;
+`;
+
+export const OnlyOneContainer = styled.div`
+  position: absolute;
+  top: -4.24755rem;
+  right: 0.63rem;
+`;
+
+export const XIconBox = styled.button`
+  border: none;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  right: 0.294rem;
+  top: -0.08rem;
+  cursor: pointer;
 `;
