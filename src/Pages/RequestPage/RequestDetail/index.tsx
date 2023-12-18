@@ -5,7 +5,6 @@ import { Major } from "../../../types/major";
 import * as I from "../../../Assets/svg/index";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../../libs/api/axiosInstance";
-import { CharacterType, Grade, RequestType } from "../../../types/utilType";
 import { MyInfo, DetailType } from "../../../types/request";
 import { GradeConvert } from "../../../types/convert";
 import { refresh } from "../../../components/api/refresh";
@@ -266,10 +265,12 @@ const RequestDetail = () => {
           <>
             {detailData?.imageNames?.length > 0 ? (
               <S.ImgContainer>
-                <S.ItemImg
-                  src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
-                  alt="요청 이미지"
-                />
+                {imgList != undefined ? (
+                  <S.ItemImg
+                    src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
+                    alt="요청 이미지"
+                  />
+                ) : null}
                 <S.LeftButton
                   onClick={() => {
                     imgIndex > 0 && setImgIndex((prev) => prev - 1);
@@ -277,14 +278,17 @@ const RequestDetail = () => {
                 >
                   <I.ImageLeftButton />
                 </S.LeftButton>
-                <S.RightButton
-                  onClick={() => {
-                    imgIndex < imgList.length - 1 &&
-                      setImgIndex((prev) => prev + 1);
-                  }}
-                >
-                  <I.ImageRightButton />
-                </S.RightButton>
+
+                {imgList != undefined ? (
+                  <S.RightButton
+                    onClick={() => {
+                      imgIndex < imgList.length - 1 &&
+                        setImgIndex((prev) => prev + 1);
+                    }}
+                  >
+                    <I.ImageRightButton />
+                  </S.RightButton>
+                ) : null}
               </S.ImgContainer>
             ) : (
               <I.DefaultImg />

@@ -1,17 +1,10 @@
 import React from "react";
 import MyMessageCard from "./MyMessageCard";
 import PartnerMessageCard from "./PartnerMessageCard";
+import { IChatData } from "../../Pages/ChattingPage/ChattingRoom";
 
 interface Props {
-  chat: {
-    sender: {
-      id: number;
-      senderId: string;
-      senderName: string;
-    };
-    message: string;
-    sendDate: string;
-  };
+  chat: IChatData;
   isMine: boolean;
   partnerType: string;
   sendDate: string;
