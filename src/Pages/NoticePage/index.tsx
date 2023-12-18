@@ -40,7 +40,9 @@ export default function NoticePage() {
         withCredentials: true,
       });
       setDatas(response.data);
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   };
 
   const dataFilter = useCallback(() => {
@@ -56,6 +58,7 @@ export default function NoticePage() {
       }
     });
     setDatas(newData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [range, kind]);
 
   useEffect(() => {
@@ -87,19 +90,22 @@ export default function NoticePage() {
         {isFilterClick && <Filter setRange={setRange} setKind={setKind} />}
       </S.FilterContainer>
       <S.ListContainer>
-        {datas.map((data) => (
-          <S.ListItem key={data.responseId}>
-            <NoticeItem
-              id={data.responseId}
-              requestType={data.requestType}
-              requestOnly={data.requestOnly}
-              title={data.title}
-              content={data.content}
-              authorName={data.authorName}
-              image={data.image}
-            />
-          </S.ListItem>
-        ))}
+        {datas.map((notice) => {
+          console.log(notice);
+          return (
+            <S.ListItem key={notice.responseId}>
+              <NoticeItem
+                id={notice.responseId}
+                requestType={notice.requestType}
+                requestOnly={true}
+                title={notice.title}
+                content={notice.content}
+                authorName={notice.authorName}
+                image={notice.image}
+              />
+            </S.ListItem>
+          );
+        })}
       </S.ListContainer>
     </S.Container>
   );
