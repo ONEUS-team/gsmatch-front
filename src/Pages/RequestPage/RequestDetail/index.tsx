@@ -28,32 +28,32 @@ const majorConvert: Major = {
   AI: "AI",
 };
 
-const defaultDetail = {
-  id: 0,
-  title: "",
-  content: "",
-  requestType: "" as RequestType,
-  isOnlyOne: false,
-  author: {
-    id: 0,
-    name: "",
-    major: "" as unknown as Major,
-    type: "" as CharacterType,
-    level: 0,
-    grade: "" as Grade,
-  },
-} as unknown as DetailType;
+// const defaultDetail = {
+//   id: 0,
+//   title: "",
+//   content: "",
+//   requestType: "" as RequestType,
+//   isOnlyOne: false,
+//   author: {
+//     id: 0,
+//     name: "",
+//     major: "" as unknown as Major,
+//     type: "" as CharacterType,
+//     level: 0,
+//     grade: "" as Grade,
+//   },
+// } as unknown as DetailType;
 
-const defaultMyInfo = {
-  id: 0,
-  username: "",
-  grade: 0,
-  type: "",
-} as unknown as MyInfo;
+// const defaultMyInfo = {
+//   id: 0,
+//   username: "",
+//   grade: 0,
+//   type: "",
+// } as unknown as MyInfo;
 
 const RequestDetail = () => {
-  const [detailData, setDetailData] = useState<DetailType>(defaultDetail);
-  const [myInfoData, setMyInfoData] = useState<MyInfo>(defaultMyInfo);
+  const [detailData, setDetailData] = useState<DetailType>();
+  const [myInfoData, setMyInfoData] = useState<MyInfo>();
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean>(false);
   const [state, setStaete] = useState<"edit" | "view">("view");
@@ -64,7 +64,7 @@ const RequestDetail = () => {
   const imgList = detailData?.imageNames?.map((img) => img);
   const navigate = useNavigate();
 
-  const typeImg = `../../src/Assets/png/${myInfoData.type}.png`;
+  const typeImg = `../../src/Assets/png/${myInfoData?.type}.png`;
 
   const handleEditClick = () => {
     setStaete("edit");
@@ -106,6 +106,8 @@ const RequestDetail = () => {
       };
 
       const { data } = await axiosInstance.get("/user", config);
+      console.log(data);
+
       setMyInfoData(data);
     } catch (error) {}
   };
@@ -159,10 +161,13 @@ const RequestDetail = () => {
   };
 
   const init = async () => {
-    await fetchDetailData();
     await fetchMyInfoData();
+    await fetchDetailData();
 
-    if (detailData.id === myInfoData!.id) {
+    console.log(detailData);
+    console.log(myInfoData);
+
+    if (detailData?.author.id === myInfoData?.id) {
       setIsMine(true);
     }
   };
@@ -199,67 +204,71 @@ const RequestDetail = () => {
   if (detailData !== null && state === "view")
     return (
       <S.Container>
-        {detailData?.imageNames?.length > 0 ? (
-          <S.ImgContainer>
-            <S.ItemImg
-              src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
-              alt="요청 이미지"
-            />
-            <S.LeftButton
-              onClick={() => {
-                imgIndex > 0 && setImgIndex((prev) => prev - 1);
-              }}
-            >
-              <I.ImageLeftButton />
-            </S.LeftButton>
-            <S.RightButton
-              onClick={() => {
-                imgIndex < imgList.length - 1 &&
-                  setImgIndex((prev) => prev + 1);
-              }}
-            >
-              <I.ImageRightButton />
-            </S.RightButton>
-          </S.ImgContainer>
-        ) : (
-          <I.DefaultImg />
-        )}
-        <S.MiddleBox>
-          <S.UserBox>
-            <S.UserImg src={typeImg} alt="유저 프로필" />
-            <S.UserInfoBox>
-              <S.UserName>{detailData!.author.name}</S.UserName>
-              <S.UserGradeMajor>
-                {gradeConvert[detailData!.author.grade]}학년{" "}
-                {majorConvert[detailData!.author.major]}
-              </S.UserGradeMajor>
-            </S.UserInfoBox>
-          </S.UserBox>
-          <S.IconBox>
-            {isMine ? (
-              <S.EditButton onClick={handleEditClick}>
-                <I.PencilIcon />
-              </S.EditButton>
+        {detailData != null && (
+          <>
+            {detailData?.imageNames?.length > 0 ? (
+              <S.ImgContainer>
+                <S.ItemImg
+                  src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
+                  alt="요청 이미지"
+                />
+                <S.LeftButton
+                  onClick={() => {
+                    imgIndex > 0 && setImgIndex((prev) => prev - 1);
+                  }}
+                >
+                  <I.ImageLeftButton />
+                </S.LeftButton>
+                <S.RightButton
+                  onClick={() => {
+                    imgIndex < imgList.length - 1 &&
+                      setImgIndex((prev) => prev + 1);
+                  }}
+                >
+                  <I.ImageRightButton />
+                </S.RightButton>
+              </S.ImgContainer>
             ) : (
-              <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
-                {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
-              </S.HeartButton>
+              <I.DefaultImg />
             )}
-          </S.IconBox>
-        </S.MiddleBox>
-        <S.RequestBox>
-          <S.RequestTitle>{detailData!.title}</S.RequestTitle>
-          <S.RequestContent>{detailData!.content}</S.RequestContent>
-        </S.RequestBox>
-        {isMine ? (
-          <S.Button disabled={isDisabled} onClick={handleDeleteClick}>
-            삭제하기
-          </S.Button>
-        ) : (
-          <S.Button>
-            답변하기
-            <I.ArrowButtonIcon />
-          </S.Button>
+            <S.MiddleBox>
+              <S.UserBox>
+                <S.UserImg src={typeImg} alt="유저 프로필" />
+                <S.UserInfoBox>
+                  <S.UserName>{detailData!.author.name}</S.UserName>
+                  <S.UserGradeMajor>
+                    {gradeConvert[detailData!.author.grade]}학년{" "}
+                    {majorConvert[detailData!.author.major]}
+                  </S.UserGradeMajor>
+                </S.UserInfoBox>
+              </S.UserBox>
+              <S.IconBox>
+                {isMine ? (
+                  <S.EditButton onClick={handleEditClick}>
+                    <I.PencilIcon />
+                  </S.EditButton>
+                ) : (
+                  <S.HeartButton onClick={() => setIsHeartClick(!isHeartClick)}>
+                    {isHeartClick ? <I.FillHeartIcon /> : <I.HeartIcon />}
+                  </S.HeartButton>
+                )}
+              </S.IconBox>
+            </S.MiddleBox>
+            <S.RequestBox>
+              <S.RequestTitle>{detailData!.title}</S.RequestTitle>
+              <S.RequestContent>{detailData!.content}</S.RequestContent>
+            </S.RequestBox>
+            {isMine ? (
+              <S.Button disabled={isDisabled} onClick={handleDeleteClick}>
+                삭제하기
+              </S.Button>
+            ) : (
+              <S.Button>
+                답변하기
+                <I.ArrowButtonIcon />
+              </S.Button>
+            )}
+          </>
         )}
       </S.Container>
     );
