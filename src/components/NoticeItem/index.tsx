@@ -56,7 +56,9 @@ const NoticeItem: React.FC<Props> = ({
         </S.ListSub>
       </S.ListHeader>
       <S.ListTitle>{title}</S.ListTitle>
-      <S.ListContent>{content}</S.ListContent>
+      <S.ListContent>
+        {content.length > 40 ? content.slice(0, 40) + "..." : content}
+      </S.ListContent>
       <S.ListImg
         src={
           image
