@@ -19,7 +19,7 @@ const ChattingInput: React.FC<Props> = ({
   return (
     <S.ChattingInput>
       <S.InputContainer onSubmit={handleSendSubmit}>
-        <S.Input value={inputValue} onChange={handleInputChange} />
+        <S.Input value={inputValue} onChange={handleInputChange} required />
         <S.SendButton>
           <SendIcon />
         </S.SendButton>

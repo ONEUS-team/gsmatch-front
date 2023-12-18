@@ -18,7 +18,7 @@ const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<ChattingCard[]>([]);
-  const [roomData, setRoomData] = useState();
+  const [roomData, setRoomData] = useState({});
   const [chatData, setChatData] = useState([]);
   const [myData, setMyData] = useState();
 
@@ -166,6 +166,10 @@ const ChattingRoom = () => {
 
   function handleSendSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (inputValue.length > 500) return alert("메시지가 너무 길어요!");
+    if (inputValue == "" || inputValue == null || /^\s*$/.test(inputValue))
+      return alert("메시지를 입력해주세요!");
+
     client.current.send(
       "/send/" + roomId,
       {},
@@ -189,16 +193,16 @@ const ChattingRoom = () => {
           <S.MessageDisplayBox ref={MessageBoxRef}>
             <S.PartnerInfo>
               <S.PartnerTypeImg
-                src={`../../src/Assets/png/${roomData?.partner.type}.png`}
+                src={`../../src/Assets/png/${roomData?.partner?.type}.png`}
               />
-              <S.PartnerName>{roomData?.partner.name}</S.PartnerName>
-              <S.PartnerType>{roomData?.partner.type} 유형</S.PartnerType>
+              <S.PartnerName>{roomData?.partner?.name}</S.PartnerName>
+              <S.PartnerType>{roomData?.partner?.type} 유형</S.PartnerType>
             </S.PartnerInfo>
             {chatData.map((chat) => (
               <MessageCard
                 chat={chat}
-                isMine={Number(chat?.sender.senderId) === myData.id}
-                partnerType={roomData?.partner.type}
+                isMine={Number(chat?.sender?.senderId) === myData?.id}
+                partnerType={roomData?.partner?.type}
                 sendDate={chat?.sendDate}
               />
             ))}
