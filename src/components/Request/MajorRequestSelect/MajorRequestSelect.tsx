@@ -2,16 +2,33 @@ import { useState } from "react";
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
 import { Link, useNavigate } from "react-router-dom";
-import * as T from "../../../types/request";
+import { Grade, Major } from "../../../types/utilType";
+import { GradeConvert, MajorConvert } from "../../../types/convert";
 
 interface Props {
-  requestGrade: T.requestGrade[];
-  requsetMajor: T.requestMajor[] | null;
-  setRequestGrade: React.Dispatch<React.SetStateAction<T.requestGrade[]>>;
-  setRequestMajor: React.Dispatch<
-    React.SetStateAction<T.requestMajor[] | null>
-  >;
+  requestGrade: Grade[];
+  requsetMajor: Major[] | null;
+  setRequestGrade: React.Dispatch<React.SetStateAction<Grade[]>>;
+  setRequestMajor: React.Dispatch<React.SetStateAction<Major[] | null>>;
 }
+
+const gradeConvert: GradeConvert = {
+  ONE: "1",
+  TWO: "2",
+  THREE: "3",
+};
+
+const majorConvert: MajorConvert = {
+  FRONT: "프론트엔드",
+  BACK: "백엔드",
+  DESIGN: "디자인",
+  IOS: "IOS",
+  AOS: "안드로이드",
+  DEVOPS: "DevOps",
+  WORLD_SKILL: "기능반",
+  IOT: "IOT",
+  AI: "AI",
+};
 
 const MajorRequestSelect: React.FC<Props> = ({
   requestGrade,
@@ -22,21 +39,21 @@ const MajorRequestSelect: React.FC<Props> = ({
   const navigate = useNavigate();
   const [grades, setGrades] = useState([
     { grade: "모두", isSelect: true },
-    { grade: 1, isSelect: false },
-    { grade: 2, isSelect: false },
-    { grade: 3, isSelect: false },
+    { grade: "ONE", isSelect: false },
+    { grade: "TWO", isSelect: false },
+    { grade: "THREE", isSelect: false },
   ]);
 
   const [majors, setMajors] = useState([
-    { major: "프론트엔드", isSelect: false },
-    { major: "백엔드", isSelect: false },
-    { major: "디자이너", isSelect: false },
+    { major: "FRONT", isSelect: false },
+    { major: "BACK", isSelect: false },
+    { major: "DESIGN", isSelect: false },
     { major: "IOS", isSelect: false },
-    { major: "안드로이드", isSelect: false },
-    { major: "DevOps", isSelect: false },
+    { major: "AOS", isSelect: false },
+    { major: "DEVOPS", isSelect: false },
     { major: "IOT", isSelect: false },
     { major: "AI", isSelect: false },
-    { major: "기능반", isSelect: false },
+    { major: "WORLD_SKILL", isSelect: false },
   ]);
 
   const changeGrade = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -58,9 +75,9 @@ const MajorRequestSelect: React.FC<Props> = ({
     if (ID !== "모두") {
       const newRequestGrade = newGrades.filter((g) => g.isSelect === true);
 
-      setRequestGrade(newRequestGrade.map((g) => g.grade) as T.requestGrade[]);
+      setRequestGrade(newRequestGrade.map((g) => g.grade) as Grade[]);
     } else {
-      setRequestGrade(["1", "2", "3"]);
+      setRequestGrade(["ONE", "TWO", "THREE"]);
     }
     setGrades(newGrades);
   };
@@ -73,12 +90,12 @@ const MajorRequestSelect: React.FC<Props> = ({
     const newMajorValue = newMajors.filter((m) => {
       return m.isSelect === true;
     });
-    setRequestMajor(newMajorValue.map((m) => m.major) as T.requestMajor[]);
+    setRequestMajor(newMajorValue.map((m) => m.major) as Major[]);
     setMajors(newMajors);
   };
 
   const nextPage = () =>
-    requestGrade !== null && requsetMajor?.length !== 0
+    requestGrade !== null && requsetMajor?.length !== 0 && requsetMajor
       ? navigate("/request/write")
       : alert("모두 선택해 주세요");
 
@@ -101,7 +118,7 @@ const MajorRequestSelect: React.FC<Props> = ({
                   {grade.grade === "모두" ? (
                     <>{grade.grade}</>
                   ) : (
-                    <>{grade.grade}학년</>
+                    <>{gradeConvert[grade.grade as Grade]}학년</>
                   )}
                 </S.SelectButton>
               );
@@ -122,7 +139,7 @@ const MajorRequestSelect: React.FC<Props> = ({
                   id={major.major}
                   onClick={changeMajor}
                 >
-                  {major.major}
+                  {majorConvert[major.major as Major]}
                 </S.SelectButton>
               );
             })}

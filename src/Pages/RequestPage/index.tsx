@@ -6,25 +6,25 @@ import RequestCheck from "./RequestCheck";
 import RequestResult from "./RequestResult";
 import RequestDetail from "./RequestDetail";
 import { useState } from "react";
-import * as T from "../../types/request";
+import { Gender, Grade, Major, RequestType } from "../../types/utilType";
 
 const RequestPage = () => {
-  const [requestType, setRequestType] = useState<T.requestType | null>(null);
-  const [requestGender, setRequestGender] = useState<T.requestGender[]>([
-    "남자",
-    "여자",
+  const [requestType, setRequestType] = useState<RequestType | null>(null);
+  const [requestGender, setRequestGender] = useState<Gender[]>([
+    "MALE",
+    "FEMALE",
   ]);
-  const [requsetMajor, setRequestMajor] = useState<T.requestMajor[] | null>(
-    null
-  );
-  const [requestGrade, setRequestGrade] = useState<T.requestGrade[]>([
-    "1",
-    "2",
-    "3",
+  const [requsetMajor, setRequestMajor] = useState<Major[] | null>(null);
+  const [requestGrade, setRequestGrade] = useState<Grade[]>([
+    "ONE",
+    "TWO",
+    "THREE",
   ]);
   const [requestTitle, setRequestTitle] = useState<string>("");
   const [requestContent, setRequestContent] = useState<string>("");
-  const [requestImg, setRequestImg] = useState<string[]>([]);
+  const [requestImg, setRequestImg] = useState<
+    { imgFile: File; img: string }[]
+  >([]);
 
   return (
     <Routes>
@@ -63,7 +63,20 @@ const RequestPage = () => {
           />
         }
       />
-      <Route path="/check" element={<RequestCheck />} />
+      <Route
+        path="/check"
+        element={
+          <RequestCheck
+            requestType={requestType}
+            requestGender={requestGender}
+            requsetMajor={requsetMajor}
+            requestGrade={requestGrade}
+            requestTitle={requestTitle}
+            requestContent={requestContent}
+            requestImg={requestImg}
+          />
+        }
+      />
       <Route path="/finish/:result" element={<RequestResult />} />
       <Route path="/detail/:requestId" element={<RequestDetail />} />
     </Routes>

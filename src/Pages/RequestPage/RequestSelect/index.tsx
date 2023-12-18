@@ -1,23 +1,23 @@
 import * as I from "../../../Assets/svg/index";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import * as T from "../../../types/request";
+import { RequestType } from "../../../types/utilType";
 
 interface Props {
-  requestType: T.requestType | null;
-  setRequestType: React.Dispatch<React.SetStateAction<T.requestType | null>>;
+  requestType: RequestType | null;
+  setRequestType: React.Dispatch<React.SetStateAction<RequestType | null>>;
 }
 
 const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
   const navigate = useNavigate();
 
   const handleRequestClick = (e: React.MouseEvent) => {
-    setRequestType(e.currentTarget.id as T.requestType);
+    setRequestType(e.currentTarget.id as RequestType);
   };
 
   const nextPage = () => {
     if (requestType) {
-      navigate(`/request/${requestType}`);
+      navigate(`/request/${requestType.toLowerCase()}`);
     } else {
       alert("보낼 요청을 선택하세요");
     }
@@ -28,13 +28,13 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
       <S.TextItem>어떤 요청을 보낼까요?</S.TextItem>
       <S.SubTextItem>요청은 최대 3개까지 보낼 수 있어요!</S.SubTextItem>
       <S.SelectForm>
-        <S.SelectItem isSelect={requestType === "genre" ? true : false}>
+        <S.SelectItem isSelect={requestType === "TYPE" ? true : false}>
           <S.Icon
-            src="src\Assets\png\Heart.png"
+            src="..\..\src\Assets\png\Heart.png"
             alt="유형사진"
-            id="genre"
+            id="TYPE"
             onClick={handleRequestClick}
-            isSelect={requestType === "genre" ? true : false}
+            isSelect={requestType === "TYPE" ? true : false}
           />
           <S.SelectTitle>유형</S.SelectTitle>
           <S.SelectInfo>
@@ -45,13 +45,13 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
             요청을 보내요
           </S.SelectInfo>
         </S.SelectItem>
-        <S.SelectItem isSelect={requestType === "major" ? true : false}>
+        <S.SelectItem isSelect={requestType === "STUDY" ? true : false}>
           <S.Icon
-            src="src\Assets\png\Hat.png"
+            src="..\..\src\Assets\png\Hat.png"
             alt="전공사진"
-            id="major"
+            id="STUDY"
             onClick={handleRequestClick}
-            isSelect={requestType === "major" ? true : false}
+            isSelect={requestType === "STUDY" ? true : false}
           />
           <S.SelectTitle>전공</S.SelectTitle>
           <S.SelectInfo>

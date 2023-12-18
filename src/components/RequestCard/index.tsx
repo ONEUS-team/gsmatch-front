@@ -8,6 +8,9 @@ interface Props {
 
 const RequestCard: React.FC<Props> = ({ request }) => {
   const type = request.requestType === "TYPE" ? "유형" : "전공";
+  const src = request.image
+    ? `https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${request.image}`
+    : "src/Assets/png/requestCardDefault.png";
 
   return (
     <S.Card to={`/request/detail/${request.requestId}`}>
@@ -16,12 +19,7 @@ const RequestCard: React.FC<Props> = ({ request }) => {
           <S.Type>
             {type} {type === "유형" ? <PeopleIcon /> : <MacbookIcon />}
           </S.Type>
-          <S.Author>
-            {request.authorName}
-            {
-              // 작성시간 로직
-            }
-          </S.Author>
+          <S.Author>{request.authorName}</S.Author>
         </S.TopBox>
         <S.BottomBox>
           <S.TItle>{request.title}</S.TItle>
@@ -29,7 +27,7 @@ const RequestCard: React.FC<Props> = ({ request }) => {
         </S.BottomBox>
       </S.RequestBox>
       <S.ImgBox>
-        <S.PreviewImg src={""} />
+        <S.PreviewImg src={src} />
       </S.ImgBox>
     </S.Card>
   );
