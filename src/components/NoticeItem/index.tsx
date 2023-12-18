@@ -2,6 +2,7 @@ import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { useNavigate } from "react-router-dom";
 import DefualtPng from "../../Assets/png/requestCardDefault.png";
+import { useState } from "react";
 
 interface Props {
   id: number;
@@ -23,6 +24,7 @@ const NoticeItem: React.FC<Props> = ({
   image,
 }) => {
   const navigate = useNavigate();
+  const [isShow, setIsShow] = useState<boolean>(true);
 
   const redirect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const ID: string = e.currentTarget.id;
@@ -36,6 +38,19 @@ const NoticeItem: React.FC<Props> = ({
       requestType={requestType}
       onClick={redirect}
     >
+      {requestOnly && isShow && (
+        <S.OnlyOneContainer>
+          <I.OnlyOneIcon />
+          <S.XIconBox
+            onClick={(e) => {
+              setIsShow(false);
+              e.stopPropagation();
+            }}
+          >
+            <I.OnlyOneXIcon />
+          </S.XIconBox>
+        </S.OnlyOneContainer>
+      )}
       <S.ListHeader>
         <S.ListType>
           {requestType === "type" ? (
