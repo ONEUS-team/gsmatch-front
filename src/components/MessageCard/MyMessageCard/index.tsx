@@ -1,15 +1,8 @@
+import { IChatData } from "../../../Pages/ChattingPage/ChattingRoom";
 import * as S from "./style";
 
 interface Props {
-  chat: {
-    sender: {
-      id: number;
-      senderId: string;
-      senderName: string;
-    };
-    message: string;
-    sendDate: string;
-  };
+  chat: IChatData;
   sendDate: string;
 }
 

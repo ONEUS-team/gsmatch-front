@@ -11,10 +11,10 @@ import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChattingCard } from "../../../types/chattingCard";
-import { Stomp } from "@stomp/stompjs";
+import * as Stomp from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
-interface IChatData {
+export interface IChatData {
   id: number;
   message: string;
   sendDate: string;
@@ -35,13 +35,33 @@ interface IRoomData {
   };
 }
 
+export interface IMyData {
+  id: number;
+  username: string;
+  grade: "ONE" | "TWO" | "THREE";
+  level: number;
+  gender: string;
+  type: string;
+  point: number;
+  major: string;
+  requestList: [
+    {
+      requestId: number;
+      title: string;
+      content: string;
+      requestType: string;
+      authorName: string;
+    }
+  ];
+}
+
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<ChattingCard[]>([]);
-  const [roomData, setRoomData] = useState<IRoomData>({});
+  const [roomData, setRoomData] = useState<IRoomData>();
   const [chatData, setChatData] = useState<IChatData[]>([]);
-  const [myData, setMyData] = useState();
+  const [myData, setMyData] = useState<IMyData>();
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +70,7 @@ const ChattingRoom = () => {
   const [fristScroll, setFirstScroll] = useState(true);
 
   const { roomId } = useParams();
-  const client = useRef<Stomp.Client>({});
+  const client = useRef<Stomp.Client | any>();
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
@@ -122,12 +142,12 @@ const ChattingRoom = () => {
     const socket = new SockJS(
       "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/ws-stomp"
     );
-    client.current = Stomp.over(socket);
+    client.current = Stomp.Stomp.over(socket);
 
-    client.current.connect({}, function (frame: string) {
+    client.current?.connect({}, function (frame: string) {
       console.log("Connected: " + frame);
 
-      client.current.subscribe("/room/" + roomId, function (chatMessage: any) {
+      client.current?.subscribe("/room/" + roomId, function (chatMessage: any) {
         const message = JSON.parse(chatMessage.body);
         setChatData((prev) => [
           ...prev,
@@ -146,7 +166,7 @@ const ChattingRoom = () => {
   }
 
   const disconnect = () => {
-    client.current.deactivate();
+    client.current?.deactivate();
   };
 
   useEffect(() => {
@@ -190,7 +210,7 @@ const ChattingRoom = () => {
     if (inputValue == "" || inputValue == null || /^\s*$/.test(inputValue))
       return alert("메시지를 입력해주세요!");
 
-    client.current.send(
+    client.current?.send(
       "/send/" + roomId,
       {},
       JSON.stringify({
@@ -207,7 +227,7 @@ const ChattingRoom = () => {
         <ChattingCardList cardList={data} />
         <S.ChattingRoom>
           <ChattingHeader
-            roomName={roomData?.roomName}
+            roomName={roomData != undefined ? roomData.roomName : ""}
             setIsModal={setIsModal}
           />
           <S.MessageDisplayBox ref={MessageBoxRef}>
@@ -222,7 +242,9 @@ const ChattingRoom = () => {
               <MessageCard
                 chat={chat}
                 isMine={Number(chat?.sender?.senderId) === myData?.id}
-                partnerType={roomData?.partner?.type}
+                partnerType={
+                  roomData != undefined ? roomData?.partner?.type : ""
+                }
                 sendDate={chat?.sendDate}
               />
             ))}
@@ -239,7 +261,7 @@ const ChattingRoom = () => {
           id={Number(roomId)}
           setIsModal={setIsModal}
           roomName={data[0].roomName}
-          roomId={roomId}
+          roomId={roomId != undefined ? +roomId : 0}
         />
       )}
     </>
