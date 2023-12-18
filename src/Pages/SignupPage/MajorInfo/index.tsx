@@ -118,7 +118,7 @@ const MajorInfo: React.FC<Props> = ({
 
   const goToNextPage = () => {
     if (signupGender !== null && signupGrade !== null && signupMajor !== null)
-      navigate("/signup/resultx");
+      navigate("/signup/result");
     else alert("실패");
   };
 
