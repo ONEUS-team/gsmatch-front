@@ -29,3 +29,4 @@ export { default as SpeechBalloon } from "./SpeechBalloon";
 export { default as PencilIcon } from "./PencilIcon";
 export { default as ImageLeftButton } from "./ImageLeftButton";
 export { default as ImageRightButton } from "./ImageRightButton";
+export { default as SucceedIcon } from "./SucceedIcon";
