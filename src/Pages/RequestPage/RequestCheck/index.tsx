@@ -29,8 +29,7 @@ const RequestCheck: React.FC<Props> = ({
   requestContent,
   requestImg,
 }) => {
-
-  const [isDisabled, setIsDIsabled] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
@@ -40,7 +39,7 @@ const RequestCheck: React.FC<Props> = ({
   };
 
   const request = async (isOnlyone: boolean) => {
-    setIsDIsabled(true)
+    setIsDisabled(true);
     const body = new FormData();
 
     body.append(
