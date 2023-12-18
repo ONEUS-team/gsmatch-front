@@ -91,9 +91,7 @@ const RequestDetail = () => {
       setDetailData(data);
       setEditTitle(data.title);
       setEditContent(data.content);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const fetchMyInfoData = async () => {
@@ -109,9 +107,7 @@ const RequestDetail = () => {
 
       const { data } = await axiosInstance.get("/user", config);
       setMyInfoData(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleDeleteClick = async () => {
@@ -129,7 +125,6 @@ const RequestDetail = () => {
       await axiosInstance.delete(`/request/${requestId}`, config);
       navigate("/");
     } catch (error) {
-      console.log(error);
       refresh(navigate, handleDeleteClick);
     } finally {
       setIsDIsabled(false);
@@ -200,8 +195,6 @@ const RequestDetail = () => {
         </S.EditForm>
       </S.Container>
     );
-
-  console.log(detailData);
 
   if (detailData !== null && state === "view")
     return (
