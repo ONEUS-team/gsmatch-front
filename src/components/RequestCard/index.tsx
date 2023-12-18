@@ -23,7 +23,11 @@ const RequestCard: React.FC<Props> = ({ request }) => {
         </S.TopBox>
         <S.BottomBox>
           <S.TItle>{request.title}</S.TItle>
-          <S.Content>{request.content}</S.Content>
+          <S.Content>
+            {request.content.length > 40
+              ? request.content.slice(0, 40) + "..."
+              : request.content}
+          </S.Content>
         </S.BottomBox>
       </S.RequestBox>
       <S.ImgBox>
