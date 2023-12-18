@@ -24,9 +24,17 @@ const ChattingBasic = () => {
     }
   };
 
+  const checkFixList = () => {
+    if (localStorage.getItem("fixList") === null) {
+      localStorage.setItem("fixList", JSON.stringify([]));
+    }
+  };
+
   useEffect(() => {
     getRoomList();
+    checkFixList();
   }, []);
+
   return (
     <S.Container>
       <ChattingCardList cardList={data} />

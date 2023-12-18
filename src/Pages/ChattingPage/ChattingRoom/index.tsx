@@ -212,7 +212,7 @@ const ChattingRoom = () => {
       </S.Container>
       {isModal && (
         <ChattingModal
-          id={3}
+          id={Number(roomId)}
           setIsModal={setIsModal}
           roomName={data[0].roomName}
         />
