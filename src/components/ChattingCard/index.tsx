@@ -56,13 +56,13 @@ const ChattingCard: React.FC<Props> = ({ card }) => {
   return (
     <S.Card onClick={handleCardClick}>
       <S.InnerCard>
-        <S.PartnerImg src="sdff" alt="프로필 이미지" />
+        <S.PartnerImg
+          src={`../../src/Assets/png/${card?.partner.type}.png`}
+          alt="프로필 이미지"
+        />
         <S.ChatInfoBox>
           <S.TopBox>
-            <S.RoomName>
-              {card.id}
-              {card.roomName}
-            </S.RoomName>
+            <S.RoomName>{card.roomName}</S.RoomName>
             {isFixed && (
               <S.FixBox onClick={handleFixIconClick}>
                 <FixIcon />

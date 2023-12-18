@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   ChattingCardList,
   ChattingInput,
@@ -7,240 +7,146 @@ import {
 import ChattingHeader from "../../../components/ChattingHeader";
 import * as S from "./style";
 import MessageCard from "../../../components/MessageCard";
+import axiosInstance from "../../../libs/api/axiosInstance";
+import { refresh } from "../../../components/api/refresh";
+import { useNavigate, useParams } from "react-router-dom";
+import { ChattingCard } from "../../../types/chattingCard";
+import { Stomp } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 
-const data = [
-  {
-    id: 1,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1110,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "PORORO",
-    },
-  },
-  {
-    id: 2,
-    roomName: "아니 왜 손흥민...",
-    partner: {
-      id: 1210,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "TWO",
-      type: "EDI",
-    },
-  },
-  {
-    id: 3,
-    roomName: "아니 왜 손흥민123456789",
-    partner: {
-      id: 1130,
-      name: "황희찬",
-      major: "FRONT",
-      grade: "ONE",
-      type: "POBI",
-    },
-  },
-];
+interface IChatData {
+  id: number;
+  message: string;
+  sendDate: string;
+  sender: {
+    senderId: number;
+    senderName: string;
+  };
+}
 
-const chatData = {
-  roomName: "방가온 화이팅",
-  chats: [
-    {
-      sender: {
-        id: 1,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "ㅎㅇ",
-      sendDate: "2023-12-14-20-32",
-    },
-    {
-      sender: {
-        id: 2,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "안녕",
-      sendDate: "2023-12-14-20-33",
-    },
-    {
-      sender: {
-        id: 3,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "뭐해?",
-      sendDate: "2023-12-14-20-34",
-    },
-    {
-      sender: {
-        id: 4,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "일하고 있어.",
-      sendDate: "2023-12-14-20-35",
-    },
-    {
-      sender: {
-        id: 5,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "또 얘기할게 있어?",
-      sendDate: "2023-12-14-20-36",
-    },
-    {
-      sender: {
-        id: 6,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "네, 어떤 일이야?",
-      sendDate: "2023-12-14-20-37",
-    },
-    {
-      sender: {
-        id: 7,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "오늘 뭐 했어?",
-      sendDate: "2023-12-14-20-38",
-    },
-    {
-      sender: {
-        id: 8,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "영화 봤어.",
-      sendDate: "2023-12-14-20-39",
-    },
-    {
-      sender: {
-        id: 9,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "어땠어?",
-      sendDate: "2023-12-14-20-40",
-    },
-    {
-      sender: {
-        id: 10,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "재밌었어.",
-      sendDate: "2023-12-14-20-41",
-    },
-    {
-      sender: {
-        id: 3,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "뭐해?",
-      sendDate: "2023-12-14-20-34",
-    },
-    {
-      sender: {
-        id: 4,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "일하고 있어.",
-      sendDate: "2023-12-14-20-35",
-    },
-    {
-      sender: {
-        id: 5,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "또 얘기할게 있어?",
-      sendDate: "2023-12-14-20-36",
-    },
-    {
-      sender: {
-        id: 6,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "네, 어떤 일이야?",
-      sendDate: "2023-12-14-20-37",
-    },
-    {
-      sender: {
-        id: 7,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "오늘 뭐 했어?",
-      sendDate: "2023-12-14-20-38",
-    },
-    {
-      sender: {
-        id: 8,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "영화 봤어.",
-      sendDate: "2023-12-14-20-39",
-    },
-    {
-      sender: {
-        id: 9,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "어땠어?",
-      sendDate: "2023-12-14-20-40",
-    },
-    {
-      sender: {
-        id: 10,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "재밌었어.",
-      sendDate: "2023-12-14-20-41",
-    },
-  ],
-};
-
-const myData = {
-  id: 1,
-  username: "방가온",
-};
-
-const roomData = {
-  id: 131,
-  roomName: "hihi",
+interface IRoomData {
+  id: number;
+  roomName: string;
   partner: {
-    id: 1110,
-    name: "시니성",
-    major: "FRONT",
-    grade: "ONE",
-    type: "PORORO",
-  },
-};
+    id: number;
+    name: string;
+    major: string;
+    type: string;
+  };
+}
 
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const [data, setData] = useState<ChattingCard[]>([]);
+  const [roomData, setRoomData] = useState<IRoomData>({});
+  const [chatData, setChatData] = useState<IChatData[]>([]);
+  const [myData, setMyData] = useState();
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
 
+  const navigate = useNavigate();
+
   const [fristScroll, setFirstScroll] = useState(true);
+
+  const { roomId } = useParams();
+  const client = useRef<Stomp.Client>({});
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
 
     MessageBoxRef.current.scrollTop = MessageBoxRef.current.scrollHeight;
+  };
+
+  const getRoomList = async () => {
+    try {
+      const response = await axiosInstance.get("/room", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  const getRoomInfo = async () => {
+    try {
+      const response = await axiosInstance.get("/room/" + roomId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setRoomData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  const getChatList = async () => {
+    try {
+      const response = await axiosInstance.get("/chat/" + roomId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setChatData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  const getMyData = async () => {
+    try {
+      const response = await axiosInstance.get("/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setMyData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  function connect() {
+    const socket = new SockJS(
+      "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/ws-stomp"
+    );
+    client.current = Stomp.over(socket);
+
+    client.current.connect({}, function (frame: string) {
+      console.log("Connected: " + frame);
+
+      client.current.subscribe("/room/" + roomId, function (chatMessage: any) {
+        const message = JSON.parse(chatMessage.body);
+        setChatData((prev) => [
+          ...prev,
+          {
+            id: message.chatId,
+            message: message.message,
+            sendDate: message.sendDate,
+            sender: {
+              senderId: message.sender.senderId,
+              senderName: message.sender.senderName,
+            },
+          },
+        ]);
+      });
+    });
+  }
+
+  const disconnect = () => {
+    client.current.deactivate();
   };
 
   useEffect(() => {
@@ -261,7 +167,39 @@ const ChattingRoom = () => {
       }
       scrollInit();
     }
-  }, []);
+  }, [chatData]);
+
+  useEffect(() => {
+    getRoomList();
+    getRoomInfo();
+    getChatList();
+    getMyData();
+  }, [roomId]);
+
+  useEffect(() => {
+    connect();
+
+    return () => {
+      disconnect();
+    };
+  }, [roomId]);
+
+  function handleSendSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (inputValue.length > 500) return alert("메시지가 너무 길어요!");
+    if (inputValue == "" || inputValue == null || /^\s*$/.test(inputValue))
+      return alert("메시지를 입력해주세요!");
+
+    client.current.send(
+      "/send/" + roomId,
+      {},
+      JSON.stringify({
+        message: inputValue,
+        token: `Bearer ${localStorage.getItem("accessToken")}`,
+      })
+    );
+    setInputValue("");
+  }
 
   return (
     <>
@@ -269,34 +207,39 @@ const ChattingRoom = () => {
         <ChattingCardList cardList={data} />
         <S.ChattingRoom>
           <ChattingHeader
-            roomName={roomData.roomName}
+            roomName={roomData?.roomName}
             setIsModal={setIsModal}
           />
           <S.MessageDisplayBox ref={MessageBoxRef}>
             <S.PartnerInfo>
-              <S.PartnerTypeImg src="" />
-              <S.PartnerName>홍길동</S.PartnerName>s
-              <S.PartnerType>뽀로로 유형</S.PartnerType>
+              <S.PartnerTypeImg
+                src={`../../src/Assets/png/${roomData?.partner?.type}.png`}
+              />
+              <S.PartnerName>{roomData?.partner?.name}</S.PartnerName>
+              <S.PartnerType>{roomData?.partner?.type} 유형</S.PartnerType>
             </S.PartnerInfo>
-            {chatData.chats.map((chat) => (
+            {chatData.map((chat) => (
               <MessageCard
                 chat={chat}
-                isMine={Number(chat.sender.senderId) === myData.id}
-                partnerType={roomData.partner.type}
+                isMine={Number(chat?.sender?.senderId) === myData?.id}
+                partnerType={roomData?.partner?.type}
+                sendDate={chat?.sendDate}
               />
             ))}
           </S.MessageDisplayBox>
           <ChattingInput
             inputValue={inputValue}
             setInputValue={setInputValue}
+            handleSendSubmit={handleSendSubmit}
           />
         </S.ChattingRoom>
       </S.Container>
       {isModal && (
         <ChattingModal
-          id={3}
+          id={Number(roomId)}
           setIsModal={setIsModal}
           roomName={data[0].roomName}
+          roomId={roomId}
         />
       )}
     </>

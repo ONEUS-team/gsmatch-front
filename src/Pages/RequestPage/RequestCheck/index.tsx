@@ -5,7 +5,7 @@ import { Gender, Grade, Major, RequestType } from "../../../types/utilType";
 import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
@@ -74,6 +74,16 @@ const RequestCheck: React.FC<Props> = ({
     };
     try {
       await axiosInstance.post("/request", body, config);
+      toast.success("요청이 생성되었습니다.", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       navigate(`/request/finish/succeed`);
     } catch (error) {
       refresh(navigate, request);
@@ -115,9 +125,7 @@ const RequestCheck: React.FC<Props> = ({
         progress: undefined,
         theme: "dark",
       });
-      setTimeout(() => {
-        navigate("/request");
-      }, 1500);
+      navigate("/");
     }
   };
 
@@ -151,7 +159,6 @@ const RequestCheck: React.FC<Props> = ({
         보내기
         <I.ArrowButtonIcon />
       </S.Button>
-      <ToastContainer />
     </S.Container>
   );
 };

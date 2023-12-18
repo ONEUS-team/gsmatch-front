@@ -10,13 +10,14 @@ interface Props {
     message: string;
     sendDate: string;
   };
+  sendDate: string;
 }
 
-const MyMessageCard: React.FC<Props> = ({ chat }) => {
+const MyMessageCard: React.FC<Props> = ({ chat, sendDate }) => {
   return (
     <S.LineContainer>
       <S.MessageContainer>
-        <S.TimeCard>오후 9 : 21</S.TimeCard>
+        <S.TimeCard>{sendDate}</S.TimeCard>
         <S.Message>{chat.message}</S.Message>
       </S.MessageContainer>
     </S.LineContainer>
