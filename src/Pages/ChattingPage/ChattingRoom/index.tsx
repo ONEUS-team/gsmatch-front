@@ -154,7 +154,7 @@ const ChattingRoom = () => {
     getRoomInfo();
     getChatList();
     getMyData();
-  }, []);
+  }, [roomId]);
 
   useEffect(() => {
     connect();
@@ -162,7 +162,7 @@ const ChattingRoom = () => {
     return () => {
       disconnect();
     };
-  }, []);
+  }, [roomId]);
 
   function handleSendSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
