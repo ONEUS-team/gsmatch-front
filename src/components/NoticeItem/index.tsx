@@ -5,20 +5,18 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   id: number;
   requestType: string;
-  isOnlyOne: boolean;
+  requestOnly: boolean;
   title: string;
   content: string;
-  author: {
-    name: string;
-  };
+  authorName: string;
 }
 
 const NoticeItem: React.FC<Props> = ({
   requestType,
-  isOnlyOne,
+  requestOnly,
   title,
   content,
-  author,
+  authorName,
   id,
 }) => {
   const navigate = useNavigate();
@@ -31,7 +29,7 @@ const NoticeItem: React.FC<Props> = ({
   return (
     <S.ListItem
       id={id.toString()}
-      isOnlyOne={isOnlyOne}
+      isOnlyOne={requestOnly}
       requestType={requestType}
       onClick={redirect}
     >
@@ -50,8 +48,8 @@ const NoticeItem: React.FC<Props> = ({
           )}
         </S.ListType>
         <S.ListSub>
-          <S.ListAuthor>{author.name}</S.ListAuthor>
-          <S.ListTime>2분전</S.ListTime>
+          <S.ListAuthor>{authorName}</S.ListAuthor>
+          {/* <S.ListTime>2분전</S.ListTime> */}
         </S.ListSub>
       </S.ListHeader>
       <S.ListTitle>{title}</S.ListTitle>

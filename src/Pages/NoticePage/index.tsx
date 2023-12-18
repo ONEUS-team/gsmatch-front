@@ -3,6 +3,7 @@ import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Filter } from "../../components";
 import NoticeItem from "../../components/NoticeItem";
+import axiosInstance from "../../libs/api/axiosInstance";
 
 interface FilterObject {
   [key: string]: string;
@@ -15,19 +16,12 @@ const filterType: FilterObject = {
 };
 
 interface INoticeData {
-  id: number;
+  responseId: number;
   title: string;
   content: string;
-  requestType: string;
-  isOnlyOne: boolean;
-  author: {
-    id: number;
-    name: string;
-    major: string;
-    type: string;
-    level: number;
-    grade: number;
-  };
+  requestType: "STUDY" | "TYPE";
+  requestOnly: boolean;
+  authorName: string;
 }
 
 export default function NoticePage() {
@@ -35,6 +29,18 @@ export default function NoticePage() {
   const [kind, setKind] = useState<string>("전체");
   const [datas, setDatas] = useState<INoticeData[]>([]);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
+
+  const getNoticeData = async () => {
+    try {
+      const response = await axiosInstance.get("/response", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+      setDatas(response.data);
+    } catch (error) {}
+  };
 
   const dataFilter = useCallback(() => {
     const newData = datas.filter((d) => {
@@ -53,6 +59,7 @@ export default function NoticePage() {
 
   useEffect(() => {
     dataFilter();
+    getNoticeData();
   }, [dataFilter]);
 
   return (
@@ -80,14 +87,14 @@ export default function NoticePage() {
       </S.FilterContainer>
       <S.ListContainer>
         {datas.map((data) => (
-          <S.ListItem key={data.id}>
+          <S.ListItem key={data.responseId}>
             <NoticeItem
-              id={data.id}
+              id={data.responseId}
               requestType={data.requestType}
-              isOnlyOne={data.isOnlyOne}
+              requestOnly={data.requestOnly}
               title={data.title}
               content={data.content}
-              author={data.author}
+              authorName={data.authorName}
             />
           </S.ListItem>
         ))}
