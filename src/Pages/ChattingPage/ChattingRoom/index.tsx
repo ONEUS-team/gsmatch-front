@@ -12,184 +12,13 @@ import { refresh } from "../../../components/api/refresh";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChattingCard } from "../../../types/chattingCard";
 
-const chatData = {
-  roomName: "방가온 화이팅",
-  chats: [
-    {
-      sender: {
-        id: 1,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "ㅎㅇ",
-      sendDate: "2023-12-14-20-32",
-    },
-    {
-      sender: {
-        id: 2,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "안녕",
-      sendDate: "2023-12-14-20-33",
-    },
-    {
-      sender: {
-        id: 3,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "뭐해?",
-      sendDate: "2023-12-14-20-34",
-    },
-    {
-      sender: {
-        id: 4,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "일하고 있어.",
-      sendDate: "2023-12-14-20-35",
-    },
-    {
-      sender: {
-        id: 5,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "또 얘기할게 있어?",
-      sendDate: "2023-12-14-20-36",
-    },
-    {
-      sender: {
-        id: 6,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "네, 어떤 일이야?",
-      sendDate: "2023-12-14-20-37",
-    },
-    {
-      sender: {
-        id: 7,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "오늘 뭐 했어?",
-      sendDate: "2023-12-14-20-38",
-    },
-    {
-      sender: {
-        id: 8,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "영화 봤어.",
-      sendDate: "2023-12-14-20-39",
-    },
-    {
-      sender: {
-        id: 9,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "어땠어?",
-      sendDate: "2023-12-14-20-40",
-    },
-    {
-      sender: {
-        id: 10,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "재밌었어.",
-      sendDate: "2023-12-14-20-41",
-    },
-    {
-      sender: {
-        id: 3,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "뭐해?",
-      sendDate: "2023-12-14-20-34",
-    },
-    {
-      sender: {
-        id: 4,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "일하고 있어.",
-      sendDate: "2023-12-14-20-35",
-    },
-    {
-      sender: {
-        id: 5,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "또 얘기할게 있어?",
-      sendDate: "2023-12-14-20-36",
-    },
-    {
-      sender: {
-        id: 6,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "네, 어떤 일이야?",
-      sendDate: "2023-12-14-20-37",
-    },
-    {
-      sender: {
-        id: 7,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "오늘 뭐 했어?",
-      sendDate: "2023-12-14-20-38",
-    },
-    {
-      sender: {
-        id: 8,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "영화 봤어.",
-      sendDate: "2023-12-14-20-39",
-    },
-    {
-      sender: {
-        id: 9,
-        senderId: "1",
-        senderName: "방가온",
-      },
-      message: "어땠어?",
-      sendDate: "2023-12-14-20-40",
-    },
-    {
-      sender: {
-        id: 10,
-        senderId: "2",
-        senderName: "신희성",
-      },
-      message: "재밌었어.",
-      sendDate: "2023-12-14-20-41",
-    },
-  ],
-};
-
-const myData = {
-  id: 1,
-  username: "방가온",
-};
-
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<ChattingCard[]>([]);
   const [roomData, setRoomData] = useState();
+  const [chatData, setChatData] = useState([]);
+  const [myData, setMyData] = useState();
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
 
@@ -235,6 +64,36 @@ const ChattingRoom = () => {
     }
   };
 
+  const getChatList = async () => {
+    try {
+      const response = await axiosInstance.get("/chat/" + roomId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setChatData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  const getMyData = async () => {
+    try {
+      const response = await axiosInstance.get("/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setMyData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
   useEffect(() => {
     scrollInit();
     if (fristScroll) {
@@ -258,6 +117,8 @@ const ChattingRoom = () => {
   useEffect(() => {
     getRoomList();
     getRoomInfo();
+    getChatList();
+    getMyData();
   }, []);
 
   return (
@@ -277,10 +138,10 @@ const ChattingRoom = () => {
               <S.PartnerName>{roomData?.partner.name}</S.PartnerName>
               <S.PartnerType>{roomData?.partner.type} 유형</S.PartnerType>
             </S.PartnerInfo>
-            {chatData.chats.map((chat) => (
+            {chatData.map((chat) => (
               <MessageCard
                 chat={chat}
-                isMine={Number(chat.sender.senderId) === myData.id}
+                isMine={Number(chat?.sender.senderId) === myData.id}
                 partnerType={roomData?.partner.type}
               />
             ))}
