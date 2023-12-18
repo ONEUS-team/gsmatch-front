@@ -22,6 +22,7 @@ interface INoticeData {
   requestType: "STUDY" | "TYPE";
   requestOnly: boolean;
   authorName: string;
+  image: string;
 }
 
 export default function NoticePage() {
@@ -95,6 +96,7 @@ export default function NoticePage() {
               title={data.title}
               content={data.content}
               authorName={data.authorName}
+              image={data.image}
             />
           </S.ListItem>
         ))}

@@ -1,6 +1,7 @@
 import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { useNavigate } from "react-router-dom";
+import DefualtPng from "../../Assets/png/requestCardDefault.png";
 
 interface Props {
   id: number;
@@ -9,6 +10,7 @@ interface Props {
   title: string;
   content: string;
   authorName: string;
+  image: string;
 }
 
 const NoticeItem: React.FC<Props> = ({
@@ -18,6 +20,7 @@ const NoticeItem: React.FC<Props> = ({
   content,
   authorName,
   id,
+  image,
 }) => {
   const navigate = useNavigate();
 
@@ -54,7 +57,13 @@ const NoticeItem: React.FC<Props> = ({
       </S.ListHeader>
       <S.ListTitle>{title}</S.ListTitle>
       <S.ListContent>{content}</S.ListContent>
-      <S.ListImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" />
+      <S.ListImg
+        src={
+          image
+            ? `https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${image}`
+            : DefualtPng
+        }
+      />
     </S.ListItem>
   );
 };
