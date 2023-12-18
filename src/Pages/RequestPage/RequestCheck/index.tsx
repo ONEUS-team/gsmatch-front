@@ -105,7 +105,7 @@ const RequestCheck: React.FC<Props> = ({
       if (response.data.range === 0) navigate(`/request/finish/failed`);
       setRange(response.data.range);
     } catch (error) {
-      toast.error("요청은 3개를 초과할 수 없습니다.", {
+      toast.error("요청을 보낼 수 없습니다.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
