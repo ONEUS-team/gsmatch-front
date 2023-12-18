@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ToastContainer } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const GlobalStyle = createGlobalStyle`
@@ -77,6 +78,7 @@ html, body {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
+    <ToastContainer />
     <App />
     <GlobalStyle />
   </BrowserRouter>

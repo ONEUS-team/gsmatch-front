@@ -9,6 +9,7 @@ import { CharacterType, Grade, RequestType } from "../../../types/utilType";
 import { MyInfo, DetailType } from "../../../types/request";
 import { GradeConvert } from "../../../types/convert";
 import { refresh } from "../../../components/api/refresh";
+import { toast } from "react-toastify";
 
 const gradeConvert: GradeConvert = {
   ONE: "1",
@@ -27,29 +28,6 @@ const majorConvert: Major = {
   IOT: "IOT",
   AI: "AI",
 };
-
-// const defaultDetail = {
-//   id: 0,
-//   title: "",
-//   content: "",
-//   requestType: "" as RequestType,
-//   isOnlyOne: false,
-//   author: {
-//     id: 0,
-//     name: "",
-//     major: "" as unknown as Major,
-//     type: "" as CharacterType,
-//     level: 0,
-//     grade: "" as Grade,
-//   },
-// } as unknown as DetailType;
-
-// const defaultMyInfo = {
-//   id: 0,
-//   username: "",
-//   grade: 0,
-//   type: "",
-// } as unknown as MyInfo;
 
 const RequestDetail = () => {
   const [detailData, setDetailData] = useState<DetailType>();
@@ -140,6 +118,16 @@ const RequestDetail = () => {
       };
 
       await axiosInstance.delete(`/request/${requestId}`, config);
+      toast.success("요청이 삭제되었습니다.", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       navigate("/");
     } catch (error) {
       refresh(navigate, handleDeleteClick);
@@ -219,8 +207,29 @@ const RequestDetail = () => {
       };
 
       const response = await axiosInstance.post(`/room`, { requestId }, config);
+      toast.success("채팅방에 생성되었습니다.", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       navigate("/chat/" + response.data.roomId);
     } catch (error) {
+      toast.warning("이미 채팅방에 생성되었습니다.", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      navigate("/chat");
       refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
