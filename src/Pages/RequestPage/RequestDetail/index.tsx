@@ -76,39 +76,49 @@ const RequestDetail = () => {
 
   const { requestId } = useParams();
 
-  const fetchDetailData = async () => {
+  const fetchMyInfoAndDetailData = async () => {
     try {
-      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+      const authorizationDetail = `Bearer ${localStorage.getItem(
+        "accessToken"
+      )}`;
 
-      const config = {
+      const configDetail = {
         headers: {
-          Authorization: authorization,
+          Authorization: authorizationDetail,
         },
         withCredentials: true,
       };
 
-      const { data } = await axiosInstance.get(`/request/${requestId}`, config);
-      setDetailData(data);
-      setEditTitle(data.title);
-      setEditContent(data.content);
-    } catch (error) {}
-  };
+      const dataDetail = await axiosInstance.get("/user", configDetail);
+      console.log(dataDetail.data);
 
-  const fetchMyInfoData = async () => {
-    try {
-      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+      setMyInfoData(dataDetail.data);
 
-      const config = {
+      const authorizationMyInfo = `Bearer ${localStorage.getItem(
+        "accessToken"
+      )}`;
+
+      const configMyInfo = {
         headers: {
-          Authorization: authorization,
+          Authorization: authorizationMyInfo,
         },
         withCredentials: true,
       };
 
-      const { data } = await axiosInstance.get("/user", config);
-      console.log(data);
+      const dataMyInfo = await axiosInstance.get(
+        `/request/${requestId}`,
+        configMyInfo
+      );
+      setDetailData(dataMyInfo.data);
 
-      setMyInfoData(data);
+      if (dataMyInfo.data?.author.id === dataDetail.data?.id) {
+        setIsMine(true);
+      } else {
+        setIsMine(false);
+      }
+
+      setEditTitle(dataMyInfo.data.title);
+      setEditContent(dataMyInfo.data.content);
     } catch (error) {}
   };
 
@@ -161,15 +171,7 @@ const RequestDetail = () => {
   };
 
   const init = async () => {
-    await fetchMyInfoData();
-    await fetchDetailData();
-
-    console.log(detailData);
-    console.log(myInfoData);
-
-    if (detailData?.author.id === myInfoData?.id) {
-      setIsMine(true);
-    }
+    await fetchMyInfoAndDetailData();
   };
 
   useEffect(() => {
