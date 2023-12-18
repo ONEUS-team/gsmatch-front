@@ -5,6 +5,8 @@ import { Gender, Grade, Major, RequestType } from "../../../types/utilType";
 import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   requestType: RequestType | null;
@@ -26,6 +28,7 @@ const RequestCheck: React.FC<Props> = ({
   requestImg,
 }) => {
   const [isOnlyone, setIsOnlyone] = useState<boolean>(false);
+  const [isDisabled, setIsDIsabled] = useState<boolean>(false);
   const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
@@ -35,6 +38,7 @@ const RequestCheck: React.FC<Props> = ({
   };
 
   const request = async () => {
+    setIsDIsabled(true);
     const body = new FormData();
 
     body.append(
@@ -73,7 +77,8 @@ const RequestCheck: React.FC<Props> = ({
       navigate(`/request/finish/succeed`);
     } catch (error) {
       refresh(navigate, request);
-      navigate(`/request/finish/failed`);
+    } finally {
+      setIsDIsabled(false);
     }
   };
 
@@ -97,9 +102,22 @@ const RequestCheck: React.FC<Props> = ({
     };
     try {
       const response = await axiosInstance.post("/request/range", body, config);
+      if (response.data.range === 0) navigate(`/request/finish/failed`);
       setRange(response.data.range);
     } catch (error) {
-      refresh(navigate, requestRange);
+      toast.error("요청은 3개를 초과할 수 없다.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setTimeout(() => {
+        navigate("/request");
+      }, 1500);
     }
   };
 
@@ -119,16 +137,21 @@ const RequestCheck: React.FC<Props> = ({
         요청을 보낼 수 있어요!
       </S.MainText>
       <S.LinkTextContainer>
-        <S.LinkTextItem id="isOnlyone" onClick={handleBtnClick}>
+        <S.LinkTextItem
+          disabled={isDisabled}
+          id="isOnlyone"
+          onClick={handleBtnClick}
+        >
           랜덤으로 한명에게만 보내기
         </S.LinkTextItem>
         <I.CheckArrowIcon />
       </S.LinkTextContainer>
       <S.ExplainText>*특수 요청으로 보내집니다</S.ExplainText>
-      <S.Button onClick={handleBtnClick}>
+      <S.Button disabled={isDisabled} onClick={handleBtnClick}>
         보내기
         <I.ArrowButtonIcon />
       </S.Button>
+      <ToastContainer />
     </S.Container>
   );
 };
