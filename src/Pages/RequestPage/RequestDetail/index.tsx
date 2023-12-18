@@ -203,6 +203,25 @@ const RequestDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleChat = async (requestId: number) => {
+    try {
+      const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+
+      const config = {
+        headers: {
+          Authorization: authorization,
+        },
+        withCredentials: true,
+      };
+
+      await axiosInstance.post(`/room`, { requestId }, config);
+    } catch (error) {
+      refresh(navigate, null);
+    } finally {
+      setIsDIsabled(false);
+    }
+  };
+
   if (state === "edit")
     return (
       <S.Container>
@@ -298,7 +317,12 @@ const RequestDetail = () => {
                 삭제하기
               </S.Button>
             ) : (
-              <S.Button>
+              <S.Button
+                disabled={isDisabled}
+                onClick={() => {
+                  handleChat(detailData.responseId);
+                }}
+              >
                 답변하기
                 <I.ArrowButtonIcon />
               </S.Button>
