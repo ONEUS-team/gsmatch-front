@@ -14,11 +14,10 @@ interface Props {
 }
 
 const PartnerMessageCard: React.FC<Props> = ({ chat, partnerType }) => {
-  const src = partnerType;
   return (
     <S.LineContainer>
       <S.MessageContainer>
-        <S.TypeImg src={src} />
+        <S.TypeImg src={`../../src/Assets/png/${partnerType}.png`} />
         <S.Message>{chat.message}</S.Message>
         <S.TimeCard>오후 9 : 21</S.TimeCard>
       </S.MessageContainer>

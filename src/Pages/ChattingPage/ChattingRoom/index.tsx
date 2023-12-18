@@ -9,7 +9,7 @@ import * as S from "./style";
 import MessageCard from "../../../components/MessageCard";
 import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChattingCard } from "../../../types/chattingCard";
 
 const chatData = {
@@ -185,28 +185,19 @@ const myData = {
   username: "방가온",
 };
 
-const roomData = {
-  id: 131,
-  roomName: "hihi",
-  partner: {
-    id: 1110,
-    name: "시니성",
-    major: "FRONT",
-    grade: "ONE",
-    type: "PORORO",
-  },
-};
-
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<ChattingCard[]>([]);
+  const [roomData, setRoomData] = useState();
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
 
   const [fristScroll, setFirstScroll] = useState(true);
+
+  const { roomId } = useParams();
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
@@ -224,6 +215,21 @@ const ChattingRoom = () => {
       });
 
       setData(response.data);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
+
+  const getRoomInfo = async () => {
+    try {
+      const response = await axiosInstance.get("/room/" + roomId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      setRoomData(response.data);
     } catch (error) {
       refresh(navigate, null);
     }
@@ -251,7 +257,8 @@ const ChattingRoom = () => {
 
   useEffect(() => {
     getRoomList();
-  });
+    getRoomInfo();
+  }, []);
 
   return (
     <>
@@ -259,20 +266,22 @@ const ChattingRoom = () => {
         <ChattingCardList cardList={data} />
         <S.ChattingRoom>
           <ChattingHeader
-            roomName={roomData.roomName}
+            roomName={roomData?.roomName}
             setIsModal={setIsModal}
           />
           <S.MessageDisplayBox ref={MessageBoxRef}>
             <S.PartnerInfo>
-              <S.PartnerTypeImg src="" />
-              <S.PartnerName>홍길동</S.PartnerName>s
-              <S.PartnerType>뽀로로 유형</S.PartnerType>
+              <S.PartnerTypeImg
+                src={`../../src/Assets/png/${roomData?.partner.type}.png`}
+              />
+              <S.PartnerName>{roomData?.partner.name}</S.PartnerName>
+              <S.PartnerType>{roomData?.partner.type} 유형</S.PartnerType>
             </S.PartnerInfo>
             {chatData.chats.map((chat) => (
               <MessageCard
                 chat={chat}
                 isMine={Number(chat.sender.senderId) === myData.id}
-                partnerType={roomData.partner.type}
+                partnerType={roomData?.partner.type}
               />
             ))}
           </S.MessageDisplayBox>
