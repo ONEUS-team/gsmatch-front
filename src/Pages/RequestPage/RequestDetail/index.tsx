@@ -8,6 +8,7 @@ import axiosInstance from "../../../libs/api/axiosInstance";
 import { CharacterType, Grade, RequestType } from "../../../types/utilType";
 import { MyInfo, DetailType } from "../../../types/request";
 import { GradeConvert } from "../../../types/convert";
+import { refresh } from "../../../components/api/refresh";
 
 const gradeConvert: GradeConvert = {
   ONE: "1",
@@ -59,6 +60,7 @@ const RequestDetail = () => {
   const [editTitle, setEditTitle] = useState<string>("");
   const [editContent, setEditContent] = useState<string>("");
   const [imgIndex, setImgIndex] = useState<number>(0);
+  const [isDisabled, setIsDIsabled] = useState<boolean>(false);
   const imgList = detailData?.imageNames?.map((img) => img);
   const navigate = useNavigate();
 
@@ -71,6 +73,7 @@ const RequestDetail = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
   const { requestId } = useParams();
 
   const fetchDetailData = async () => {
@@ -112,6 +115,7 @@ const RequestDetail = () => {
   };
 
   const handleDeleteClick = async () => {
+    setIsDIsabled(true);
     try {
       const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
 
@@ -126,10 +130,14 @@ const RequestDetail = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+      refresh(navigate, handleDeleteClick);
+    } finally {
+      setIsDIsabled(false);
     }
   };
 
   const handleEditCompletetClick = async () => {
+    setIsDIsabled(true);
     try {
       const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
 
@@ -149,7 +157,9 @@ const RequestDetail = () => {
       setStaete("view");
       init();
     } catch (error) {
-      console.log(error);
+      refresh(navigate, handleEditCompletetClick);
+    } finally {
+      setIsDIsabled(false);
     }
   };
 
@@ -180,7 +190,10 @@ const RequestDetail = () => {
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
           />
-          <S.EditCompleteButton onClick={handleEditCompletetClick}>
+          <S.EditCompleteButton
+            disabled={isDisabled}
+            onClick={handleEditCompletetClick}
+          >
             수정
             <I.ArrowButtonIcon />
           </S.EditCompleteButton>
@@ -194,10 +207,27 @@ const RequestDetail = () => {
     return (
       <S.Container>
         {detailData?.imageNames?.length > 0 ? (
-          <S.ItemImg
-            src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
-            alt="요청 이미지"
-          />
+          <S.ImgContainer>
+            <S.ItemImg
+              src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
+              alt="요청 이미지"
+            />
+            <S.LeftButton
+              onClick={() => {
+                imgIndex > 0 && setImgIndex((prev) => prev - 1);
+              }}
+            >
+              <I.ImageLeftButton />
+            </S.LeftButton>
+            <S.RightButton
+              onClick={() => {
+                imgIndex < imgList.length - 1 &&
+                  setImgIndex((prev) => prev + 1);
+              }}
+            >
+              <I.ImageRightButton />
+            </S.RightButton>
+          </S.ImgContainer>
         ) : (
           <I.DefaultImg />
         )}
@@ -229,7 +259,9 @@ const RequestDetail = () => {
           <S.RequestContent>{detailData!.content}</S.RequestContent>
         </S.RequestBox>
         {isMine ? (
-          <S.Button onClick={handleDeleteClick}>삭제하기</S.Button>
+          <S.Button disabled={isDisabled} onClick={handleDeleteClick}>
+            삭제하기
+          </S.Button>
         ) : (
           <S.Button>
             답변하기
