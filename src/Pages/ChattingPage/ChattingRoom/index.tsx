@@ -174,6 +174,7 @@ const ChattingRoom = () => {
         token: `Bearer ${localStorage.getItem("accessToken")}`,
       })
     );
+    setInputValue("");
   }
 
   return (

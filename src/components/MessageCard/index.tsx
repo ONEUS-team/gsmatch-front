@@ -27,9 +27,9 @@ const MessageCard: React.FC<Props> = ({
     <MyMessageCard
       chat={chat}
       sendDate={
-        sendDate.split("-")[1].toString() +
+        sendDate.split("T")[1].slice(0, 5).split(":")[0] +
         "시 " +
-        sendDate.split("-")[2].slice(0, 2).toString() +
+        sendDate.split("T")[1].slice(0, 5).split(":")[0] +
         "분"
       }
     />
@@ -38,9 +38,9 @@ const MessageCard: React.FC<Props> = ({
       chat={chat}
       partnerType={partnerType}
       sendDate={
-        sendDate.split("-")[1].toString() +
+        sendDate.split("T")[1].slice(0, 5).split(":")[0] +
         "시 " +
-        sendDate.split("-")[2].slice(0, 2).toString() +
+        sendDate.split("T")[1].slice(0, 5).split(":")[0] +
         "분"
       }
     />
