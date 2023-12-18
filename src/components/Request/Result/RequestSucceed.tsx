@@ -7,6 +7,7 @@ const RequestSucceed = () => {
 
   return (
     <S.Container>
+      <S.Img src="../../src/Assets/png/succeedimg.png" />
       <S.TextItem>요청이 성공적으로 보내졌어요! </S.TextItem>
       <S.SucceedButton onClick={() => navigate("/")}>
         나가기

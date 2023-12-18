@@ -13,6 +13,10 @@ export const IconContainer = styled.div`
   margin-top: 11.88rem;
 `;
 
+export const Img = styled.img`
+  margin-top: 15.81rem;
+`;
+
 export const TextItem = styled.h1`
   margin-top: 2rem;
   color: #eeeeee;
