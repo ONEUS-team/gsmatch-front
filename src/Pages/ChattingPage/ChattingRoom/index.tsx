@@ -219,6 +219,7 @@ const ChattingRoom = () => {
           id={Number(roomId)}
           setIsModal={setIsModal}
           roomName={data[0].roomName}
+          roomId={roomId}
         />
       )}
     </>

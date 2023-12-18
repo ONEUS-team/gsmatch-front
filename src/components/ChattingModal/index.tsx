@@ -1,21 +1,63 @@
 import { useState } from "react";
 import * as S from "./style";
+import axiosInstance from "../../libs/api/axiosInstance";
+import { refresh } from "../api/refresh";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 interface Props {
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
   id: number;
   roomName: string;
+  roomId: number;
 }
 
-const ChattingModal: React.FC<Props> = ({ setIsModal, id, roomName }) => {
+const ChattingModal: React.FC<Props> = ({
+  setIsModal,
+  id,
+  roomName,
+  roomId,
+}) => {
   const [state, setState] = useState<"first" | "second">("first");
+  const navigate = useNavigate();
+
+  const deleteRoom = async () => {
+    if (roomId == null) return;
+
+    try {
+      await axios.delete("http://localhost:8080/room/" + roomId, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      });
+
+      toast.warning("채팅방이 삭제되었습니다.", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      navigate("/chat");
+      setIsModal(false);
+    } catch (error) {
+      refresh(navigate, null);
+    }
+  };
 
   const handleBackgroundClick = () => setIsModal(false);
 
   const handleCancelClick = () => setIsModal(false);
 
-  const handleExitClick = () => setState("second");
-
+  const handleExitClick = () => {
+    deleteRoom();
+    setState("second");
+  };
   const handleFinalClick = () => {};
 
   const handleFixClick = () => {
