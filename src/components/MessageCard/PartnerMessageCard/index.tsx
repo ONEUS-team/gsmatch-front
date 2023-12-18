@@ -11,15 +11,20 @@ interface Props {
     sendDate: string;
   };
   partnerType: string;
+  sendDate: string;
 }
 
-const PartnerMessageCard: React.FC<Props> = ({ chat, partnerType }) => {
+const PartnerMessageCard: React.FC<Props> = ({
+  chat,
+  partnerType,
+  sendDate,
+}) => {
   return (
     <S.LineContainer>
       <S.MessageContainer>
         <S.TypeImg src={`../../src/Assets/png/${partnerType}.png`} />
         <S.Message>{chat.message}</S.Message>
-        <S.TimeCard>오후 9 : 21</S.TimeCard>
+        <S.TimeCard>{sendDate}</S.TimeCard>
       </S.MessageContainer>
     </S.LineContainer>
   );

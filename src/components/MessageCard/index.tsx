@@ -14,13 +14,36 @@ interface Props {
   };
   isMine: boolean;
   partnerType: string;
+  sendDate: string;
 }
 
-const MessageCard: React.FC<Props> = ({ chat, isMine, partnerType }) => {
+const MessageCard: React.FC<Props> = ({
+  chat,
+  isMine,
+  partnerType,
+  sendDate,
+}) => {
   return isMine ? (
-    <MyMessageCard chat={chat} />
+    <MyMessageCard
+      chat={chat}
+      sendDate={
+        sendDate.split("-")[1].toString() +
+        "시 " +
+        sendDate.split("-")[2].slice(0, 2).toString() +
+        "분"
+      }
+    />
   ) : (
-    <PartnerMessageCard chat={chat} partnerType={partnerType} />
+    <PartnerMessageCard
+      chat={chat}
+      partnerType={partnerType}
+      sendDate={
+        sendDate.split("-")[1].toString() +
+        "시 " +
+        sendDate.split("-")[2].slice(0, 2).toString() +
+        "분"
+      }
+    />
   );
 };
 

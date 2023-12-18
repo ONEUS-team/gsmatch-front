@@ -1,19 +1,20 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import * as S from "./style";
 import SendIcon from "../../Assets/svg/SendIcon";
 
 interface Props {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  handleSendSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const ChattingInput: React.FC<Props> = ({ inputValue, setInputValue }) => {
+const ChattingInput: React.FC<Props> = ({
+  inputValue,
+  setInputValue,
+  handleSendSubmit,
+}) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
-
-  const handleSendSubmit = () => {
-    // 요청 보내기
-  };
 
   return (
     <S.ChattingInput>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   ChattingCardList,
   ChattingInput,
@@ -11,6 +11,8 @@ import axiosInstance from "../../../libs/api/axiosInstance";
 import { refresh } from "../../../components/api/refresh";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChattingCard } from "../../../types/chattingCard";
+import { Stomp } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -27,6 +29,7 @@ const ChattingRoom = () => {
   const [fristScroll, setFirstScroll] = useState(true);
 
   const { roomId } = useParams();
+  const client = useRef({});
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
@@ -94,6 +97,38 @@ const ChattingRoom = () => {
     }
   };
 
+  function connect() {
+    const socket = new SockJS(
+      "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/ws-stomp"
+    );
+    client.current = Stomp.over(socket);
+
+    client.current.connect({}, function (frame) {
+      console.log("Connected: " + frame);
+
+      client.current.subscribe("/room/" + roomId, function (chatMessage) {
+        const message = JSON.parse(chatMessage.body);
+        console.log(message);
+        setChatData((prev) => [
+          ...prev,
+          {
+            id: message.chatId,
+            message: message.message,
+            sendDate: message.sendDate,
+            sender: {
+              senderId: message.sender.senderId,
+              senderName: message.sender.senderName,
+            },
+          },
+        ]);
+      });
+    });
+  }
+
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
   useEffect(() => {
     scrollInit();
     if (fristScroll) {
@@ -112,7 +147,7 @@ const ChattingRoom = () => {
       }
       scrollInit();
     }
-  }, []);
+  }, [chatData]);
 
   useEffect(() => {
     getRoomList();
@@ -120,6 +155,26 @@ const ChattingRoom = () => {
     getChatList();
     getMyData();
   }, []);
+
+  useEffect(() => {
+    connect();
+
+    return () => {
+      disconnect();
+    };
+  }, []);
+
+  function handleSendSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    client.current.send(
+      "/send/" + roomId,
+      {},
+      JSON.stringify({
+        message: inputValue,
+        token: `Bearer ${localStorage.getItem("accessToken")}`,
+      })
+    );
+  }
 
   return (
     <>
@@ -143,12 +198,14 @@ const ChattingRoom = () => {
                 chat={chat}
                 isMine={Number(chat?.sender.senderId) === myData.id}
                 partnerType={roomData?.partner.type}
+                sendDate={chat?.sendDate}
               />
             ))}
           </S.MessageDisplayBox>
           <ChattingInput
             inputValue={inputValue}
             setInputValue={setInputValue}
+            handleSendSubmit={handleSendSubmit}
           />
         </S.ChattingRoom>
       </S.Container>
