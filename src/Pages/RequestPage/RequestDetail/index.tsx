@@ -89,9 +89,9 @@ const RequestDetail = () => {
         withCredentials: true,
       };
 
-      const dataDetail = await axiosInstance.get("/user", configDetail);
+      const dataMyInfo = await axiosInstance.get("/user", configDetail);
 
-      setMyInfoData(dataDetail.data);
+      setMyInfoData(dataMyInfo.data);
 
       const authorizationMyInfo = `Bearer ${localStorage.getItem(
         "accessToken"
@@ -104,15 +104,15 @@ const RequestDetail = () => {
         withCredentials: true,
       };
 
-      const dataMyInfo = await axiosInstance.get(
+      const dataDetail = await axiosInstance.get(
         `/response/${requestId}`,
         configMyInfo
       );
-      setDetailData(dataMyInfo.data);
+      setDetailData(dataDetail.data);
 
-      console.log(dataMyInfo.data);
+      console.log(dataDetail.data);
 
-      if (dataMyInfo.data?.author.id === dataDetail.data?.id) {
+      if (dataDetail.data?.author.id === dataMyInfo.data?.id) {
         setIsMine(true);
       } else {
         setIsMine(false);
@@ -172,6 +172,8 @@ const RequestDetail = () => {
   };
 
   const handleLikeClick = async (responseId: number) => {
+    if (responseId == null) return;
+
     setIsDIsabled(true);
     try {
       const authorization = `Bearer ${localStorage.getItem("accessToken")}`;
