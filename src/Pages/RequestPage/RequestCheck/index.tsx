@@ -28,7 +28,7 @@ const RequestCheck: React.FC<Props> = ({
   requestImg,
 }) => {
   const [isOnlyone, setIsOnlyone] = useState<boolean>(false);
-  const [isDisabled, setIsDIsabled] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const RequestCheck: React.FC<Props> = ({
   };
 
   const request = async () => {
-    setIsDIsabled(true);
+    setIsDisabled(true);
     const body = new FormData();
 
     body.append(
@@ -88,7 +88,7 @@ const RequestCheck: React.FC<Props> = ({
     } catch (error) {
       refresh(navigate, request);
     } finally {
-      setIsDIsabled(false);
+      setIsDisabled(false);
     }
   };
 
