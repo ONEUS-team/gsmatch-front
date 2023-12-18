@@ -14,12 +14,33 @@ import { ChattingCard } from "../../../types/chattingCard";
 import { Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
+interface IChatData {
+  id: number;
+  message: string;
+  sendDate: string;
+  sender: {
+    senderId: number;
+    senderName: string;
+  };
+}
+
+interface IRoomData {
+  id: number;
+  roomName: string;
+  partner: {
+    id: number;
+    name: string;
+    major: string;
+    type: string;
+  };
+}
+
 const ChattingRoom = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<ChattingCard[]>([]);
-  const [roomData, setRoomData] = useState({});
-  const [chatData, setChatData] = useState([]);
+  const [roomData, setRoomData] = useState<IRoomData>({});
+  const [chatData, setChatData] = useState<IChatData[]>([]);
   const [myData, setMyData] = useState();
 
   const MessageBoxRef = useRef<HTMLDivElement>(null);
@@ -29,7 +50,7 @@ const ChattingRoom = () => {
   const [fristScroll, setFirstScroll] = useState(true);
 
   const { roomId } = useParams();
-  const client = useRef({});
+  const client = useRef<Stomp.Client>({});
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
@@ -103,12 +124,11 @@ const ChattingRoom = () => {
     );
     client.current = Stomp.over(socket);
 
-    client.current.connect({}, function (frame) {
+    client.current.connect({}, function (frame: string) {
       console.log("Connected: " + frame);
 
-      client.current.subscribe("/room/" + roomId, function (chatMessage) {
+      client.current.subscribe("/room/" + roomId, function (chatMessage: any) {
         const message = JSON.parse(chatMessage.body);
-        console.log(message);
         setChatData((prev) => [
           ...prev,
           {
