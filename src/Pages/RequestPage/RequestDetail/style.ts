@@ -16,6 +16,38 @@ export const ItemImg = styled.img`
   color: white;
 `;
 
+export const ImgContainer = styled.div`
+  position: relative;
+`;
+
+export const LeftButton = styled.button`
+  border: none;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+`;
+
+export const RightButton = styled.button`
+  border: none;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+`;
+
 export const MiddleBox = styled.div`
   position: relative;
   display: flex;
