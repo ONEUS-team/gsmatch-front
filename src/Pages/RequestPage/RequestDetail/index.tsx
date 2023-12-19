@@ -10,6 +10,11 @@ import { GradeConvert } from "../../../types/convert";
 import { refresh } from "../../../components/api/refresh";
 import { toast } from "react-toastify";
 
+import PORORO from "../../../Assets/png/pororo.png";
+import POBI from "../../../Assets/png/pobi.png";
+import LUPI from "../../../Assets/png/LUPI.png";
+import EDI from "../../../Assets/png/edi.png";
+
 const gradeConvert: GradeConvert = {
   ONE: "1",
   TWO: "2",
@@ -41,7 +46,16 @@ const RequestDetail = () => {
   const imgList = detailData?.imageNames?.map((img) => img);
   const navigate = useNavigate();
 
-  const typeImg = `../../src/Assets/png/${myInfoData?.type}.png`;
+  const profileSrc =
+    myInfoData?.type == "PORORO"
+      ? PORORO
+      : myInfoData?.type == "POBI"
+      ? POBI
+      : myInfoData?.type == "LUPI"
+      ? LUPI
+      : myInfoData?.type == "EDI"
+      ? EDI
+      : "";
 
   const handleEditClick = () => {
     setStaete("edit");
@@ -295,7 +309,7 @@ const RequestDetail = () => {
             )}
             <S.MiddleBox>
               <S.UserBox>
-                <S.UserImg src={typeImg} alt="유저 프로필" />
+                <S.UserImg src={profileSrc} alt="유저 프로필" />
                 <S.UserInfoBox>
                   <S.UserName>{detailData!.author.name}</S.UserName>
                   <S.UserGradeMajor>
