@@ -8,6 +8,14 @@ import axiosInstance from "../../libs/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { refresh } from "../../components/api/refresh";
 
+import Message from "../../Assets/png/Message.png";
+import Arrow from "../../Assets/png/Arrow.png";
+
+import PORORO from "../../Assets/png/pororo.png";
+import POBI from "../../Assets/png/pobi.png";
+import LUPI from "../../Assets/png/LUPI.png";
+import EDI from "../../Assets/png/edi.png";
+
 const typeList: Type = {
   PORORO: "뽀로로",
   LUPI: "루피",
@@ -40,7 +48,16 @@ const ProfilePage = () => {
       : null;
   const gender = userInfo.gender === "MALE" ? "남자" : "여자";
   const type = typeList[userInfo.type! as keyof Type];
-  const profileSrc = `src\\Assets\\png\\${userInfo.type}.png`;
+  const profileSrc =
+    userInfo.type == "PORORO"
+      ? PORORO
+      : userInfo.type == "POBI"
+      ? POBI
+      : userInfo.type == "LUPI"
+      ? LUPI
+      : userInfo.type == "EDI"
+      ? EDI
+      : "";
 
   const naviagte = useNavigate();
 
@@ -94,7 +111,7 @@ const ProfilePage = () => {
       </S.ProfileBox>
       <S.BannerContainer>
         <S.BannerItem>
-          <S.BannerImg src="src\Assets\png\Message.png" alt="배너 이미지" />
+          <S.BannerImg src={Message} alt="배너 이미지" />
           <S.TextBox>
             <S.RequestBannerText>
               원하는 사람들과
@@ -109,7 +126,7 @@ const ProfilePage = () => {
         </S.BannerItem>
 
         <S.BannerItem>
-          <S.BannerImg src="src\Assets\png\Arrow.png" alt="배너 이미지" />
+          <S.BannerImg src={Arrow} alt="배너 이미지" />
           <S.TextBox>
             <S.TypeBannerText>
               내 유형,
