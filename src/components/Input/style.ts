@@ -8,6 +8,10 @@ export const Container = styled.div`
   padding-top: 0.75rem;
   border-radius: 10px;
   padding: 0.75rem 1.25rem 0.75rem;
+
+  @media (max-width: 720px) {
+    width: 20.9375rem;
+  }
 `;
 
 export const InputText = styled.p<{ isMatch: boolean | undefined }>`

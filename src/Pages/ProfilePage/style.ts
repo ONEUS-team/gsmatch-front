@@ -70,6 +70,12 @@ export const BannerContainer = styled.div`
   display: flex;
   column-gap: 0.75rem;
   width: 50.125rem;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+    row-gap: 0.75rem;
+    width: fit-content;
+  }
 `;
 
 export const BannerItem = styled.div`
@@ -81,6 +87,11 @@ export const BannerItem = styled.div`
   column-gap: 1.75rem;
   background-color: #292424;
   border-radius: 1.25rem;
+
+  @media (max-width: 720px) {
+    width: 23rem;
+    padding-left: 1.5rem;
+  }
 `;
 
 export const BannerImg = styled.img`

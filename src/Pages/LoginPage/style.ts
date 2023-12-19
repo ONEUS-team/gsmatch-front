@@ -61,6 +61,7 @@ export const Button = styled.button`
   color: #000;
   font-size: 18px;
   font-weight: 700;
+  line-height: 120%;
   cursor: pointer;
 `;
 

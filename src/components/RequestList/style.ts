@@ -6,6 +6,10 @@ export const Container = styled.div`
   padding: 2rem;
   background-color: #292424;
   border-radius: 1.25rem;
+
+  @media (max-width: 720px) {
+    width: 23rem;
+  }
 `;
 
 export const Header = styled.header`
@@ -47,8 +51,9 @@ export const EmptyContiner = styled.div`
 
 export const EmptyBox = styled.div`
   display: flex;
+  padding-top: 1rem;
   flex-direction: column;
-  row-gap: 1.25rem;
+  row-gap: 1rem;
   align-items: center;
 
   svg {
