@@ -192,9 +192,7 @@ export default function SurveyPage() {
 
       navigate("/");
     } catch (error) {
-      refresh(navigate, () => {
-        sendType(type);
-      });
+      refresh(navigate, null);
     }
   };
 

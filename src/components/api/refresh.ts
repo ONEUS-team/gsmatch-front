@@ -3,7 +3,8 @@ import { NavigateFunction } from "react-router-dom";
 
 export const refresh = (
   navigate: NavigateFunction,
-  callBack: null | (() => void)
+  callBack: null
+  // callBack: null | (() => void)
 ) => {
   axios
     .get(
@@ -21,7 +22,8 @@ export const refresh = (
         "accessToken",
         response.headers.authorization.replace("Bearer ", "")
       );
-      if (callBack != null) callBack();
+      // if (callBack != null)  callBack();
+      return callBack;
     })
     .catch(() => {
       localStorage.clear();

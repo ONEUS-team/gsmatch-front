@@ -71,7 +71,7 @@ const ProfilePage = () => {
 
       setUserInfo(response.data);
     } catch (error) {
-      refresh(naviagte, sendUserRequest);
+      refresh(naviagte, null);
     }
   };
 
