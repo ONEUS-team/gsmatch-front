@@ -29,17 +29,16 @@ const RequestCheck: React.FC<Props> = ({
   requestContent,
   requestImg,
 }) => {
-  const [isOnlyone, setIsOnlyone] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
   const handleBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsOnlyone(e.currentTarget?.id === "isOnlyone" ? true : false);
-    await request();
+    alert(e.currentTarget?.id);
+    await request(e.currentTarget?.id == "isOnlyone" ? true : false);
   };
 
-  const request = async () => {
+  const request = async (isOnlyone: boolean) => {
     setIsDisabled(true);
     const body = new FormData();
 
@@ -60,6 +59,8 @@ const RequestCheck: React.FC<Props> = ({
         { type: "application/json" }
       )
     );
+
+    alert(isOnlyone);
 
     requestImg.forEach((img) => {
       body.append("images", img.imgFile);
