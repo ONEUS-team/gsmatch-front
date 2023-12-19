@@ -34,7 +34,6 @@ const RequestCheck: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const handleBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    alert(e.currentTarget?.id);
     await request(e.currentTarget?.id == "isOnlyone" ? true : false);
   };
 
@@ -59,8 +58,6 @@ const RequestCheck: React.FC<Props> = ({
         { type: "application/json" }
       )
     );
-
-    alert(isOnlyone);
 
     requestImg.forEach((img) => {
       body.append("images", img.imgFile);
