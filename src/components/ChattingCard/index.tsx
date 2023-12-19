@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { ChattingCard } from "../../types/chattingCard";
 import { GradeConvert, TypeConvert } from "../../types/convert";
 
+import PORORO from "../../Assets/png/pororo.png";
+import POBI from "../../Assets/png/pobi.png";
+import LUPI from "../../Assets/png/LUPI.png";
+import EDI from "../../Assets/png/edi.png";
+
 const gradeConvert: GradeConvert = {
   ONE: "1",
   TWO: "2",
@@ -29,6 +34,17 @@ const ChattingCard: React.FC<Props> = ({ card }) => {
   const name = partner.name;
   const grade = gradeConvert[partner.grade as keyof GradeConvert];
   const type = typeConvert[partner.type as keyof TypeConvert];
+
+  const profileSrc =
+    partner.type == "PORORO"
+      ? PORORO
+      : partner.type == "POBI"
+      ? POBI
+      : partner.type == "LUPI"
+      ? LUPI
+      : partner.type == "EDI"
+      ? EDI
+      : "";
 
   const handleCardClick = () => navigate(`/chat/${card.id}`);
 
@@ -56,10 +72,7 @@ const ChattingCard: React.FC<Props> = ({ card }) => {
   return (
     <S.Card onClick={handleCardClick}>
       <S.InnerCard>
-        <S.PartnerImg
-          src={`../../src/Assets/png/${card?.partner.type}.png`}
-          alt="프로필 이미지"
-        />
+        <S.PartnerImg src={profileSrc} alt="프로필 이미지" />
         <S.ChatInfoBox>
           <S.TopBox>
             <S.RoomName>{card.roomName}</S.RoomName>

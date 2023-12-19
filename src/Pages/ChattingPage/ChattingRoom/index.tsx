@@ -14,6 +14,11 @@ import { ChattingCard } from "../../../types/chattingCard";
 import * as Stomp from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
+import PORORO from "../../../Assets/png/pororo.png";
+import POBI from "../../../Assets/png/pobi.png";
+import LUPI from "../../../Assets/png/LUPI.png";
+import EDI from "../../../Assets/png/edi.png";
+
 export interface IChatData {
   id: number;
   message: string;
@@ -71,6 +76,17 @@ const ChattingRoom = () => {
 
   const { roomId } = useParams();
   const client = useRef<Stomp.Client | any>();
+
+  const profileSrc =
+    roomData?.partner?.type == "PORORO"
+      ? PORORO
+      : roomData?.partner?.type == "POBI"
+      ? POBI
+      : roomData?.partner?.type == "LUPI"
+      ? LUPI
+      : roomData?.partner?.type == "EDI"
+      ? EDI
+      : "";
 
   const scrollInit = () => {
     if (!MessageBoxRef.current) return;
@@ -232,9 +248,7 @@ const ChattingRoom = () => {
           />
           <S.MessageDisplayBox ref={MessageBoxRef}>
             <S.PartnerInfo>
-              <S.PartnerTypeImg
-                src={`../../src/Assets/png/${roomData?.partner?.type}.png`}
-              />
+              <S.PartnerTypeImg src={profileSrc} />
               <S.PartnerName>{roomData?.partner?.name}</S.PartnerName>
               <S.PartnerType>{roomData?.partner?.type} 유형</S.PartnerType>
             </S.PartnerInfo>
