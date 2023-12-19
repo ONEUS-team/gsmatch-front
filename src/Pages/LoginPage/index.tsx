@@ -3,12 +3,12 @@ import * as S from "./style";
 import * as I from "../../Assets/svg/index";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../libs/api/axiosInstance";
+import { BlindInput, Input } from "../../components";
 
 export default function LoginPage() {
   const [nameValue, setNameValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [isHide, setIsHide] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,10 +26,6 @@ export default function LoginPage() {
     setIsDisabled(false);
   };
 
-  const toggleIsHide = () => {
-    setIsHide(!isHide);
-  };
-
   const login = async (body: { username: string; password: string }) => {
     try {
       const { headers } = await axiosInstance.post("/api/auth/login", body);
@@ -39,7 +35,9 @@ export default function LoginPage() {
       localStorage.setItem("refreshToken", refreshToken);
 
       navigate("/");
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   };
 
   return (
@@ -48,25 +46,21 @@ export default function LoginPage() {
         <I.HeaderLogo />
       </S.LogoContainer>
       <S.FormContainer onSubmit={loginFormSubmit}>
-        <S.InputContainer>
-          <S.InputText>이름</S.InputText>
-          <S.InputItem //
-            type="name"
-            value={nameValue}
-            onChange={changeName}
-          />
-        </S.InputContainer>
-        <S.InputContainer>
-          <S.InputText>비밀번호</S.InputText>
-          <S.InputItem
-            type={isHide ? "password" : "text"}
-            value={passwordValue}
-            onChange={changePassword}
-          />
-          <S.PasswordToggleButton onClick={toggleIsHide}>
-            {isHide ? <I.PasswordBlindIcon /> : <I.PasswordShowIcon />}
-          </S.PasswordToggleButton>
-        </S.InputContainer>
+        <Input
+          value={nameValue}
+          type="name"
+          changeFunction={changeName}
+          id="name"
+        >
+          이름
+        </Input>
+        <BlindInput
+          value={passwordValue}
+          id="password"
+          changeFunction={changePassword}
+        >
+          비밀번호
+        </BlindInput>
         <S.Button disabled={isDisabled}>로그인</S.Button>
       </S.FormContainer>
       <S.SignupContainer>
