@@ -26,7 +26,7 @@ export const Input = styled.input`
   font-weight: 500;
   line-height: 150%;
   background-color: rgba(0, 0, 0, 0);
-
+  justify-content: center;
   &:focus {
     outline: none;
   }
