@@ -3,6 +3,9 @@ import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { RequestType } from "../../../types/utilType";
 
+import Heart from "../../../Assets/png/Heart.png";
+import Hat from "../../../Assets/png/Hat.png";
+
 interface Props {
   requestType: RequestType | null;
   setRequestType: React.Dispatch<React.SetStateAction<RequestType | null>>;
@@ -30,7 +33,7 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
       <S.SelectForm>
         <S.SelectItem isSelect={requestType === "TYPE" ? true : false}>
           <S.Icon
-            src="..\..\src\Assets\png\Heart.png"
+            src={Heart}
             alt="유형사진"
             id="TYPE"
             onClick={handleRequestClick}
@@ -47,7 +50,7 @@ const RequestSelect: React.FC<Props> = ({ requestType, setRequestType }) => {
         </S.SelectItem>
         <S.SelectItem isSelect={requestType === "STUDY" ? true : false}>
           <S.Icon
-            src="..\..\src\Assets\png\Hat.png"
+            src={Hat}
             alt="전공사진"
             id="STUDY"
             onClick={handleRequestClick}

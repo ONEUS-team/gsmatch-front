@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Message from "../../../Assets/png/Message.png";
+
 interface Props {
   requestType: RequestType | null;
   requestGender: Gender[];
@@ -137,7 +139,7 @@ const RequestCheck: React.FC<Props> = ({
   return (
     <S.Container>
       <S.MessegeIconContainer>
-        <S.IconImg src="..\src\Assets\png\Message.png" alt="메시지 이미지" />
+        <S.IconImg src={Message} alt="메시지 이미지" />
       </S.MessegeIconContainer>
       <S.MainText>
         {range}명의 사람들에게
