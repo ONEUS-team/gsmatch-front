@@ -129,7 +129,7 @@ const RequestDetail = () => {
       });
       navigate("/");
     } catch (error) {
-      refresh(navigate, handleDeleteClick);
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }
@@ -156,7 +156,7 @@ const RequestDetail = () => {
       setStaete("view");
       init();
     } catch (error) {
-      refresh(navigate, handleEditCompletetClick);
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }

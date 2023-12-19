@@ -86,7 +86,7 @@ const RequestCheck: React.FC<Props> = ({
       });
       navigate(`/request/finish/succeed`);
     } catch (error) {
-      refresh(navigate, request);
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }
