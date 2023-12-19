@@ -155,9 +155,7 @@ const ChattingRoom = () => {
   };
 
   function connect() {
-    const socket = new SockJS(
-      "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/ws-stomp"
-    );
+    const socket = new SockJS(import.meta.env.VITE_BASE_URL + "/ws-stomp");
     client.current = Stomp.Stomp.over(socket);
 
     client.current?.connect({}, function (frame: string) {
