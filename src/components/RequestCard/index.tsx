@@ -11,7 +11,7 @@ interface Props {
 const RequestCard: React.FC<Props> = ({ request }) => {
   const type = request.requestType === "TYPE" ? "유형" : "전공";
   const src = request.image
-    ? `https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${request.image}`
+    ? `${import.meta.env.VITE_BASE_URL}/api${request.image}`
     : requestCardDefault;
 
   return (
