@@ -155,7 +155,7 @@ const ChattingRoom = () => {
   };
 
   function connect() {
-    const socket = new SockJS(process.env.BASE_URL + "/ws-stomp");
+    const socket = new SockJS(import.meta.env.VITE_BASE_URL + "/ws-stomp");
     client.current = Stomp.Stomp.over(socket);
 
     client.current?.connect({}, function (frame: string) {
