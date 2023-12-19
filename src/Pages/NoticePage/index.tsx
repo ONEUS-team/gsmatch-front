@@ -5,17 +5,7 @@ import { Filter } from "../../components";
 import NoticeItem from "../../components/NoticeItem";
 import axiosInstance from "../../libs/api/axiosInstance";
 
-interface FilterObject {
-  [key: string]: string;
-}
-
-const filterType: FilterObject = {
-  전체: "all",
-  유형: "type",
-  전공: "major",
-};
-
-interface INoticeData {
+interface NoticeData {
   responseId: number;
   title: string;
   content: string;
@@ -23,12 +13,13 @@ interface INoticeData {
   requestOnly: boolean;
   authorName: string;
   image: string;
+  likes: boolean;
 }
 
 export default function NoticePage() {
-  const [range, setRange] = useState<string>("전체");
-  const [kind, setKind] = useState<string>("전체");
-  const [datas, setDatas] = useState<INoticeData[]>([]);
+  const [range, setRange] = useState<"전체" | "관심 목록">("전체");
+  const [kind, setKind] = useState<"전체" | "유형" | "전공">("전체");
+  const [datas, setDatas] = useState<NoticeData[]>([]);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
 
   const getNoticeData = async () => {
@@ -45,26 +36,44 @@ export default function NoticePage() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const dataFilter = useCallback(() => {
-    const newData = datas.filter((d) => {
-      if (range === "전체" && kind === "전체") {
-        return d;
-      } else if (range === "전체" && kind !== "전체") {
-        return d.requestType === filterType[kind];
-      } else if (range !== "전체" && kind === "전체") {
-        return d;
-      } else {
-        return d.requestType === filterType[kind];
+    const newData = datas.filter((item) => {
+      if (range === "전체") {
+        if (kind === "전체") {
+          return true;
+        } else if (kind === "유형" && item.requestType === "STUDY") {
+          return true;
+        } else if (kind === "전공" && item.requestType === "TYPE") {
+          return true;
+        }
+      } else if (range === "관심 목록" && item.likes) {
+        if (kind === "전체") {
+          return true;
+        } else if (kind === "유형" && item.requestType === "STUDY") {
+          return true;
+        } else if (kind === "전공" && item.requestType === "TYPE") {
+          return true;
+        }
       }
+      return false;
     });
+
     setDatas(newData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range, kind]);
+  }, [kind, range]);
 
   useEffect(() => {
-    dataFilter();
-    getNoticeData();
+    async () => {
+      await getNoticeData();
+      dataFilter();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataFilter]);
+
+  useEffect(() => {
+    getNoticeData();
+  }, []);
 
   return (
     <S.Container>
@@ -91,13 +100,12 @@ export default function NoticePage() {
       </S.FilterContainer>
       <S.ListContainer>
         {datas.map((notice) => {
-          console.log(notice);
           return (
             <S.ListItem key={notice.responseId}>
               <NoticeItem
                 id={notice.responseId}
                 requestType={notice.requestType}
-                requestOnly={true}
+                requestOnly={notice.requestOnly}
                 title={notice.title}
                 content={notice.content}
                 authorName={notice.authorName}
