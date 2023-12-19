@@ -15,7 +15,11 @@ const PartnerMessageCard: React.FC<Props> = ({
   return (
     <S.LineContainer>
       <S.MessageContainer>
-        <S.TypeImg src={`../../src/Assets/png/${partnerType}.png`} />
+        <S.TypeImg
+          src={
+            partnerType != null ? `../../src/Assets/png/${partnerType}.png` : ""
+          }
+        />
         <S.Message>{chat.message}</S.Message>
         <S.TimeCard>{sendDate}</S.TimeCard>
       </S.MessageContainer>
