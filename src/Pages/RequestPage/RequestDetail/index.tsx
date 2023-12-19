@@ -281,7 +281,9 @@ const RequestDetail = () => {
               <S.ImgContainer>
                 {imgList != undefined ? (
                   <S.ItemImg
-                    src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
+                    src={`${import.meta.env.VITE_BASE_URL}/api${
+                      imgList[imgIndex]
+                    }`}
                     alt="요청 이미지"
                   />
                 ) : null}
