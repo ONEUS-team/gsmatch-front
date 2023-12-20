@@ -55,7 +55,7 @@ const GenreRequsetSelect: React.FC<Props> = ({
         : grades.map((g) =>
             g.grade == ID
               ? { ...g, isSelect: !g.isSelect }
-              : typeof g.grade === "string"
+              : g.grade == "모두"
               ? { ...g, isSelect: false }
               : g
           );
