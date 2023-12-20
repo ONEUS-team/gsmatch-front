@@ -36,12 +36,21 @@ export const SurveyMainItemBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+
+  @media (max-width: 720px) {
+    gap: 2.5rem;
+  }
 `;
 
 export const SurveyMainItem = styled.img<{ selected: boolean }>`
   cursor: pointer;
-  filter: ${({selected}) =>
+  filter: ${({ selected }) =>
     selected ? "brightness(100%)" : "brightness(0.4)"};
+
+  @media (max-width: 720px) {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
 `;
 
 export const SurveyMainNextButton = styled.button`
@@ -102,6 +111,13 @@ export const SurveyBox = styled.div`
 export const SurveyTitle = styled.h1`
   font-size: 35px;
   color: #f3a4b2;
+
+  @media (max-width: 720px) {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
 `;
 
 export const SurveyContent = styled.p`
@@ -110,6 +126,14 @@ export const SurveyContent = styled.p`
   width: 100%;
   text-align: center;
   line-height: 40px;
+
+  @media (max-width: 720px) {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    padding: 0 2rem;
+  }
 `;
 
 export const SurveyButtonBox = styled.div`
@@ -125,13 +149,21 @@ export const SurveyButton = styled.button`
   width: 300px;
   padding: 19px;
   color: white;
-  font-size: 17px;
+  font-size: 1.25rem;
   cursor: pointer;
   transition: all 0.3s;
 
   &:hover {
     background-color: rgba(243, 164, 178, 0.5);
     transition: all 0.3s;
+  }
+
+  @media (max-width: 720px) {
+    width: 13.5rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -145,6 +177,12 @@ export const SurveyBar = styled.div<{ page: number }>`
     #eee ${(props) => "" + ((props.page - 1) / 12) * 100 + "%"},
     #eee 100%
   );
+
+  @media (max-width: 720px) {
+    padding: 0;
+    width: 90vw;
+    height: 16px;
+  }
 `;
 
 export const SurveyResultBox = styled.div`
@@ -152,7 +190,7 @@ export const SurveyResultBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 2rem;
 `;
 
 export const SurveyResultTitle = styled.div`
@@ -166,12 +204,25 @@ export const SurveyDescriptionBox = styled.div`
   background-color: #292424;
   width: 700px;
   padding: 30px;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 export const SurveyDescription = styled.p`
   color: white;
   font-weight: 300;
   margin: 25px 0;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
-export const SurveyFinishButton = styled(SurveyMainNextButton)``;
+export const SurveyFinishButton = styled(SurveyMainNextButton)`
+  @media (max-width: 720px) {
+    position: absolute;
+    bottom: 2rem;
+  }
+`;

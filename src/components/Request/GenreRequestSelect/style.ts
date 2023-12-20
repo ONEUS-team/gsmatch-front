@@ -7,6 +7,7 @@ export const Container = styled.div`
   background-color: #111;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 `;
 
 export const MiddleContainer = styled.div`
@@ -19,6 +20,10 @@ export const MiddleContainer = styled.div`
   & > div:not(:first-of-type) {
     margin-top: 2.5rem;
   }
+
+  @media (max-width: 720px) {
+    width: 100vw;
+  }
 `;
 
 export const TextItem = styled.h1`
@@ -26,6 +31,13 @@ export const TextItem = styled.h1`
   font-weight: 700;
   font-size: 2rem;
   line-height: 120%;
+
+  @media (max-width: 720px) {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
 `;
 
 export const SubTextItem = styled.p`
@@ -64,6 +76,7 @@ export const SelectContainer = styled.div`
   flex-wrap: wrap;
   gap: 8px 8px;
   width: 45rem;
+  width: 100vw;
 `;
 
 export const GenderContainer = styled.div`
@@ -80,6 +93,10 @@ export const MajorContainer = styled.div`
 
 export const LinkContainer = styled.div`
   display: inline-block;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 `;
 
 export const LinkText = styled.p`

@@ -67,8 +67,6 @@ export const SelectInfo = styled.p`
 `;
 
 export const Button = styled.button`
-  position: absolute;
-  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   width: 16rem;
