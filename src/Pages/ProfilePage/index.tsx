@@ -16,7 +16,11 @@ import POBI from "../../Assets/png/pobi.png";
 import LUPI from "../../Assets/png/LUPI.png";
 import EDI from "../../Assets/png/edi.png";
 
-import a from "../../Assets/png/Level1.png";
+import Level1 from "../../Assets/png/Level1.png";
+import Level2 from "../../Assets/png/Level2.png";
+import Level3 from "../../Assets/png/Level3.png";
+import Level4 from "../../Assets/png/Level4.png";
+import Level5 from "../../Assets/png/Level5.png";
 
 const typeList: Type = {
   PORORO: "뽀로로",
@@ -39,8 +43,16 @@ const ProfilePage = () => {
     requestList: [],
   });
   const LevelSrc =
-    userInfo.level != null
-      ? `../../src/Assets/png/Level${userInfo.level}.png`
+    userInfo.level == 1
+      ? Level1
+      : userInfo.level == 2
+      ? Level2
+      : userInfo.level == 3
+      ? Level3
+      : userInfo.level == 4
+      ? Level4
+      : userInfo.level == 5
+      ? Level5
       : "";
 
   const ref = useRef<HTMLDivElement>(null);
