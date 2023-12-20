@@ -72,7 +72,10 @@ const ChattingCard: React.FC<Props> = ({ card }) => {
   return (
     <S.Card onClick={handleCardClick}>
       <S.InnerCard>
-        <S.PartnerImg src={profileSrc} alt="프로필 이미지" />
+        <S.PartnerImg
+          src={profileSrc != "" ? profileSrc : ""}
+          alt="프로필 이미지"
+        />
         <S.ChatInfoBox>
           <S.TopBox>
             <S.RoomName>{card.roomName}</S.RoomName>
