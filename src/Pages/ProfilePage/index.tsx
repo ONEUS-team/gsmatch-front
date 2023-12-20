@@ -16,6 +16,8 @@ import POBI from "../../Assets/png/pobi.png";
 import LUPI from "../../Assets/png/LUPI.png";
 import EDI from "../../Assets/png/edi.png";
 
+import a from "../../Assets/png/Level1.png";
+
 const typeList: Type = {
   PORORO: "뽀로로",
   LUPI: "루피",
@@ -36,7 +38,10 @@ const ProfilePage = () => {
     major: null,
     requestList: [],
   });
-  const LevelSrc = `../../src/Assets/png/Level${userInfo.level}.png`;
+  const LevelSrc =
+    userInfo.level != null
+      ? `../../src/Assets/png/Level${userInfo.level}.png`
+      : "";
 
   const ref = useRef<HTMLDivElement>(null);
   const grade =
@@ -102,9 +107,7 @@ const ProfilePage = () => {
       <S.ProfileBox>
         <S.TypeImgBox>
           <S.ProfileImg src={profileSrc} />
-          {userInfo.level !== null && (
-            <S.LevelEdge src={userInfo.level != null ? LevelSrc : ""} />
-          )}
+          {userInfo.level !== null && <S.LevelEdge src={LevelSrc} />}
         </S.TypeImgBox>
         <S.InfoBox>
           <S.TopInfo>
