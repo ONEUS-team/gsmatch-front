@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 4.875rem;
+  /* overflow: hidden; */
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #111;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
 `;
 
 export const MiddleContainer = styled.div`
-  margin-top: 16.38rem;
   width: 50rem;
   display: flex;
   flex-direction: column;
@@ -22,7 +26,7 @@ export const MiddleContainer = styled.div`
   }
 
   @media (max-width: 720px) {
-    width: 100vw;
+    width: 23rem;
   }
 `;
 
@@ -37,6 +41,7 @@ export const TextItem = styled.h1`
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    width: 9rem;
   }
 `;
 
@@ -75,8 +80,7 @@ export const SelectContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px 8px;
-  width: 45rem;
-  width: 100vw;
+  width: 100%;
 `;
 
 export const GenderContainer = styled.div`
@@ -114,11 +118,10 @@ export const LinkText = styled.p`
 `;
 
 export const Button = styled.button`
-  position: absolute;
-  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   /* width: 16rem; */
+  margin-top: 10rem;
   padding: 1rem 5.1875rem;
   color: black;
   font-size: 1.125rem;
@@ -130,4 +133,8 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    margin-top: 4rem;
+  }
 `;

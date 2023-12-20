@@ -4,17 +4,28 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #111;
+  justify-content: center;
+
   height: 100vh;
-  position: relative;
+  padding-top: 4.875rem;
+
+  @media (max-width: 720px) {
+    padding-top: 3.875rem;
+  }
 `;
 
-export const IconContainer = styled.div`
-  margin-top: 11.88rem;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
+export const IconContainer = styled.div``;
 
 export const Img = styled.img`
-  margin-top: 15.81rem;
+  @media (max-width: 720px) {
+    width: 9rem;
+  }
 `;
 
 export const TextItem = styled.h1`
@@ -23,20 +34,22 @@ export const TextItem = styled.h1`
   font-weight: 700;
   font-size: 2rem;
   line-height: 120%;
+
+  @media (max-width: 720px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const SubTextItem = styled.p`
   margin-top: 0.5rem;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
 `;
 
 export const FailedButton = styled.button`
-  position: absolute;
-  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   padding: 1rem 5.1875rem;
@@ -50,11 +63,10 @@ export const FailedButton = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+  margin-top: 10rem;
 `;
 
 export const SucceedButton = styled.button`
-  position: absolute;
-  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   padding: 1rem 5.1875rem;
@@ -68,4 +80,5 @@ export const SucceedButton = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+  margin-top: 10rem;
 `;
