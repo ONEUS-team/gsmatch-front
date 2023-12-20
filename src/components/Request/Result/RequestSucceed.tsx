@@ -9,12 +9,14 @@ const RequestSucceed = () => {
 
   return (
     <S.Container>
-      <S.Img src={Succeed} />
-      <S.TextItem>요청이 성공적으로 보내졌어요! </S.TextItem>
-      <S.SucceedButton onClick={() => navigate("/")}>
-        나가기
-        <I.ArrowButtonIcon />
-      </S.SucceedButton>
+      <S.Wrapper>
+        <S.Img src={Succeed} />
+        <S.TextItem>요청이 성공적으로 보내졌어요! </S.TextItem>
+        <S.SucceedButton onClick={() => navigate("/")}>
+          나가기
+          <I.ArrowButtonIcon />
+        </S.SucceedButton>
+      </S.Wrapper>
     </S.Container>
   );
 };
