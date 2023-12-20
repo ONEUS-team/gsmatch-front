@@ -21,7 +21,7 @@ export const BackContainer = styled.div`
 
   @media (max-width: 720px) {
     width: 25rem;
-    margin: 6.5rem 0 4.5rem 0;
+    margin: 5rem 0 4rem 0;
   }
 `;
 
@@ -65,7 +65,7 @@ export const Button = styled.button`
   bottom: 5rem;
 
   @media (max-width: 720px) {
-    bottom: 3.44rem;
+    bottom: 2.75rem;
   }
 `;
 
