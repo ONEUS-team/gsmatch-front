@@ -99,7 +99,7 @@ export default function NoticePage() {
         {isFilterClick && <Filter setRange={setRange} setKind={setKind} />}
       </S.FilterContainer>
       <S.ListContainer>
-        {datas.map((notice) => {
+        {datas.reverse().map((notice) => {
           return (
             <S.ListItem key={notice.responseId}>
               <NoticeItem
