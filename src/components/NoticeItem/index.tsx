@@ -53,7 +53,7 @@ const NoticeItem: React.FC<Props> = ({
       )}
       <S.ListHeader>
         <S.ListType>
-          {requestType === "type" ? (
+          {requestType === "TYPE" ? (
             <>
               유형
               <I.PeopleIcon />
