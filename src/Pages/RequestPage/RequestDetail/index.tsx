@@ -5,11 +5,15 @@ import { Major } from "../../../types/major";
 import * as I from "../../../Assets/svg/index";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../../libs/api/axiosInstance";
-import { CharacterType, Grade, RequestType } from "../../../types/utilType";
 import { MyInfo, DetailType } from "../../../types/request";
 import { GradeConvert } from "../../../types/convert";
 import { refresh } from "../../../components/api/refresh";
 import { toast } from "react-toastify";
+
+import PORORO from "../../../Assets/png/pororo.png";
+import POBI from "../../../Assets/png/pobi.png";
+import LUPI from "../../../Assets/png/LUPI.png";
+import EDI from "../../../Assets/png/edi.png";
 
 const gradeConvert: GradeConvert = {
   ONE: "1",
@@ -42,7 +46,16 @@ const RequestDetail = () => {
   const imgList = detailData?.imageNames?.map((img) => img);
   const navigate = useNavigate();
 
-  const typeImg = `../../src/Assets/png/${myInfoData?.type}.png`;
+  const profileSrc =
+    myInfoData?.type == "PORORO"
+      ? PORORO
+      : myInfoData?.type == "POBI"
+      ? POBI
+      : myInfoData?.type == "LUPI"
+      ? LUPI
+      : myInfoData?.type == "EDI"
+      ? EDI
+      : "";
 
   const handleEditClick = () => {
     setStaete("edit");
@@ -130,7 +143,7 @@ const RequestDetail = () => {
       });
       navigate("/");
     } catch (error) {
-      refresh(navigate, handleDeleteClick);
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }
@@ -157,7 +170,7 @@ const RequestDetail = () => {
       setStaete("view");
       init();
     } catch (error) {
-      refresh(navigate, handleEditCompletetClick);
+      refresh(navigate, null);
     } finally {
       setIsDIsabled(false);
     }
@@ -266,10 +279,14 @@ const RequestDetail = () => {
           <>
             {detailData?.imageNames?.length > 0 ? (
               <S.ImgContainer>
-                <S.ItemImg
-                  src={`https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${imgList[imgIndex]}`}
-                  alt="요청 이미지"
-                />
+                {imgList != undefined ? (
+                  <S.ItemImg
+                    src={`${import.meta.env.VITE_BASE_URL}/api${
+                      imgList[imgIndex]
+                    }`}
+                    alt="요청 이미지"
+                  />
+                ) : null}
                 <S.LeftButton
                   onClick={() => {
                     imgIndex > 0 && setImgIndex((prev) => prev - 1);
@@ -277,21 +294,24 @@ const RequestDetail = () => {
                 >
                   <I.ImageLeftButton />
                 </S.LeftButton>
-                <S.RightButton
-                  onClick={() => {
-                    imgIndex < imgList.length - 1 &&
-                      setImgIndex((prev) => prev + 1);
-                  }}
-                >
-                  <I.ImageRightButton />
-                </S.RightButton>
+
+                {imgList != undefined ? (
+                  <S.RightButton
+                    onClick={() => {
+                      imgIndex < imgList.length - 1 &&
+                        setImgIndex((prev) => prev + 1);
+                    }}
+                  >
+                    <I.ImageRightButton />
+                  </S.RightButton>
+                ) : null}
               </S.ImgContainer>
             ) : (
               <I.DefaultImg />
             )}
             <S.MiddleBox>
               <S.UserBox>
-                <S.UserImg src={typeImg} alt="유저 프로필" />
+                <S.UserImg src={profileSrc} alt="유저 프로필" />
                 <S.UserInfoBox>
                   <S.UserName>{detailData!.author.name}</S.UserName>
                   <S.UserGradeMajor>

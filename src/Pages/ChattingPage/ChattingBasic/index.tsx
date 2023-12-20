@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { refresh } from "../../../components/api/refresh";
 import axiosInstance from "../../../libs/api/axiosInstance";
 
+import Message from "../../../Assets/png/NotSelectMessage.png";
+
 const ChattingBasic = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const ChattingBasic = () => {
       <ChattingCardList cardList={data} />
       <S.NotSelectMessageContainer>
         <S.TextBox>
-          <img src="../../../src/Assets/png/NotSelectMessage.png" alt="" />
+          <img src={Message} alt="" />
           <S.KeyWord>채팅</S.KeyWord>
           <S.Text>다양한 질문과 이야기를 나눠보세요</S.Text>
         </S.TextBox>

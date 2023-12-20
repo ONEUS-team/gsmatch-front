@@ -76,8 +76,8 @@ const NoticeItem: React.FC<Props> = ({
       </S.ListContent>
       <S.ListImg
         src={
-          image
-            ? `https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/api${image}`
+          image != null
+            ? `${import.meta.env.VITE_BASE_URL}/api${image}`
             : DefualtPng
         }
       />

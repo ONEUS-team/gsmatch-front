@@ -47,20 +47,7 @@ const SignupPage = () => {
           />
         }
       />
-      <Route
-        path="/result"
-        element={
-          <Result
-            signupName={signupName}
-            signupEmail={signupEmail}
-            signupPassword={signupPassword}
-            signupCheckPassword={signupCheckPassword}
-            signupGrade={signupGrade}
-            signupGender={signupGender}
-            signupMajor={signupMajor}
-          />
-        }
-      />
+      <Route path="/result" element={<Result />} />
     </Routes>
   );
 };

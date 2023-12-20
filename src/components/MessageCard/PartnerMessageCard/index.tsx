@@ -1,15 +1,8 @@
+import { IChatData } from "../../../Pages/ChattingPage/ChattingRoom";
 import * as S from "./style";
 
 interface Props {
-  chat: {
-    sender: {
-      id: number;
-      senderId: string;
-      senderName: string;
-    };
-    message: string;
-    sendDate: string;
-  };
+  chat: IChatData;
   partnerType: string;
   sendDate: string;
 }
@@ -22,7 +15,11 @@ const PartnerMessageCard: React.FC<Props> = ({
   return (
     <S.LineContainer>
       <S.MessageContainer>
-        <S.TypeImg src={`../../src/Assets/png/${partnerType}.png`} />
+        <S.TypeImg
+          src={
+            partnerType != null ? `../../src/Assets/png/${partnerType}.png` : ""
+          }
+        />
         <S.Message>{chat.message}</S.Message>
         <S.TimeCard>{sendDate}</S.TimeCard>
       </S.MessageContainer>

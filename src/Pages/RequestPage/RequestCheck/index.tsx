@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Message from "../../../Assets/png/Message.png";
+
 interface Props {
   requestType: RequestType | null;
   requestGender: Gender[];
@@ -27,18 +29,18 @@ const RequestCheck: React.FC<Props> = ({
   requestContent,
   requestImg,
 }) => {
-  const [isOnlyone, setIsOnlyone] = useState<boolean>(false);
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
+  const [isDisabled, setIsDIsabled] = useState<boolean>(false);
   const [range, setRange] = useState<number>(0);
   const navigate = useNavigate();
 
   const handleBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsOnlyone(e.currentTarget?.id === "isOnlyone" ? true : false);
-    await request();
+    alert(e.currentTarget?.id);
+    await request(e.currentTarget?.id == "isOnlyone" ? true : false);
   };
 
-  const request = async () => {
-    setIsDisabled(true);
+  const request = async (isOnlyone: boolean) => {
+    setIsDIsabled(true)
     const body = new FormData();
 
     body.append(
@@ -58,6 +60,8 @@ const RequestCheck: React.FC<Props> = ({
         { type: "application/json" }
       )
     );
+
+    alert(isOnlyone);
 
     requestImg.forEach((img) => {
       body.append("images", img.imgFile);
@@ -86,7 +90,7 @@ const RequestCheck: React.FC<Props> = ({
       });
       navigate(`/request/finish/succeed`);
     } catch (error) {
-      refresh(navigate, request);
+      refresh(navigate, null);
     } finally {
       setIsDisabled(false);
     }
@@ -137,7 +141,7 @@ const RequestCheck: React.FC<Props> = ({
   return (
     <S.Container>
       <S.MessegeIconContainer>
-        <S.IconImg src="..\src\Assets\png\Message.png" alt="메시지 이미지" />
+        <S.IconImg src={Message} alt="메시지 이미지" />
       </S.MessegeIconContainer>
       <S.MainText>
         {range}명의 사람들에게
