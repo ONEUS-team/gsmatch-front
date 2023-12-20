@@ -12,8 +12,8 @@ export const MessageContainer = styled.div`
 
 export const Message = styled.div`
   border-radius: 1.25rem;
+  padding: 0.75rem 1.5rem;
   background-color: rgba(0, 0, 0, 0);
-  padding: 0.75rem;
   border: 1px solid #575757;
   color: #fff;
   font-size: 1.125rem;

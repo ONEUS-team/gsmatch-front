@@ -17,10 +17,10 @@ export const BackContainer = styled.div`
   align-items: center;
   column-gap: 1rem;
   padding: 0.62rem 0.62rem 0.62rem 1.87rem;
-  margin: 6.97rem 0 13.78rem 0;
+  margin: 9vh 0 13vh 0;
 
   @media (max-width: 720px) {
-    width: 25rem;
+    width: 23rem;
     margin: 6.5rem 0 4.5rem 0;
   }
 `;
@@ -70,7 +70,7 @@ export const SelectBox = styled.div`
   width: 500px;
 
   @media (max-width: 720px) {
-    width: 23rem;
+    width: 19rem;
   }
 `;
 
@@ -101,7 +101,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 10rem;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: none;
   font-weight: 700;

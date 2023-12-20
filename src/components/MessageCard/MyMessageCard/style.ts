@@ -13,7 +13,7 @@ export const MessageContainer = styled.div`
 export const Message = styled.div`
   border-radius: 1.25rem;
   background: #292424;
-  padding: 0.75rem;
+  padding: 0.75rem 1.5rem;
   max-width: 95%;
   word-wrap: break-word;
   color: #fff;
