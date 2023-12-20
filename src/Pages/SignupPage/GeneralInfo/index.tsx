@@ -81,6 +81,11 @@ const index: React.FC<Props> = ({
           value={signupName}
           changeFunction={changeValue}
           type="text"
+          isMatch={
+            signupName.length > 0
+              ? signupName.length >= 2 && signupName.length <= 4
+              : true
+          }
         >
           이름
         </Input>
@@ -119,8 +124,8 @@ const index: React.FC<Props> = ({
           비밀번호 재확인
         </BlindInput>
         {/* <S.IncorrectBox>{}</S.IncorrectBox> */}
-        <S.Button onClick={goToNextPage}>다음</S.Button>
       </S.FormContainer>
+      <S.Button onClick={goToNextPage}>다음</S.Button>
     </S.Container>
   );
 };

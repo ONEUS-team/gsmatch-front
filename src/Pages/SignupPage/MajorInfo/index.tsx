@@ -69,9 +69,11 @@ const MajorInfo: React.FC<Props> = ({
   }) => {
     try {
       await axiosInstance.post("/api/auth/signup", body);
-      navigate("/login");
+      setIsDisabled(false);
+      navigate("/signup/result");
     } catch (e) {
-      console.log(e);
+      setIsDisabled(false);
+      navigate("/signup");
     }
   };
 
@@ -132,10 +134,7 @@ const MajorInfo: React.FC<Props> = ({
         gender: signupGender,
         major: signupMajor,
       });
-
-      setIsDisabled(false);
-      navigate("/signup/result");
-    } else alert("실패");
+    } else navigate("/signup");
   };
 
   const checkGeneralInfo = () => {

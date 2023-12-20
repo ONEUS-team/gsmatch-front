@@ -42,31 +42,33 @@ export default function LoginPage() {
 
   return (
     <S.Container>
-      <S.LogoContainer>
-        <I.HeaderLogo />
-      </S.LogoContainer>
-      <S.FormContainer onSubmit={loginFormSubmit}>
-        <Input
-          value={nameValue}
-          type="name"
-          changeFunction={changeName}
-          id="name"
-        >
-          이름
-        </Input>
-        <BlindInput
-          value={passwordValue}
-          id="password"
-          changeFunction={changePassword}
-        >
-          비밀번호
-        </BlindInput>
-        <S.Button disabled={isDisabled}>로그인</S.Button>
-      </S.FormContainer>
-      <S.SignupContainer>
-        <S.SignupText>GSMATCH가 처음이라면?</S.SignupText>
-        <Link to="/signup">회원가입</Link>
-      </S.SignupContainer>
+      <S.Wrapper>
+        <S.LogoContainer>
+          <I.HeaderLogo />
+        </S.LogoContainer>
+        <S.FormContainer onSubmit={loginFormSubmit}>
+          <Input
+            value={nameValue}
+            type="name"
+            changeFunction={changeName}
+            id="name"
+          >
+            이름
+          </Input>
+          <BlindInput
+            value={passwordValue}
+            id="password"
+            changeFunction={changePassword}
+          >
+            비밀번호
+          </BlindInput>
+          <S.Button disabled={isDisabled}>로그인</S.Button>
+        </S.FormContainer>
+        <S.SignupContainer>
+          <S.SignupText>GSMATCH가 처음이라면?</S.SignupText>
+          <Link to="/signup">회원가입</Link>
+        </S.SignupContainer>
+      </S.Wrapper>
     </S.Container>
   );
 }
