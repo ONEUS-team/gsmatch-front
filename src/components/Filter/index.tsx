@@ -4,8 +4,8 @@ import * as T from "../../types/filter";
 import { FilterIcon } from "../../Assets/svg";
 
 interface Props {
-  setRange: React.Dispatch<React.SetStateAction<string>>;
-  setKind: React.Dispatch<React.SetStateAction<string>>;
+  setRange: React.Dispatch<React.SetStateAction<"전체" | "관심 목록">>;
+  setKind: React.Dispatch<React.SetStateAction<"전체" | "유형" | "전공">>;
 }
 
 const Filter: React.FC<Props> = ({ setRange, setKind }) => {
@@ -20,7 +20,7 @@ const Filter: React.FC<Props> = ({ setRange, setKind }) => {
   ]);
 
   const handleRangeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const ID: T.Range = e.currentTarget.id as unknown as T.Range;
+    const ID: T.Range = e.currentTarget.id as T.Range;
     setRange(ID);
     const newRanges = ranges.map((r) =>
       r.range === ID ? { ...r, isSelect: true } : { ...r, isSelect: false }

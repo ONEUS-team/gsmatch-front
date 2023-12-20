@@ -7,6 +7,7 @@ export const MessageContainer = styled.div`
   column-gap: 0.5rem;
   align-items: end;
   margin-left: 6.5rem;
+  width: 81%;
 `;
 
 export const Message = styled.div`
@@ -19,9 +20,12 @@ export const Message = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 170%;
+  /* max-width: ; */
 `;
 
 export const TimeCard = styled.div`
+  min-width: 3rem;
+  min-height: 1rem;
   color: #808080;
   text-align: center;
   font-size: 0.625rem;

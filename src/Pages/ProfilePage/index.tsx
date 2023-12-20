@@ -36,6 +36,7 @@ const ProfilePage = () => {
     major: null,
     requestList: [],
   });
+  const LevelSrc = `../../src/Assets/png/Level${userInfo.level}.png`;
 
   const ref = useRef<HTMLDivElement>(null);
   const grade =
@@ -99,13 +100,17 @@ const ProfilePage = () => {
   return (
     <S.Container ref={ref} isScrollable={isScrollable}>
       <S.ProfileBox>
-        <S.ProfileImg src={profileSrc} />
+        <S.TypeImgBox>
+          <S.ProfileImg src={profileSrc} />
+          {userInfo.level !== null && <S.LevelEdge src={LevelSrc} />}
+        </S.TypeImgBox>
         <S.InfoBox>
           <S.TopInfo>
             Level {userInfo.level} {userInfo.username}
           </S.TopInfo>
           <S.BottomInfo>
             {grade}학년 {gender} {type} 유형
+            <S.PointBar level={userInfo.level!} point={userInfo.point!} />
           </S.BottomInfo>
         </S.InfoBox>
       </S.ProfileBox>

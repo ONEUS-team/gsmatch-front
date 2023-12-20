@@ -5,14 +5,17 @@ export const MessageContainer = styled.div`
   display: flex;
   column-gap: 0.5rem;
   align-items: end;
+  justify-content: end;
   margin-right: 4rem;
+  width: 80%;
 `;
 
 export const Message = styled.div`
   border-radius: 1.25rem;
   background: #292424;
   padding: 0.75rem;
-
+  max-width: 95%;
+  word-wrap: break-word;
   color: #fff;
   font-size: 1.125rem;
   font-style: normal;
@@ -21,6 +24,8 @@ export const Message = styled.div`
 `;
 
 export const TimeCard = styled.div`
+  height: 1rem;
+  min-width: 3rem;
   color: #808080;
   text-align: center;
   font-size: 0.625rem;
