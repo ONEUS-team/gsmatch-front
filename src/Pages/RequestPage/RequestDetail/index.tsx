@@ -58,6 +58,8 @@ const RequestDetail = () => {
       : "";
 
   const handleEditClick = () => {
+    setEditTitle(detailData!.title);
+    setEditContent(detailData!.content);
     setStaete("edit");
   };
 
@@ -112,10 +114,9 @@ const RequestDetail = () => {
         setIsMine(false);
         setDetailData(responseDataDetail.data);
       }
-
-      setEditTitle(dataMyInfo.data.title);
-      setEditContent(dataMyInfo.data.content);
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   };
 
   const handleDeleteClick = async () => {

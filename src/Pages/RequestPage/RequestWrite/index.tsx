@@ -1,6 +1,7 @@
 import * as S from "./style";
 import * as I from "../../../Assets/svg/index";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Props {
   requestTitle: string;
@@ -66,9 +67,24 @@ const RequestWrite: React.FC<Props> = ({
   };
 
   const nextPage = () => {
-    requestTitle.length !== 0 && requestContent.length !== 0
+    requestTitle.length !== 0 &&
+    requestContent.length !== 0 &&
+    requestContent.length <= 200 &&
+    requestTitle.length <= 50
       ? navigate("/request/check")
-      : alert("제목이나 내용을 입력해주세요");
+      : toast.error(
+          "제목이 내용을 0자 이상 각각 50자, 200자 이하로 작성해주세요",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
   };
 
   return (
