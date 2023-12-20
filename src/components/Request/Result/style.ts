@@ -20,7 +20,13 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const IconContainer = styled.div``;
+export const IconContainer = styled.div`
+  & > svg {
+    @media (max-width: 720px) {
+      width: 9rem;
+    }
+  }
+`;
 
 export const Img = styled.img`
   @media (max-width: 720px) {
