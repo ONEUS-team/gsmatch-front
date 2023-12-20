@@ -23,6 +23,13 @@ export const MainText = styled.h1`
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
+
+  @media (max-width: 720px) {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
 `;
 
 export const SubText = styled.p`
@@ -32,6 +39,13 @@ export const SubText = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
+
+  @media (max-width: 720px) {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+  }
 `;
 
 export const Button = styled.button`

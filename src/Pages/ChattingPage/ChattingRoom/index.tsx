@@ -201,6 +201,7 @@ const ChattingRoom = () => {
       }
       scrollInit();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatData]);
 
   useEffect(() => {
@@ -208,6 +209,7 @@ const ChattingRoom = () => {
     getRoomInfo();
     getChatList();
     getMyData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   useEffect(() => {
@@ -216,6 +218,7 @@ const ChattingRoom = () => {
     return () => {
       disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   function handleSendSubmit(e: FormEvent<HTMLFormElement>) {

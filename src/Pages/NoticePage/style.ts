@@ -4,15 +4,15 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000000;
   height: 100vh;
+  padding-top: 4.875rem;
 `;
 
 export const FilterContainer = styled.header`
   width: 50rem;
   padding: 0, 1.25rem;
   display: flex;
-  margin-top: 7.375rem;
+  margin-top: 2.5rem;
   position: relative;
 
   & > div {
@@ -65,6 +65,8 @@ export const ListContainer = styled.ul`
   flex-direction: column;
   row-gap: 1.75rem;
   align-items: center;
+  overflow-y: scroll;
+  height: calc(100vh - 12.815rem);
 `;
 
 export const ListItem = styled.li``;

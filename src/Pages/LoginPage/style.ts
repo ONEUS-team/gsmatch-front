@@ -2,14 +2,19 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: #111;
+  justify-content: center;
   height: 100vh;
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const LogoContainer = styled.div`
-  margin: 92px;
+  margin-bottom: 92px;
 `;
 
 export const FormContainer = styled.form`
@@ -61,6 +66,7 @@ export const Button = styled.button`
   color: #000;
   font-size: 18px;
   font-weight: 700;
+  line-height: 120%;
   cursor: pointer;
 `;
 

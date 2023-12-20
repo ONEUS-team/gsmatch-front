@@ -1,16 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  padding-top: 4.875rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #111;
+  justify-content: center;
   height: 100vh;
-  position: relative;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const TextItem = styled.h1`
-  margin-top: 16.315rem;
   color: #eeeeee;
   font-weight: 700;
   font-size: 2rem;
@@ -27,6 +32,10 @@ export const SelectForm = styled.form`
   margin-top: 2.5rem;
   column-gap: 5rem;
   display: flex;
+
+  @media (max-width: 720px) {
+    column-gap: 2.5rem;
+  }
 `;
 
 export const SelectItem = styled.div<{ isSelect: boolean }>`
@@ -48,6 +57,11 @@ export const Icon = styled.img<{ isSelect: boolean }>`
   padding: 0.625rem;
   border-radius: 1.875rem;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
 `;
 
 export const SelectTitle = styled.h1`
@@ -67,8 +81,6 @@ export const SelectInfo = styled.p`
 `;
 
 export const Button = styled.button`
-  position: absolute;
-  bottom: 5rem;
   background-color: #f3a4b2;
   border: 0;
   width: 16rem;
@@ -83,4 +95,9 @@ export const Button = styled.button`
   justify-content: center;
   cursor: pointer;
   column-gap: 0.5rem;
+  margin-top: 14rem;
+
+  @media (max-width: 720px) {
+    margin-top: 7rem;
+  }
 `;

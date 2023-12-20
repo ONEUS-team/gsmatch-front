@@ -17,7 +17,12 @@ export const BackContainer = styled.div`
   align-items: center;
   column-gap: 1rem;
   padding: 0.62rem 0.62rem 0.62rem 1.87rem;
-  margin: 6.97rem 0 13.78rem 0;
+  margin: 9vh 0 13vh 0;
+
+  @media (max-width: 720px) {
+    width: 23rem;
+    margin: 3.5rem 0 2rem 0;
+  }
 `;
 
 export const TextContainer = styled.p`
@@ -41,8 +46,14 @@ export const SelectForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   & > div:not(:last-of-type) {
     margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 720px) {
+    width: 23.5rem;
+    padding-left: 1.25rem;
   }
 `;
 
@@ -57,6 +68,10 @@ export const SelectBox = styled.div`
   flex-wrap: wrap;
   gap: 8px 8px;
   width: 500px;
+
+  @media (max-width: 720px) {
+    width: 19rem;
+  }
 `;
 
 export const SelectText = styled.p`
@@ -86,11 +101,15 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 10rem;
+  bottom: 5rem;
   background-color: #f3a4b2;
   border: none;
   font-weight: 700;
   font-size: 20px;
   border-radius: 1.875rem;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    bottom: 2.75rem;
+  }
 `;

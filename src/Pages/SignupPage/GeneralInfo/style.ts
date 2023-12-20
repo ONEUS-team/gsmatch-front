@@ -17,7 +17,12 @@ export const BackContainer = styled.div`
   align-items: center;
   column-gap: 1rem;
   padding: 0.62rem 0.62rem 0.62rem 1.87rem;
-  margin: 6.97rem 0 13.78rem 0;
+  margin: 9vh 0 13vh 0;
+
+  @media (max-width: 720px) {
+    width: 25rem;
+    margin: 5rem 0 4rem 0;
+  }
 `;
 
 export const TextContainer = styled.p`
@@ -57,7 +62,11 @@ export const Button = styled.button`
   font-size: 20px;
   cursor: pointer;
   border: none;
-  bottom: 10rem;
+  bottom: 5rem;
+
+  @media (max-width: 720px) {
+    bottom: 2.75rem;
+  }
 `;
 
 export const IncorrectBox = styled.div`

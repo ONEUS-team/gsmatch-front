@@ -2,18 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 4.875rem;
+
+  @media (max-width: 720px) {
+    padding-top: 3.875rem;
+  }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #111;
-  height: 100vh;
-  position: relative;
 `;
 
-export const MessegeIconContainer = styled.div`
-  margin-top: 19.81rem;
-`;
+export const MessegeIconContainer = styled.div``;
 
-export const IconImg = styled.img``;
+export const IconImg = styled.img`
+  @media (max-width: 720px) {
+    height: 9.5rem;
+  }
+`;
 
 export const MainText = styled.p`
   margin-top: 2rem;
@@ -23,6 +34,10 @@ export const MainText = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
+
+  @media (max-width: 720px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const LinkTextContainer = styled.div`
@@ -43,6 +58,10 @@ export const LinkTextItem = styled.button`
   border: none;
   padding: 0;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const ExplainText = styled.p`
@@ -53,6 +72,10 @@ export const ExplainText = styled.p`
   font-weight: 500;
   line-height: 150%;
   margin-top: 0.5rem;
+
+  @media (max-width: 720px) {
+    font-size: 0.75rem;
+  }
 `;
 
 export const Button = styled.button`
@@ -69,6 +92,9 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
-  position: absolute;
-  bottom: 5rem;
+  margin-top: 10rem;
+
+  @media (max-width: 720px) {
+    margin-top: 5rem;
+  }
 `;

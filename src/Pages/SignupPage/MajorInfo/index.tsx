@@ -8,6 +8,7 @@ import {
   MajorConvert,
 } from "../../../types/convert";
 import axiosInstance from "../../../libs/api/axiosInstance";
+import { toast } from "react-toastify";
 
 interface Props {
   signupName: string;
@@ -69,9 +70,21 @@ const MajorInfo: React.FC<Props> = ({
   }) => {
     try {
       await axiosInstance.post("/api/auth/signup", body);
-      navigate("/login");
-    } catch (e) {
-      console.log(e);
+
+      setIsDisabled(false);
+      navigate("/signup/result");
+    } catch (e: any) {
+      toast.error(e.response.data.message, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return navigate("/signup");
     }
   };
 
@@ -132,10 +145,7 @@ const MajorInfo: React.FC<Props> = ({
         gender: signupGender,
         major: signupMajor,
       });
-
-      setIsDisabled(false);
-      navigate("/signup/result");
-    } else alert("실패");
+    } else navigate("/signup");
   };
 
   const checkGeneralInfo = () => {

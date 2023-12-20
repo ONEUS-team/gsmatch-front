@@ -136,29 +136,31 @@ const RequestCheck: React.FC<Props> = ({
 
   return (
     <S.Container>
-      <S.MessegeIconContainer>
-        <S.IconImg src={Message} alt="메시지 이미지" />
-      </S.MessegeIconContainer>
-      <S.MainText>
-        {range}명의 사람들에게
-        <br />
-        요청을 보낼 수 있어요!
-      </S.MainText>
-      <S.LinkTextContainer>
-        <S.LinkTextItem
-          disabled={isDisabled}
-          id="isOnlyone"
-          onClick={handleBtnClick}
-        >
-          랜덤으로 한명에게만 보내기
-        </S.LinkTextItem>
-        <I.CheckArrowIcon />
-      </S.LinkTextContainer>
-      <S.ExplainText>*특수 요청으로 보내집니다</S.ExplainText>
-      <S.Button disabled={isDisabled} onClick={handleBtnClick}>
-        보내기
-        <I.ArrowButtonIcon />
-      </S.Button>
+      <S.Wrapper>
+        <S.MessegeIconContainer>
+          <S.IconImg src={Message} alt="메시지 이미지" />
+        </S.MessegeIconContainer>
+        <S.MainText>
+          {range}명의 사람들에게
+          <br />
+          요청을 보낼 수 있어요!
+        </S.MainText>
+        <S.LinkTextContainer>
+          <S.LinkTextItem
+            disabled={isDisabled}
+            id="isOnlyone"
+            onClick={handleBtnClick}
+          >
+            랜덤으로 한명에게만 보내기
+          </S.LinkTextItem>
+          <I.CheckArrowIcon />
+        </S.LinkTextContainer>
+        <S.ExplainText>*특수 요청으로 보내집니다</S.ExplainText>
+        <S.Button disabled={isDisabled} onClick={handleBtnClick}>
+          보내기
+          <I.ArrowButtonIcon />
+        </S.Button>
+      </S.Wrapper>
     </S.Container>
   );
 };
