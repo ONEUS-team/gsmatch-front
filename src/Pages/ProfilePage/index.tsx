@@ -102,7 +102,9 @@ const ProfilePage = () => {
       <S.ProfileBox>
         <S.TypeImgBox>
           <S.ProfileImg src={profileSrc} />
-          {userInfo.level !== null && <S.LevelEdge src={LevelSrc} />}
+          {userInfo.level !== null && (
+            <S.LevelEdge src={userInfo.level != null ? LevelSrc : ""} />
+          )}
         </S.TypeImgBox>
         <S.InfoBox>
           <S.TopInfo>
