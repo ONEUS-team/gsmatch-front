@@ -101,63 +101,67 @@ const MajorRequestSelect: React.FC<Props> = ({
 
   return (
     <S.Container>
-      <S.MiddleContainer>
-        <S.TextItem>어떤 사람에게 보내고 싶나요?</S.TextItem>
-        <S.SubTextItem>같은 유형의 학년 성별에게 요청이 보내져요</S.SubTextItem>
-        <S.GradeContainer>
-          <S.SelectText>학년</S.SelectText>
-          <S.SelectContainer>
-            {grades.map((grade) => {
-              return (
-                <S.SelectButton
-                  key={grade.grade}
-                  id={grade.grade.toString()}
-                  isSelect={grade.isSelect}
-                  onClick={changeGrade}
-                >
-                  {grade.grade === "모두" ? (
-                    <>{grade.grade}</>
-                  ) : (
-                    <>{gradeConvert[grade.grade as Grade]}학년</>
-                  )}
-                </S.SelectButton>
-              );
-            })}
-          </S.SelectContainer>
-        </S.GradeContainer>
-        <S.MajorContainer>
-          <S.SelectText>
-            전공
-            <S.RefText>*복수 선택 가능합니다</S.RefText>
-          </S.SelectText>
-          <S.SelectContainer>
-            {majors.map((major) => {
-              return (
-                <S.SelectButton
-                  key={major.major}
-                  isSelect={major.isSelect}
-                  id={major.major}
-                  onClick={changeMajor}
-                >
-                  {majorConvert[major.major as Major]}
-                </S.SelectButton>
-              );
-            })}
-          </S.SelectContainer>
-        </S.MajorContainer>
-        <S.LinkContainer>
-          <Link to="/request">
-            <S.LinkText>
-              <I.RequestBackIcon />
-              이전 페이지로 이동하기
-            </S.LinkText>
-          </Link>
-        </S.LinkContainer>
-      </S.MiddleContainer>
-      <S.Button onClick={nextPage}>
-        요청 쓰기
-        <I.ArrowButtonIcon />
-      </S.Button>
+      <S.Wrapper>
+        <S.MiddleContainer>
+          <S.TextItem>어떤 사람에게 보내고 싶나요?</S.TextItem>
+          <S.SubTextItem>
+            같은 유형의 학년 성별에게 요청이 보내져요
+          </S.SubTextItem>
+          <S.GradeContainer>
+            <S.SelectText>학년</S.SelectText>
+            <S.SelectContainer>
+              {grades.map((grade) => {
+                return (
+                  <S.SelectButton
+                    key={grade.grade}
+                    id={grade.grade.toString()}
+                    isSelect={grade.isSelect}
+                    onClick={changeGrade}
+                  >
+                    {grade.grade === "모두" ? (
+                      <>{grade.grade}</>
+                    ) : (
+                      <>{gradeConvert[grade.grade as Grade]}학년</>
+                    )}
+                  </S.SelectButton>
+                );
+              })}
+            </S.SelectContainer>
+          </S.GradeContainer>
+          <S.MajorContainer>
+            <S.SelectText>
+              전공
+              <S.RefText>*복수 선택 가능합니다</S.RefText>
+            </S.SelectText>
+            <S.SelectContainer>
+              {majors.map((major) => {
+                return (
+                  <S.SelectButton
+                    key={major.major}
+                    isSelect={major.isSelect}
+                    id={major.major}
+                    onClick={changeMajor}
+                  >
+                    {majorConvert[major.major as Major]}
+                  </S.SelectButton>
+                );
+              })}
+            </S.SelectContainer>
+          </S.MajorContainer>
+          <S.LinkContainer>
+            <Link to="/request">
+              <S.LinkText>
+                <I.RequestBackIcon />
+                이전 페이지로 이동하기
+              </S.LinkText>
+            </Link>
+          </S.LinkContainer>
+        </S.MiddleContainer>
+        <S.Button onClick={nextPage}>
+          요청 쓰기
+          <I.ArrowButtonIcon />
+        </S.Button>
+      </S.Wrapper>
     </S.Container>
   );
 };
