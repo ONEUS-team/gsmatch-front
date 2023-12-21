@@ -30,6 +30,10 @@ export const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 720px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const SendButton = styled.button`

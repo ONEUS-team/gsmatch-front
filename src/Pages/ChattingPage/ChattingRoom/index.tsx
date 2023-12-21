@@ -18,6 +18,7 @@ import PORORO from "../../../Assets/png/pororo.png";
 import POBI from "../../../Assets/png/pobi.png";
 import LUPI from "../../../Assets/png/LUPI.png";
 import EDI from "../../../Assets/png/edi.png";
+import { GoBackIcon } from "../../../Assets/svg";
 
 export interface IChatData {
   id: number;
@@ -241,7 +242,7 @@ const ChattingRoom = () => {
   return (
     <>
       <S.Container>
-        <ChattingCardList cardList={data} />
+        <ChattingCardList cardList={data} isChat={true} />
         <S.ChattingRoom>
           <ChattingHeader
             roomName={roomData != undefined ? roomData.roomName : ""}

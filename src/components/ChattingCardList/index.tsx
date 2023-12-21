@@ -6,9 +6,10 @@ import { ChattingCard as CardType } from "../../types/chattingCard";
 
 interface Props {
   cardList: CardType[];
+  isChat: boolean;
 }
 
-const ChattingCardList: React.FC<Props> = ({ cardList }) => {
+const ChattingCardList: React.FC<Props> = ({ cardList, isChat }) => {
   const navigate = useNavigate();
 
   const localfFxList = JSON.parse(localStorage.getItem("fixList")!);
@@ -24,7 +25,7 @@ const ChattingCardList: React.FC<Props> = ({ cardList }) => {
   const handleIconButtonClick = () => navigate("/");
 
   return (
-    <S.Container>
+    <S.Container isChat={isChat}>
       <S.AbsoluteBox>
         <S.IconButton onClick={handleIconButtonClick}>
           <GoBackIcon />

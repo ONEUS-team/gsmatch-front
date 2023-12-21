@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ isChat: boolean }>`
   padding: 5.75rem 0 1rem 0;
   background-color: #121212;
   flex-direction: column;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     border: none;
     min-width: 100vw;
     padding: 0 0 1rem 0;
-    display: none;
+    ${({ isChat }) => (isChat ? "display: none" : "")}
   }
 `;
 
@@ -28,6 +28,10 @@ export const AbsoluteBox = styled.div`
   display: flex;
   top: 1.25rem;
   left: 5rem;
+
+  @media (max-width: 720px) {
+    margin-left: 3rem;
+  }
 
   @media (max-width: 720px) {
     position: static;

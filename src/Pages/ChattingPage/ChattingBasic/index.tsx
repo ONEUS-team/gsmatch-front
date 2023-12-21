@@ -40,7 +40,7 @@ const ChattingBasic = () => {
 
   return (
     <S.Container>
-      <ChattingCardList cardList={data} />
+      <ChattingCardList cardList={data} isChat={false} />
       <S.NotSelectMessageContainer>
         <S.TextBox>
           <img src={Message} alt="" />
