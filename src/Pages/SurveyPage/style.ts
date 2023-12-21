@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
   background-color: black;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
 `;
 
 export const SurveMainyBox = styled.div`
-  width: 800px;
+  width: 100vw;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -63,6 +63,7 @@ export const SurveyMainNextButton = styled.button`
   font-weight: 550;
   font-size: 15px;
   cursor: pointer;
+  color: #121212;
 `;
 
 export const HashTagContainer = styled.div`
@@ -221,8 +222,7 @@ export const SurveyDescription = styled.p`
 `;
 
 export const SurveyFinishButton = styled(SurveyMainNextButton)`
+  margin: 0;
   @media (max-width: 720px) {
-    position: absolute;
-    bottom: 2rem;
   }
 `;
