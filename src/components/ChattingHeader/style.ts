@@ -12,6 +12,10 @@ export const ChattingHeader = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 export const Button = styled.button`

@@ -8,6 +8,10 @@ export const MessageContainer = styled.div`
   align-items: end;
   margin-left: 6.5rem;
   width: 81%;
+
+  @media (max-width: 720px) {
+    margin-left: 4rem;
+  }
 `;
 
 export const Message = styled.div`
@@ -21,6 +25,12 @@ export const Message = styled.div`
   font-weight: 500;
   line-height: 170%;
   /* max-width: ; */
+
+  @media (max-width: 720px) {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    max-width: 80%;
+  }
 `;
 
 export const TimeCard = styled.div`

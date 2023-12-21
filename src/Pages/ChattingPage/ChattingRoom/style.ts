@@ -10,6 +10,10 @@ export const ChattingRoom = styled.div`
   width: 120rem;
   height: 100%;
   background-color: #121212;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 export const MessageDisplayBox = styled.div`
@@ -22,6 +26,10 @@ export const MessageDisplayBox = styled.div`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: 720px) {
+    width: 100%;
   }
 `;
 
