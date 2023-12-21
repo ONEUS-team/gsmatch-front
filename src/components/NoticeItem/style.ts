@@ -1,22 +1,12 @@
 import styled from "styled-components";
 
-export const ListContainer = styled.ul`
-  margin-top: 2.69rem;
-  width: 50rem;
-  padding: 0, 1.25rem;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.75rem;
-  align-items: center;
-`;
-
 export const ListItem = styled.button<{
   requestType: string;
   isOnlyOne: boolean;
 }>`
   height: 4.75rem;
   position: relative;
-  width: 47.5rem;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   text-align: left;
@@ -47,6 +37,12 @@ export const ListTitle = styled.h1`
   font-weight: 700;
   line-height: 100%;
   margin-top: 0.5rem;
+
+  @media (max-width: 720px) {
+    width: 16rem;
+    height: 0.875rem;
+    overflow: hidden;
+  }
 `;
 
 export const ListType = styled.h1`
@@ -71,6 +67,12 @@ export const ListContent = styled.p`
   font-weight: 500;
   line-height: 150%;
   margin-top: 0.75rem;
+
+  @media (max-width: 720px) {
+    width: 16rem;
+    height: 1.3125rem;
+    overflow: hidden;
+  }
 `;
 
 export const ListImg = styled.img`

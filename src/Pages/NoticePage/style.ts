@@ -21,6 +21,10 @@ export const FilterContainer = styled.header`
     z-index: 10;
     left: 1.25rem;
   }
+
+  @media (max-width: 720px) {
+    width: 21rem;
+  }
 `;
 
 export const FilterButton = styled.button`
@@ -37,7 +41,6 @@ export const FilterButton = styled.button`
   border: none;
   padding: 0.625rem 1rem;
   cursor: pointer;
-  margin-left: 1.25rem;
 
   &:hover {
     box-shadow: 0 0 18px 0px #f3a4b2;
@@ -67,9 +70,11 @@ export const ListContainer = styled.ul`
   align-items: center;
   overflow-y: scroll;
   height: calc(100vh - 12.815rem);
-`;
 
-export const ListItem = styled.li``;
+  @media (max-width: 720px) {
+    width: 21rem;
+  }
+`;
 
 export const ListHeader = styled.header`
   display: flex;

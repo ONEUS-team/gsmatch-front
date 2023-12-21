@@ -255,6 +255,7 @@ const ChattingRoom = () => {
             </S.PartnerInfo>
             {chatData.map((chat) => (
               <MessageCard
+                key={chat.id}
                 chat={chat}
                 isMine={Number(chat?.sender?.senderId) === myData?.id}
                 partnerType={
