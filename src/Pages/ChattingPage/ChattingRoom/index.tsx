@@ -18,7 +18,6 @@ import PORORO from "../../../Assets/png/pororo.png";
 import POBI from "../../../Assets/png/pobi.png";
 import LUPI from "../../../Assets/png/LUPI.png";
 import EDI from "../../../Assets/png/edi.png";
-import { GoBackIcon } from "../../../Assets/svg";
 
 export interface IChatData {
   id: number;
