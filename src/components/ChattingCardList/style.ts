@@ -10,6 +10,14 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   border-right: 3px solid #777;
+
+  @media (max-width: 720px) {
+    width: 100%;
+    align-items: center;
+    border: none;
+    min-width: 100vw;
+    padding: 0 0 1rem 0;
+  }
 `;
 
 export const AbsoluteBox = styled.div`
@@ -20,11 +28,12 @@ export const AbsoluteBox = styled.div`
   top: 1.25rem;
   left: 5rem;
 
-  font-style: normal;
-  line-height: 100%;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #eee;
+  @media (max-width: 720px) {
+    position: static;
+    height: 5.75rem;
+    width: 100vw;
+    padding-left: 10v w;
+  }
 `;
 
 export const IconButton = styled.button`
@@ -34,4 +43,12 @@ export const IconButton = styled.button`
   display: flex;
   border: none;
   padding: 0;
+`;
+
+export const Text = styled.p`
+  font-style: normal;
+  line-height: 100%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #eee;
 `;

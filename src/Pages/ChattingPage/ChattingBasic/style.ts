@@ -11,6 +11,10 @@ export const NotSelectMessageContainer = styled.div`
   align-items: center;
   display: flex;
   width: 100%;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 `;
 
 export const TextBox = styled.div`

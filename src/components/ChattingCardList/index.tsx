@@ -22,13 +22,14 @@ const ChattingCardList: React.FC<Props> = ({ cardList }) => {
   );
 
   const handleIconButtonClick = () => navigate("/");
+
   return (
     <S.Container>
       <S.AbsoluteBox>
         <S.IconButton onClick={handleIconButtonClick}>
           <GoBackIcon />
         </S.IconButton>
-        채팅
+        <S.Text>채팅</S.Text>
       </S.AbsoluteBox>
       {fixCardList.concat(notFixCardList).map((card) => (
         <ChattingCard key={card.id} card={card} />
