@@ -366,7 +366,9 @@ const RequestDetail = () => {
         )}
       </S.Container>
     );
-  else return <S.Container></S.Container>;
+  else {
+    return <S.Container></S.Container>;
+  }
 };
 
 export default RequestDetail;
