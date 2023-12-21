@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { ChattingCard } from "../../types/chattingCard";
 import { GradeConvert, TypeConvert } from "../../types/convert";
 
-import PORORO from "../../Assets/png/pororo.png";
-import POBI from "../../Assets/png/pobi.png";
+import PORORO from "../../Assets/png/PORORO.png";
+import POBI from "../../Assets/png/POBI.png";
 import LUPI from "../../Assets/png/LUPI.png";
-import EDI from "../../Assets/png/edi.png";
+import EDI from "../../Assets/png/EDI.png";
 
 const gradeConvert: GradeConvert = {
   ONE: "1",
