@@ -241,7 +241,7 @@ const ChattingRoom = () => {
   return (
     <>
       <S.Container>
-        <ChattingCardList cardList={data} />
+        <ChattingCardList cardList={data} isChat={true} />
         <S.ChattingRoom>
           <ChattingHeader
             roomName={roomData != undefined ? roomData.roomName : ""}
@@ -255,6 +255,7 @@ const ChattingRoom = () => {
             </S.PartnerInfo>
             {chatData.map((chat) => (
               <MessageCard
+                key={chat.id}
                 chat={chat}
                 isMine={Number(chat?.sender?.senderId) === myData?.id}
                 partnerType={

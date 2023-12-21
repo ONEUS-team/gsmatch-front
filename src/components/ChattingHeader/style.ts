@@ -12,6 +12,19 @@ export const ChattingHeader = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
+
+  @media (max-width: 720px) {
+    width: 100%;
+    font-size: 1.2rem;
+    height: 5.5rem;
+    padding: 1.2rem 1.5rem;
+  }
+`;
+
+export const Title = styled.h1`
+  @media (max-width: 720px) {
+    width: 80%;
+  }
 `;
 
 export const Button = styled.button`
@@ -19,4 +32,13 @@ export const Button = styled.button`
   padding: 0;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
+`;
+
+export const IconButton = styled.button`
+  background-color: rgba(0, 0, 0, 0);
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  border: none;
+  padding: 0;
 `;

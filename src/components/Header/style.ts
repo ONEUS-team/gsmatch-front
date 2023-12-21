@@ -30,6 +30,10 @@ export const LogoBox = styled.button`
   border: none;
   background-color: rgba(0, 0, 0, 0);
 
+  & > svg {
+    width: 9.3125rem;
+  }
+
   @media (max-width: 720px) {
     & > svg {
       width: 7.4375rem;

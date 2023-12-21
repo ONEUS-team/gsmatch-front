@@ -1,11 +1,7 @@
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 
-export const refresh = (
-  navigate: NavigateFunction,
-  callBack: null
-  // callBack: null | (() => void)
-) => {
+export const refresh = (navigate: NavigateFunction, callBack: null) => {
   axios
     .get(
       "https://port-0-gsmatch-back-f02w2almh8gdgs.sel5.cloudtype.app/refresh",

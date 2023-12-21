@@ -4,6 +4,10 @@ export const Card = styled.div`
   cursor: pointer;
   height: 6rem;
   padding: 1rem 5rem;
+
+  @media (max-width: 720px) {
+    padding: 0 1.25rem;
+  }
 `;
 
 export const InnerCard = styled.div`

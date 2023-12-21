@@ -35,11 +35,12 @@ const ChattingBasic = () => {
   useEffect(() => {
     getRoomList();
     checkFixList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <S.Container>
-      <ChattingCardList cardList={data} />
+      <ChattingCardList cardList={data} isChat={false} />
       <S.NotSelectMessageContainer>
         <S.TextBox>
           <img src={Message} alt="" />

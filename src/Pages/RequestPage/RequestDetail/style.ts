@@ -8,16 +8,31 @@ export const Container = styled.div`
   height: 100vh;
   position: relative;
   padding-top: 4.875rem;
+  overflow-x: hidden;
+
+  @media (max-width: 720px) {
+    padding-top: 3.875rem;
+  }
 `;
 
 export const ItemImg = styled.img`
   width: 50rem;
   height: 36.25rem;
   color: white;
+
+  @media (max-width: 720px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const ImgContainer = styled.div`
   position: relative;
+
+  @media (max-width: 720px) {
+    width: 100vw;
+    height: 100vw;
+  }
 `;
 
 export const LeftButton = styled.button`
@@ -32,6 +47,13 @@ export const LeftButton = styled.button`
   left: 1rem;
   cursor: pointer;
   transform: translateY(-50%);
+
+  @media (max-width: 720px) {
+    & > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 `;
 
 export const RightButton = styled.button`
@@ -46,12 +68,24 @@ export const RightButton = styled.button`
   top: 50%;
   cursor: pointer;
   transform: translateY(-50%);
+
+  @media (max-width: 720px) {
+    & > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 `;
 
 export const MiddleBox = styled.div`
   position: relative;
   display: flex;
   width: 50rem;
+
+  @media (max-width: 720px) {
+    width: 100vw;
+    padding: 0 1.25rem;
+  }
 `;
 
 export const UserBox = styled.div`
@@ -68,6 +102,10 @@ export const IconBox = styled.div`
   top: 50%;
   right: -1.75rem;
   transform: translate(-50%, -50%);
+
+  @media (max-width: 720px) {
+    right: -0.5rem;
+  }
 `;
 
 export const HeartButton = styled.button`
@@ -115,10 +153,19 @@ export const RequestBox = styled.div`
   width: 50rem;
   height: 33vh;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    width: 100vw;
+    padding: 0 1.25rem;
+  }
 `;
 
 export const RequestTitle = styled.h1`
-  margin-top: 1.25rem;
+  margin-top: 0.5rem;
   color: #fff;
   font-size: 1.5rem;
   font-style: normal;
@@ -153,6 +200,11 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 0.5rem;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    position: static;
+    margin: 1rem;
+  }
 `;
 
 export const EditForm = styled.form`
@@ -179,6 +231,10 @@ export const TitleInput = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 720px) {
+    width: 90vw;
+  }
 `;
 
 export const ContentInput = styled.textarea`
@@ -197,6 +253,11 @@ export const ContentInput = styled.textarea`
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 720px) {
+    width: 90vw;
+    height: 60vh;
   }
 `;
 

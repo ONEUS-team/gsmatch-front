@@ -101,17 +101,16 @@ export default function NoticePage() {
       <S.ListContainer>
         {datas.reverse().map((notice) => {
           return (
-            <S.ListItem key={notice.responseId}>
-              <NoticeItem
-                id={notice.responseId}
-                requestType={notice.requestType}
-                requestOnly={notice.requestOnly}
-                title={notice.title}
-                content={notice.content}
-                authorName={notice.authorName}
-                image={notice.image}
-              />
-            </S.ListItem>
+            <NoticeItem
+              key={notice.responseId}
+              id={notice.responseId}
+              requestType={notice.requestType}
+              requestOnly={notice.requestOnly}
+              title={notice.title}
+              content={notice.content}
+              authorName={notice.authorName}
+              image={notice.image}
+            />
           );
         })}
       </S.ListContainer>
