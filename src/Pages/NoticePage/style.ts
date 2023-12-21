@@ -71,6 +71,10 @@ export const ListContainer = styled.ul`
   overflow-y: scroll;
   height: calc(100vh - 12.815rem);
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (max-width: 720px) {
     width: 21rem;
   }

@@ -19,6 +19,10 @@ export const MessageDisplayBox = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const PartnerInfo = styled.div`

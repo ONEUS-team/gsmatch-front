@@ -154,6 +154,10 @@ export const RequestBox = styled.div`
   height: 33vh;
   overflow-y: scroll;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (max-width: 720px) {
     width: 100vw;
     padding: 0 1.25rem;
