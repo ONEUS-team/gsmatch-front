@@ -16,7 +16,6 @@ export const ChattingHeader = styled.div`
   @media (max-width: 720px) {
     width: 100%;
     font-size: 1.2rem;
-    height: 5.5rem;
     padding: 1.2rem 1.5rem;
   }
 `;
