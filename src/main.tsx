@@ -2,7 +2,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ToastContainer } from "react-toastify";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const GlobalStyle = createGlobalStyle`
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css");
 
@@ -54,9 +56,10 @@ table {
   border-spacing: 0;
 }
 body {
-  background-color: #292424;
+  background-color: #121212;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-weight: 700;
+  overscroll-behavior-y: none;
 }
 a {
   text-decoration: none;
@@ -66,10 +69,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
 `;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
+    <ToastContainer />
     <App />
     <GlobalStyle />
   </BrowserRouter>

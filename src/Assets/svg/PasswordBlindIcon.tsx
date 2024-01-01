@@ -1,4 +1,4 @@
-const PasswordHideIcon = () => (
+const PasswordBlindIcon = () => (
   <svg
     width="26"
     height="12"
@@ -27,4 +27,4 @@ const PasswordHideIcon = () => (
   </svg>
 );
 
-export default PasswordHideIcon;
+export default PasswordBlindIcon;
