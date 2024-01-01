@@ -1,6 +1,4 @@
 export { default as PrivateRouter } from "./PrivateRouter";
-<<<<<<< HEAD
-=======
 export { default as GenreRequsetSelect } from "./Request/GenreRequestSelect";
 export { default as MajorRequsetSelect } from "./Request/MajorRequestSelect/MajorRequestSelect";
 export { default as RequestSucceed } from "./Request/Result/RequestSucceed";
@@ -15,4 +13,3 @@ export { default as ChattingModal } from "./ChattingModal";
 export { default as ChattingInput } from "./ChattingInput";
 export { default as RequestList } from "./RequestList";
 export { default as RequestCard } from "./RequestCard";
->>>>>>> develop

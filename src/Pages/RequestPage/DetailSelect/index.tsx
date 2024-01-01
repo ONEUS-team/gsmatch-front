@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import * as C from "../../../components/index";
+import * as C from "../../../components";
 import { Gender, Grade, Major } from "../../../types/utilType";
 
 interface Props {

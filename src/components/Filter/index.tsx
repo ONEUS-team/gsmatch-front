@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as S from "./style";
 import * as T from "../../types/filter";
-import { FilterIcon } from "../../Assets/svg";
+import FilterIcon from "../../Assets/svg/FilterIcon";
 
 interface Props {
   setRange: React.Dispatch<React.SetStateAction<"전체" | "관심 목록">>;
