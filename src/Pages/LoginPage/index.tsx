@@ -4,6 +4,8 @@ import { useState } from "react";
 import * as I from "../../Assets/svg";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../libs/api/axiosInstance";
+import { BlindInput } from "../../components";
+import { Input } from "../../components";
 
 export default function LoginPage() {
   const [nameValue, setNameValue] = useState<string>("");
