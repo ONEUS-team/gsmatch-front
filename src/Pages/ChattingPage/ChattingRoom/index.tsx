@@ -104,8 +104,10 @@ const ChattingRoom = () => {
       });
 
       setData(response.data);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, getRoomList);
+      }
     }
   };
 
@@ -119,8 +121,10 @@ const ChattingRoom = () => {
       });
 
       setRoomData(response.data);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, getRoomInfo);
+      }
     }
   };
 
@@ -134,8 +138,10 @@ const ChattingRoom = () => {
       });
 
       setChatData(response.data);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, getChatList);
+      }
     }
   };
 
@@ -149,8 +155,10 @@ const ChattingRoom = () => {
       });
 
       setMyData(response.data);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, getMyData);
+      }
     }
   };
 

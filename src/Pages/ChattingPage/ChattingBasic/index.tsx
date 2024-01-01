@@ -21,8 +21,10 @@ const ChattingBasic = () => {
       });
 
       setData(response.data);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, getRoomList);
+      }
     }
   };
 

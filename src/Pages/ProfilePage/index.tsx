@@ -104,8 +104,10 @@ const ProfilePage = () => {
       }
 
       setUserInfo(response.data);
-    } catch (error) {
-      refresh(naviagte, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(naviagte, sendUserRequest);
+      }
     }
   };
 
