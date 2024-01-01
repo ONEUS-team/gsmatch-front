@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function SignupPage() {
-  return <div>SignupPage</div>;
-}
-=======
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import GeneralInfo from "./GeneralInfo";
@@ -58,4 +53,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
->>>>>>> develop
