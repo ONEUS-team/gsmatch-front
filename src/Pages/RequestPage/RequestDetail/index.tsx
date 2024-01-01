@@ -114,8 +114,10 @@ const RequestDetail = () => {
         setIsMine(false);
         setDetailData(responseDataDetail.data);
       }
-    } catch (error) {
-      //
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, fetchMyInfoAndDetailData);
+      }
     }
   };
 

@@ -7,10 +7,17 @@ import {
   useParams,
 } from "react-router-dom";
 import * as S from "./style";
+
 import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
 import LUPI from "../../Assets/png/LUPI.png";
-import EDI from "../../Assets/png/edi.png";
+import EDI from "../../Assets/png/char/edi_n.png";
+
+import PORORO_I from "../../Assets/png/char/pororo_i.png";
+import POBI_I from "../../Assets/png/char/pobi_i.png";
+import LUPI_I from "../../Assets/png/char/lupi_i.png";
+import EDI_I from "../../Assets/png/char/EDI.png";
+
 import { useEffect, useState } from "react";
 import { usePreventLeave } from "../../hooks/usePreventLeave";
 import axiosInstance from "../../libs/api/axiosInstance";
@@ -213,28 +220,28 @@ export default function SurveyPage() {
                   <S.SurveyMainItemBox>
                     <S.SurveyMainItem
                       selected={selectedType == "PORORO"}
-                      src={PORORO}
+                      src={selectedType == "PORORO" ? PORORO_I : PORORO}
                       onClick={() => {
                         setSelectedType("PORORO");
                       }}
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
                       selected={selectedType == "POBI"}
-                      src={POBI}
+                      src={selectedType == "POBI" ? POBI_I : POBI}
                       onClick={() => {
                         setSelectedType("POBI");
                       }}
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
                       selected={selectedType == "LUPI"}
-                      src={LUPI}
+                      src={selectedType == "LUPI" ? LUPI_I : LUPI}
                       onClick={() => {
                         setSelectedType("LUPI");
                       }}
                     ></S.SurveyMainItem>
                     <S.SurveyMainItem
                       selected={selectedType == "EDI"}
-                      src={EDI}
+                      src={selectedType == "EDI" ? EDI_I : EDI}
                       onClick={() => {
                         setSelectedType("EDI");
                       }}
