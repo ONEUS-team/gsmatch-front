@@ -143,8 +143,10 @@ const RequestDetail = () => {
         theme: "dark",
       });
       navigate("/");
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, handleDeleteClick);
+      }
     } finally {
       setIsDIsabled(false);
     }
@@ -170,8 +172,10 @@ const RequestDetail = () => {
       await axiosInstance.put(`/request/${requestId}`, body, config);
       setStaete("view");
       init();
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, handleEditCompletetClick);
+      }
     } finally {
       setIsDIsabled(false);
     }
@@ -192,8 +196,10 @@ const RequestDetail = () => {
       };
 
       await axiosInstance.post(`/response/likes`, { responseId }, config);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, handleLikeClick);
+      }
     } finally {
       setIsDIsabled(false);
     }

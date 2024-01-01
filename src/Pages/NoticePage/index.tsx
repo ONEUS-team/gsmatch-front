@@ -4,6 +4,8 @@ import * as I from "../../Assets/svg/index";
 import { Filter } from "../../components";
 import NoticeItem from "../../components/NoticeItem";
 import axiosInstance from "../../libs/api/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import { refresh } from "../../components/api/refresh";
 
 interface NoticeData {
   responseId: number;
@@ -22,6 +24,8 @@ export default function NoticePage() {
   const [datas, setDatas] = useState<NoticeData[]>([]);
   const [isFilterClick, setIsFilterClick] = useState<boolean>(false);
 
+  const naviagte = useNavigate();
+
   const getNoticeData = async () => {
     try {
       const response = await axiosInstance.get("/response", {
@@ -31,8 +35,10 @@ export default function NoticePage() {
         withCredentials: true,
       });
       setDatas(response.data);
-    } catch (error) {
-      //
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(naviagte, getNoticeData);
+      }
     }
   };
 

@@ -85,8 +85,10 @@ const RequestCheck: React.FC<Props> = ({
         theme: "dark",
       });
       navigate(`/request/finish/succeed`);
-    } catch (error) {
-      refresh(navigate, null);
+    } catch (error: any) {
+      if (error.response.status == 403) {
+        refresh(navigate, () => request(isOnlyone));
+      }
     } finally {
       setIsDisabled(false);
     }
