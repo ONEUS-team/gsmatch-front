@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function RequestPage() {
-  return <div>RequestPage</div>;
-}
-=======
 import { Route, Routes } from "react-router-dom";
 import RequestSelect from "./RequestSelect/index";
 import DetailSelect from "./DetailSelect";
@@ -89,4 +84,3 @@ const RequestPage = () => {
 };
 
 export default RequestPage;
->>>>>>> develop

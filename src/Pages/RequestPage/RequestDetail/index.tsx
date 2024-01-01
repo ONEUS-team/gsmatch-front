@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { useParams } from "react-router";
 import * as S from "./style";
 import { Major } from "../../../types/major";
-import * as I from "../../../Assets/svg/index";
+import * as I from "../../../Assets/svg";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../../libs/api/axiosInstance";
 import { MyInfo, DetailType } from "../../../types/request";

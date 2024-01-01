@@ -1,5 +1,5 @@
 import * as S from "./style";
-import * as I from "../../../Assets/svg/index";
+import * as I from "../../../Assets/svg";
 import { useNavigate } from "react-router-dom";
 import { Gender, Grade, Major, RequestType } from "../../../types/utilType";
 import axiosInstance from "../../../libs/api/axiosInstance";
