@@ -9,7 +9,7 @@ const ArrowHeadIcon = () => (
     <path
       d="M10.7211 8.27119L14.9609 12.0531L10.7211 15.835"
       stroke="#C0C0C0"
-      stroke-linecap="square"
+      strokeLinecap="square"
     />
     <circle
       cx="12"

@@ -32,4 +32,3 @@ export { default as ImageRightButton } from "./ImageRightButton";
 export { default as SucceedIcon } from "./SucceedIcon";
 export { default as OnlyOneIcon } from "./OnlyOneIcon";
 export { default as OnlyOneXIcon } from "./OnlyOneXIcon";
->>>>>>> develop

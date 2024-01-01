@@ -5,20 +5,8 @@ import { Header } from "./components";
 
 function App() {
   return (
-<<<<<<< HEAD
-    <>
-      <Routes>
-        <Route path="/signup" element={<P.SignupPage />} />
-        <Route path="/login" element={<P.LoginPage />} />
-        <Route path="/main" element={<P.MainPage />} />
-        <Route
-          path="/"
-          element={<PrivateRouter element={<P.ProfilePage />} />}
-        />
-=======
     <Routes>
       <Route element={<Header />}>
->>>>>>> develop
         <Route
           path="/request"
           element={<PrivateRouter element={<P.RequestPage />} />}
