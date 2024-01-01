@@ -1,4 +1,4 @@
-import * as I from "../../../Assets/svg";
+import * as I from "../../../Assets/svg/index";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { RequestType } from "../../../types/utilType";

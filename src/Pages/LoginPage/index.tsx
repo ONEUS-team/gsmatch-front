@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import * as I from "../../Assets/svg/index";
+import * as I from "../../Assets/svg";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../libs/api/axiosInstance";
 

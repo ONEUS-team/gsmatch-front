@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route element={<Header />}>
         <Route
-          path="/request"
+          path="/request/*"
           element={<PrivateRouter element={<P.RequestPage />} />}
         />
         <Route
