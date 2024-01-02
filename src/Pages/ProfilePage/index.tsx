@@ -14,7 +14,7 @@ import Arrow from "../../Assets/png/Arrow.png";
 import PORORO from "../../Assets/png/pororo.png";
 import POBI from "../../Assets/png/pobi.png";
 import LUPI from "../../Assets/png/LUPI.png";
-import EDI from "../../Assets/png/edi.png";
+import EDI from "../../Assets/png/char/edi_n.png";
 
 import Level1 from "../../Assets/png/Level1.png";
 import Level2 from "../../Assets/png/Level2.png";
