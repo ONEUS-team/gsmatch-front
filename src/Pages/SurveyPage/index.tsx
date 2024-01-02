@@ -502,7 +502,7 @@ function SurveyResult({
         />
         <S.SurveyResultTitle>
           {result == "PORORO"
-            ? "뽀뽀로 유형입니다!"
+            ? "뽀로로 유형입니다!"
             : result == "POBI"
             ? "포비 유형입니다!"
             : result == "LUPI"
