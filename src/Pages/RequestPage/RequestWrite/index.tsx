@@ -25,7 +25,7 @@ const RequestWrite: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (requestImg.length <= 3) {
+    if (requestImg.length < 3) {
       const fileReader = new FileReader();
       const imgFile = e.target.files![0];
       fileReader.readAsDataURL(imgFile);
